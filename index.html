@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Zufallsklausur – Einführung in Sicherheit und Privatheit</title>
-
     <style>
         :root {
             --primary: #153b5b;
@@ -77,10 +75,7 @@
             outline-offset: 2px;
         }
 
-        /* =================================================
-           Kopfbereich
-        ================================================= */
-
+        /* Hero Header */
         .hero {
             padding: 3rem 1.25rem 4.5rem;
             color: white;
@@ -149,13 +144,10 @@
             font-size: 0.88rem;
         }
 
-        /* =================================================
-           Layout
-        ================================================= */
-
+        /* Layout */
         .layout {
             display: grid;
-            grid-template-columns: 310px minmax(0, 1fr);
+            grid-template-columns: 320px minmax(0, 1fr);
             gap: 1.5rem;
             align-items: start;
             width: min(1450px, calc(100% - 2rem));
@@ -166,16 +158,13 @@
             min-width: 0;
         }
 
-        /* =================================================
-           Seitenleiste
-        ================================================= */
-
+        /* Sidebar */
         .sidebar {
             position: sticky;
             top: 1rem;
             max-height: calc(100vh - 2rem);
-            padding: 1rem;
-            overflow: auto;
+            padding: 1.15rem;
+            overflow-y: auto;
             border: 1px solid var(--border);
             border-radius: var(--radius);
             background: var(--surface);
@@ -206,7 +195,7 @@
                     var(--secondary),
                     #45b9ae
                 );
-            transition: width 0.2s ease;
+            transition: width 0.25s ease;
         }
 
         .progress-label {
@@ -222,20 +211,37 @@
             padding: 0.85rem;
             border-radius: 12px;
             background: #edf5fa;
+            font-weight: 600;
         }
 
         .timer-box strong {
             color: var(--primary);
-            font-size: 1.08rem;
+            font-size: 1.12rem;
             font-variant-numeric: tabular-nums;
         }
 
         .timer-box.warning {
             background: var(--warning-light);
+            color: var(--warning);
+        }
+
+        .timer-box.warning strong {
+            color: var(--warning);
         }
 
         .timer-box.danger {
             background: var(--danger-light);
+            color: var(--danger);
+            animation: pulse-danger 1s infinite alternate;
+        }
+
+        .timer-box.danger strong {
+            color: var(--danger);
+        }
+
+        @keyframes pulse-danger {
+            from { opacity: 1; }
+            to { opacity: 0.75; }
         }
 
         .pool-information {
@@ -246,11 +252,13 @@
             color: var(--muted);
             background: var(--surface-alt);
             font-size: 0.82rem;
+            line-height: 1.45;
         }
 
         .pool-information strong {
             display: block;
             color: var(--primary);
+            margin-bottom: 0.25rem;
         }
 
         .legend {
@@ -299,11 +307,15 @@
             color: var(--muted);
             background: white;
             cursor: pointer;
+            font-weight: 700;
+            font-size: 0.88rem;
+            transition: all 0.15s ease;
         }
 
         .nav-button:hover {
             color: var(--primary);
             border-color: var(--primary-light);
+            background: #f3f8fc;
         }
 
         .nav-button.answered {
@@ -317,20 +329,21 @@
         }
 
         .nav-button.correct {
-            color: white;
-            border-color: var(--success);
-            background: var(--success);
+            color: white !important;
+            border-color: var(--success) !important;
+            background: var(--success) !important;
         }
 
         .nav-button.incorrect {
-            color: white;
-            border-color: var(--danger);
-            background: var(--danger);
+            color: white !important;
+            border-color: var(--danger) !important;
+            background: var(--danger) !important;
         }
 
         .button-stack {
             display: grid;
             gap: 0.6rem;
+            margin-top: 1.25rem;
         }
 
         .btn {
@@ -343,9 +356,7 @@
             border-radius: 11px;
             font-weight: 750;
             cursor: pointer;
-            transition:
-                transform 0.15s ease,
-                opacity 0.15s ease;
+            transition: transform 0.15s ease, opacity 0.15s ease, background 0.15s ease;
         }
 
         .btn:hover:not(:disabled) {
@@ -373,16 +384,21 @@
             background: white;
         }
 
+        .btn-secondary:hover:not(:disabled) {
+            background: var(--surface-alt);
+        }
+
         .btn-danger {
             color: var(--danger);
             border: 1px solid #efc3c0;
             background: var(--danger-light);
         }
 
-        /* =================================================
-           Inhaltskarten
-        ================================================= */
+        .btn-danger:hover:not(:disabled) {
+            background: #ffe3e1;
+        }
 
+        /* Information and Question Cards */
         .info-card,
         .result-card,
         .question-card {
@@ -417,17 +433,16 @@
         .instruction strong {
             display: block;
             color: var(--primary);
+            margin-bottom: 0.2rem;
         }
 
         .small-note {
+            margin: 1rem 0 0;
             color: var(--muted);
             font-size: 0.87rem;
         }
 
-        /* =================================================
-           Ergebnis
-        ================================================= */
-
+        /* Result */
         .result-card {
             display: none;
             margin-bottom: 1.25rem;
@@ -480,15 +495,13 @@
         .result-stat strong {
             display: block;
             font-size: 1.35rem;
+            color: var(--primary);
         }
 
-        /* =================================================
-           Themen und Aufgaben
-        ================================================= */
-
+        /* Sections and Questions */
         .section-heading {
             margin: 2.2rem 0 1rem;
-            padding: 0.9rem 1rem;
+            padding: 0.9rem 1.1rem;
             border-left: 5px solid var(--secondary);
             border-radius: 0 12px 12px 0;
             color: var(--primary);
@@ -509,7 +522,8 @@
             position: relative;
             margin-bottom: 1rem;
             padding: 1.35rem;
-            scroll-margin-top: 1rem;
+            scroll-margin-top: 1.5rem;
+            transition: border-color 0.2s ease;
         }
 
         .question-card.correct-card {
@@ -537,9 +551,10 @@
         }
 
         .question-title {
-            margin: 0.15rem 0 0;
+            margin: 0.2rem 0 0;
             color: var(--primary);
-            font-size: 1.16rem;
+            font-size: 1.15rem;
+            line-height: 1.35;
         }
 
         .points-badge {
@@ -552,13 +567,10 @@
             font-weight: 800;
         }
 
-        .question-prompt {
-            margin-bottom: 1rem;
-        }
-
         .options {
             display: grid;
             gap: 0.65rem;
+            margin-top: 0.9rem;
         }
 
         .option {
@@ -570,6 +582,8 @@
             border-radius: 11px;
             background: #fbfcfd;
             cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
         }
 
         .option:hover {
@@ -581,16 +595,17 @@
             flex: none;
             margin-top: 0.3rem;
             accent-color: var(--secondary);
+            cursor: pointer;
         }
 
         .option.solution-correct {
-            border-color: #78c991;
-            background: var(--success-light);
+            border-color: #78c991 !important;
+            background: var(--success-light) !important;
         }
 
         .option.solution-wrong {
-            border-color: #df918b;
-            background: var(--danger-light);
+            border-color: #df918b !important;
+            background: var(--danger-light) !important;
         }
 
         .flag-row {
@@ -609,10 +624,17 @@
             gap: 0.45rem;
             color: var(--muted);
             cursor: pointer;
+            font-size: 0.88rem;
+            user-select: none;
+        }
+
+        .flag-label input {
+            accent-color: #e5a72d;
         }
 
         .question-score {
             font-weight: 800;
+            font-size: 0.92rem;
         }
 
         .solution {
@@ -624,7 +646,7 @@
             background: #eff8f7;
         }
 
-        .submitted .solution {
+        body.submitted .solution {
             display: block;
         }
 
@@ -632,23 +654,27 @@
             color: var(--primary);
         }
 
-        /* =================================================
-           Sonstiges
-        ================================================= */
+        .solution p {
+            margin: 0.4rem 0 0;
+            color: #334e68;
+            font-size: 0.94rem;
+        }
 
+        /* Footer & Toast */
         .footer {
-            padding: 2rem 1rem;
+            padding: 2.5rem 1rem;
             color: var(--muted);
             text-align: center;
+            font-size: 0.9rem;
         }
 
         .toast {
             position: fixed;
-            right: 1rem;
-            bottom: 1rem;
+            right: 1.25rem;
+            bottom: 1.25rem;
             z-index: 100;
             max-width: 390px;
-            padding: 0.9rem 1rem;
+            padding: 0.9rem 1.1rem;
             border-radius: 12px;
             color: white;
             background: #213443;
@@ -656,7 +682,7 @@
             opacity: 0;
             transform: translateY(20px);
             pointer-events: none;
-            transition: 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .toast.show {
@@ -664,10 +690,7 @@
             transform: translateY(0);
         }
 
-        /* =================================================
-           Responsive
-        ================================================= */
-
+        /* Responsive */
         @media (max-width: 1000px) {
             .layout {
                 grid-template-columns: 1fr;
@@ -694,7 +717,7 @@
             }
 
             .layout {
-                width: min(100% - 1rem, 1450px);
+                width: calc(100% - 1.25rem);
             }
 
             .question-nav {
@@ -702,7 +725,7 @@
             }
 
             .question-card {
-                padding: 1rem;
+                padding: 1.1rem;
             }
 
             .question-header,
@@ -712,14 +735,12 @@
             }
         }
 
-        /* =================================================
-           Druck
-        ================================================= */
-
+        /* Print Styles */
         @media print {
             body {
                 background: white;
                 font-size: 10pt;
+                color: black;
             }
 
             .hero {
@@ -754,7 +775,9 @@
             .info-card,
             .result-card {
                 box-shadow: none;
+                border: 1px solid #ccc;
                 break-inside: avoid;
+                margin-bottom: 1.2rem;
             }
 
             .solution {
@@ -767,42 +790,35 @@
         }
     </style>
 </head>
-
 <body>
 
 <header class="hero">
     <div class="hero-inner">
         <span class="eyebrow">Interaktive Zufallsklausur</span>
-
         <h1>Einführung in Sicherheit und Privatheit</h1>
-
         <p class="hero-description">
             Die Fragenbank enthält 100 Aufgaben aus zehn Themengebieten.
-            Pro Versuch werden 50 Aufgaben ausgewählt. Der unmittelbar folgende
-            Versuch verwendet die jeweils anderen Fragen der Themenpools.
+            Pro Versuch werden 50 Aufgaben ausgewählt und die Antwortoptionen dynamisch
+            zufällig durchgemischt. Der unmittelbar folgende Versuch verwendet die
+            jeweils anderen Fragen der Themenpools.
         </p>
-
         <div class="hero-stats">
             <div class="hero-stat">
                 <strong id="heroQuestionCount">50</strong>
                 <span>Fragen pro Versuch</span>
             </div>
-
             <div class="hero-stat">
                 <strong id="heroBankCount">100</strong>
                 <span>Fragen in der Bank</span>
             </div>
-
             <div class="hero-stat">
                 <strong id="heroPointCount">100</strong>
                 <span>Gesamtpunkte</span>
             </div>
-
             <div class="hero-stat">
                 <strong>50 %</strong>
                 <span>Bestehensgrenze</span>
             </div>
-
             <div class="hero-stat">
                 <strong>120 min</strong>
                 <span>Bearbeitungszeit</span>
@@ -812,14 +828,11 @@
 </header>
 
 <div class="layout">
-
     <aside class="sidebar">
         <h2>Klausurfortschritt</h2>
-
         <div class="progress-shell">
             <div class="progress-bar" id="progressBar"></div>
         </div>
-
         <div class="progress-label" id="progressLabel">
             0 von 50 Fragen beantwortet
         </div>
@@ -830,10 +843,10 @@
         </div>
 
         <div class="pool-information">
-            <strong>Zufallsauswahl</strong>
-            Aus jedem der zehn Themenpools werden fünf von zehn Fragen gezogen.
-            Der nächste Versuch enthält keine Fragen des unmittelbar vorherigen
-            Versuchs.
+            <strong>Zufallsauswahl & Permutation</strong>
+            Aus jedem der zehn Themenpools werden 5 von 10 Fragen gezogen. Die Optionen
+            werden gleichmäßig gemischt. Der nächste Versuch enthält keine Fragen des
+            vorherigen Versuchs.
         </div>
 
         <div class="legend">
@@ -841,12 +854,10 @@
                 <span class="legend-dot"></span>
                 nicht beantwortet
             </div>
-
             <div class="legend-item">
                 <span class="legend-dot dot-answered"></span>
                 beantwortet
             </div>
-
             <div class="legend-item">
                 <span class="legend-dot dot-flagged"></span>
                 zur Kontrolle markiert
@@ -859,32 +870,18 @@
             <button class="btn btn-primary" id="submitButton" type="button">
                 Klausur abgeben
             </button>
-
-            <button
-                class="btn btn-secondary"
-                id="newAttemptButton"
-                type="button"
-                disabled
-            >
+            <button class="btn btn-secondary" id="newAttemptButton" type="button" disabled>
                 Neue Zufallsklausur
             </button>
-
             <button class="btn btn-secondary" id="saveButton" type="button">
                 Zwischenstand speichern
             </button>
-
             <button class="btn btn-secondary" id="printButton" type="button">
                 Klausur drucken
             </button>
-
-            <button
-                class="btn btn-secondary"
-                id="printSolutionsButton"
-                type="button"
-            >
+            <button class="btn btn-secondary" id="printSolutionsButton" type="button">
                 Mit Lösungen drucken
             </button>
-
             <button class="btn btn-danger" id="resetButton" type="button">
                 Versuch zurücksetzen
             </button>
@@ -892,58 +889,44 @@
     </aside>
 
     <main class="main-content">
-
         <section class="info-card">
             <h2>Hinweise zur Bearbeitung</h2>
-
             <div class="instruction-grid">
                 <div class="instruction">
                     <strong>50 zufällige Fragen</strong>
-                    Pro Themengebiet werden fünf von zehn Fragen ausgewählt.
-                    Jede Frage ist mit zwei Punkten bewertet.
+                    Pro Themengebiet werden fünf von zehn Fragen ausgewählt. Jede Frage ist mit zwei Punkten bewertet.
                 </div>
-
                 <div class="instruction">
                     <strong>Automatische Auswertung</strong>
-                    Die Klausur wird nach der Abgabe vollständig automatisch
-                    ausgewertet. Danach werden die Lösungen eingeblendet.
+                    Die Klausur wird nach der Abgabe vollständig automatisch ausgewertet. Danach werden die Musterlösungen sichtbar.
                 </div>
-
                 <div class="instruction">
                     <strong>Bestehensregel</strong>
-                    Zum Bestehen sind mindestens 50 von 100 Punkten
-                    beziehungsweise 50 Prozent erforderlich.
+                    Zum Bestehen sind mindestens 50 von 100 Punkten (50 Prozent) erforderlich.
                 </div>
             </div>
-
             <p class="small-note">
-                Für jede Frage ist genau eine Antwort richtig. Nicht beantwortete
-                Fragen erhalten null Punkte. Nach Ablauf der zwei Stunden wird
-                die Klausur automatisch abgegeben.
+                Für jede Frage ist genau eine Antwort richtig. Nicht beantwortete Fragen erhalten null Punkte.
+                Nach Ablauf der zwei Stunden wird die Klausur automatisch abgegeben.
             </p>
         </section>
 
         <section class="result-card" id="resultCard">
             <h2 id="resultHeading">Ergebnis</h2>
-
             <p id="resultMessage"></p>
-
             <div class="result-grid">
                 <div class="result-stat">
                     <strong id="resultPoints">–</strong>
                     <span>erreichte Punkte</span>
                 </div>
-
                 <div class="result-stat">
                     <strong id="resultPercent">–</strong>
                     <span>Prozent</span>
                 </div>
-
                 <div class="result-stat">
                     <strong id="resultCorrect">–</strong>
                     <span>richtige Antworten</span>
                 </div>
-
                 <div class="result-stat">
                     <strong id="resultAnswered">–</strong>
                     <span>beantwortete Fragen</span>
@@ -964,10 +947,6 @@
 <script>
 "use strict";
 
-/* =========================================================
-   HILFSFUNKTION FÜR FRAGEN
-========================================================= */
-
 function q(id, pool, question, options, answer, explanation) {
     return {
         id,
@@ -982,1468 +961,339 @@ function q(id, pool, question, options, answer, explanation) {
 }
 
 /* =========================================================
-   FRAGENBANK
-   10 Themenpools mit jeweils 10 Fragen = 100 Fragen
+   FRAGENBANK (10 Themenpools à 10 Fragen = 100 Fragen)
 ========================================================= */
-
 const questionBank = [
-
-    /* =====================================================
-       POOL 1: GRUNDLAGEN UND SCHUTZZIELE
-    ===================================================== */
-
-    q(
-        "g01",
-        "1. Grundlagen und Schutzziele",
-        "Was ist ein Subjekt in einem IT-System?",
-        [
-            "Eine ausschließlich passive Datei",
-            "Ein Benutzer oder ein in seinem Auftrag handelnder Prozess",
-            "Nur ein physischer Server",
-            "Eine Sicherungskopie"
-        ],
-        1,
-        "Ein Subjekt ist eine aktive Einheit, beispielsweise ein Benutzer oder ein Prozess, der im Auftrag eines Benutzers handelt."
-    ),
-
-    q(
-        "g02",
-        "1. Grundlagen und Schutzziele",
-        "Was ist ein Objekt im Kontext der Zugriffskontrolle?",
-        [
-            "Eine Einheit, die ausschließlich Angriffe ausführt",
-            "Eine Repräsentation von Informationen, auf die zugegriffen werden kann",
-            "Nur eine natürliche Person",
-            "Ausschließlich ein Netzwerkrouter"
-        ],
-        1,
-        "Ein Objekt repräsentiert oder enthält Informationen, beispielsweise eine Datei, einen Datensatz oder eine Ressource."
-    ),
-
-    q(
-        "g03",
-        "1. Grundlagen und Schutzziele",
-        "Was bezeichnet der Begriff Asset?",
-        [
-            "Ein beliebiges temporäres Passwort",
-            "Ein schutzwürdiges Gut",
-            "Nur eine Hardwarekomponente",
-            "Eine öffentlich bekannte Schwachstelle"
-        ],
-        1,
-        "Assets sind schutzwürdige Güter wie Daten, Software, Hardware, Dienste, finanzielle Werte oder Reputation."
-    ),
-
-    q(
-        "g04",
-        "1. Grundlagen und Schutzziele",
-        "Welches Schutzziel wird verletzt, wenn ein Angreifer eine vertrauliche E-Mail mitliest?",
-        [
-            "Verfügbarkeit",
-            "Verbindlichkeit",
-            "Vertraulichkeit",
-            "Authentizität"
-        ],
-        2,
-        "Unbefugtes Mitlesen verletzt die Vertraulichkeit."
-    ),
-
-    q(
-        "g05",
-        "1. Grundlagen und Schutzziele",
-        "Welches Schutzziel wird durch eine unbemerkte Veränderung einer Datei verletzt?",
-        [
-            "Integrität",
-            "Verfügbarkeit",
-            "Anonymität",
-            "Authentizität"
-        ],
-        0,
-        "Integrität bedeutet, dass Daten nicht unautorisiert und unbemerkt verändert werden können."
-    ),
-
-    q(
-        "g06",
-        "1. Grundlagen und Schutzziele",
-        "Welches Schutzziel ist bei einem erfolgreichen DDoS-Angriff hauptsächlich betroffen?",
-        [
-            "Verbindlichkeit",
-            "Verfügbarkeit",
-            "Pseudonymität",
-            "Datenminimierung"
-        ],
-        1,
-        "Ein DDoS-Angriff verhindert oder erschwert die Nutzung eines Dienstes und verletzt damit die Verfügbarkeit."
-    ),
-
-    q(
-        "g07",
-        "1. Grundlagen und Schutzziele",
-        "Was bedeutet Authentizität?",
-        [
-            "Daten sind jederzeit verfügbar",
-            "Die Echtheit eines Subjekts oder Objekts ist überprüfbar",
-            "Daten werden automatisch gelöscht",
-            "Jede Kommunikation erfolgt anonym"
-        ],
-        1,
-        "Authentizität beschreibt die Echtheit und Glaubwürdigkeit einer Identität, Nachricht oder eines Objekts."
-    ),
-
-    q(
-        "g08",
-        "1. Grundlagen und Schutzziele",
-        "Was bedeutet Verbindlichkeit beziehungsweise Nicht-Abstreitbarkeit?",
-        [
-            "Eine Aktion kann später nicht glaubhaft abgestritten werden",
-            "Alle Daten müssen öffentlich sein",
-            "Ein Dienst muss jederzeit verfügbar sein",
-            "Passwörter müssen regelmäßig geändert werden"
-        ],
-        0,
-        "Verbindlichkeit soll verhindern, dass ein Akteur eine von ihm ausgeführte Aktion später abstreitet."
-    ),
-
-    q(
-        "g09",
-        "1. Grundlagen und Schutzziele",
-        "Was beschreibt Safety am besten?",
-        [
-            "Schutz personenbezogener Daten vor Werbung",
-            "Erfüllung der Soll-Funktion unter normalen Bedingungen",
-            "Verschlüsselung jeder gespeicherten Datei",
-            "Ausschließliche Verwendung digitaler Signaturen"
-        ],
-        1,
-        "Safety beziehungsweise Funktionssicherheit betrifft die korrekte und gefahrlose Erfüllung der vorgesehenen Funktion."
-    ),
-
-    q(
-        "g10",
-        "1. Grundlagen und Schutzziele",
-        "Welcher Zielkonflikt kann bei zusätzlichen Backups entstehen?",
-        [
-            "Backups erhöhen die Verfügbarkeit, können aber zusätzliche Risiken für die Vertraulichkeit erzeugen",
-            "Backups senken grundsätzlich die Verfügbarkeit",
-            "Backups verhindern jede Form von Authentifikation",
-            "Backups machen Zugriffskontrollen überflüssig"
-        ],
-        0,
-        "Zusätzliche Kopien verbessern die Wiederherstellbarkeit, vergrößern aber die Zahl der zu schützenden Datenträger und Speicherorte."
-    ),
-
-    /* =====================================================
-       POOL 2: RISIKEN UND SICHERHEITSMANAGEMENT
-    ===================================================== */
-
-    q(
-        "r01",
-        "2. Risiken und Sicherheitsmanagement",
-        "Was ist eine Schwachstelle?",
-        [
-            "Eine bereits vollständig realisierte Attacke",
-            "Eine Schwäche eines Systems",
-            "Eine Form der Datensicherung",
-            "Ein kryptographischer Schlüssel"
-        ],
-        1,
-        "Eine Schwachstelle ist eine Schwäche, die ein System potenziell verwundbar macht."
-    ),
-
-    q(
-        "r02",
-        "2. Risiken und Sicherheitsmanagement",
-        "Was ist ein Exploit?",
-        [
-            "Eine Vorgehensweise oder Software zur Ausnutzung einer Verwundbarkeit",
-            "Eine Sicherheitsrichtlinie",
-            "Ein Backupserver",
-            "Ein biometrisches Merkmal"
-        ],
-        0,
-        "Ein Exploit nutzt eine konkrete Verwundbarkeit technisch oder organisatorisch aus."
-    ),
-
-    q(
-        "r03",
-        "2. Risiken und Sicherheitsmanagement",
-        "Was ist ein Zero-Day-Exploit?",
-        [
-            "Ein Exploit, der erst Jahre nach einem Patch entsteht",
-            "Ein Exploit für eine noch nicht oder gerade erst öffentlich bekannte Schwachstelle",
-            "Ein Angriff ohne möglichen Schaden",
-            "Ein offiziell genehmigtes Update"
-        ],
-        1,
-        "Bei einem Zero-Day-Exploit steht häufig noch kein allgemein verfügbarer Schutz oder Patch bereit."
-    ),
-
-    q(
-        "r04",
-        "2. Risiken und Sicherheitsmanagement",
-        "Wie wird Risiko in einem vereinfachten Modell berechnet?",
-        [
-            "Schaden plus Eintrittswahrscheinlichkeit",
-            "Schaden geteilt durch Eintrittswahrscheinlichkeit",
-            "Schadenshöhe mal Eintrittswahrscheinlichkeit",
-            "Anzahl der Benutzer mal Passwortlänge"
-        ],
-        2,
-        "Im vereinfachten Modell gilt R = S · E."
-    ),
-
-    q(
-        "r05",
-        "2. Risiken und Sicherheitsmanagement",
-        "Welcher STRIDE-Kategorie entspricht das Vortäuschen einer fremden Identität?",
-        [
-            "Tampering",
-            "Spoofing",
-            "Repudiation",
-            "Denial of Service"
-        ],
-        1,
-        "Spoofing bezeichnet das Vortäuschen einer falschen Identität."
-    ),
-
-    q(
-        "r06",
-        "2. Risiken und Sicherheitsmanagement",
-        "Welcher STRIDE-Kategorie entspricht die Manipulation eines Datenbankeintrags?",
-        [
-            "Tampering",
-            "Spoofing",
-            "Information Disclosure",
-            "Repudiation"
-        ],
-        0,
-        "Tampering bezeichnet die unautorisierte Veränderung von Daten oder Systemen."
-    ),
-
-    q(
-        "r07",
-        "2. Risiken und Sicherheitsmanagement",
-        "Welcher STRIDE-Kategorie entspricht das Erlangen von Administratorrechten durch einen normalen Nutzer?",
-        [
-            "Information Disclosure",
-            "Elevation of Privilege",
-            "Repudiation",
-            "Spoofing"
-        ],
-        1,
-        "Elevation of Privilege bedeutet das Erlangen höherer Rechte als vorgesehen."
-    ),
-
-    q(
-        "r08",
-        "2. Risiken und Sicherheitsmanagement",
-        "Wofür steht das D in DREAD?",
-        [
-            "Decryption",
-            "Damage",
-            "Database",
-            "Delegation"
-        ],
-        1,
-        "Damage bewertet die mögliche Schadenshöhe eines Angriffs."
-    ),
-
-    q(
-        "r09",
-        "2. Risiken und Sicherheitsmanagement",
-        "Was sollte ein Angreifermodell enthalten?",
-        [
-            "Nur den Namen des Angreifers",
-            "Rolle, Ressourcen, Fähigkeiten, Motivation und Zugriffsmöglichkeiten",
-            "Nur den verwendeten Browser",
-            "Ausschließlich die Schadenshöhe"
-        ],
-        1,
-        "Ein Angreifermodell beschreibt unter anderem Rolle, Ressourcen, Wissen, Fähigkeiten, Motivation und Zugriffspunkte."
-    ),
-
-    q(
-        "r10",
-        "2. Risiken und Sicherheitsmanagement",
-        "Was ist mehrseitige Sicherheit?",
-        [
-            "Ausschließlicher Schutz der Interessen des Betreibers",
-            "Berücksichtigung der Schutzinteressen aller beteiligten Parteien",
-            "Verwendung mehrerer Firewalls ohne Richtlinie",
-            "Ein Synonym für mehrfache Datensicherung"
-        ],
-        1,
-        "Mehrseitige Sicherheit erkennt unterschiedliche Schutzinteressen und versucht, Konflikte angemessen auszuhandeln und technisch umzusetzen."
-    ),
-
-    /* =====================================================
-       POOL 3: AUTHENTIFIKATION UND PASSWÖRTER
-    ===================================================== */
-
-    q(
-        "a01",
-        "3. Authentifikation und Passwörter",
-        "Was ist Identifikation?",
-        [
-            "Die Prüfung eines Passworts durch das System",
-            "Die Angabe einer behaupteten Identität",
-            "Die Verschlüsselung eines Benutzernamens",
-            "Die Sperrung eines Kontos"
-        ],
-        1,
-        "Bei der Identifikation wird eine Identität angegeben, beispielsweise durch einen Benutzernamen."
-    ),
-
-    q(
-        "a02",
-        "3. Authentifikation und Passwörter",
-        "Was ist Authentisierung?",
-        [
-            "Der Nutzer weist seine Identität nach",
-            "Das System erstellt ein Backup",
-            "Ein Administrator löscht ein Konto",
-            "Eine Datei erhält neue Rechte"
-        ],
-        0,
-        "Bei der Authentisierung legt der Nutzer einen Nachweis seiner behaupteten Identität vor."
-    ),
-
-    q(
-        "a03",
-        "3. Authentifikation und Passwörter",
-        "Was ist Authentifizierung?",
-        [
-            "Die Angabe eines Benutzernamens",
-            "Die Prüfung des Identitätsnachweises durch das System",
-            "Die Vergabe einer Rolle",
-            "Die Verschlüsselung eines Datenträgers"
-        ],
-        1,
-        "Authentifizierung bezeichnet die Prüfung des vorgelegten Nachweises durch das System."
-    ),
-
-    q(
-        "a04",
-        "3. Authentifikation und Passwörter",
-        "Zu welchem Faktor gehört ein Passwort?",
-        [
-            "Besitz",
-            "Ort",
-            "Wissen",
-            "Biometrie"
-        ],
-        2,
-        "Ein Passwort ist ein Wissensfaktor."
-    ),
-
-    q(
-        "a05",
-        "3. Authentifikation und Passwörter",
-        "Zu welchem Faktor gehört eine Chipkarte?",
-        [
-            "Besitz",
-            "Wissen",
-            "Ort",
-            "Verhalten"
-        ],
-        0,
-        "Eine Chipkarte ist ein Besitzfaktor."
-    ),
-
-    q(
-        "a06",
-        "3. Authentifikation und Passwörter",
-        "Welche Kombination ist echte Zwei-Faktor-Authentifikation?",
-        [
-            "Passwort und PIN",
-            "Passwort und Sicherheitsfrage",
-            "Chipkarte und PIN",
-            "Zwei verschiedene Passwörter"
-        ],
-        2,
-        "Chipkarte und PIN verbinden Besitz und Wissen. Die anderen Kombinationen verwenden jeweils nur den Wissensfaktor."
-    ),
-
-    q(
-        "a07",
-        "3. Authentifikation und Passwörter",
-        "Was bedeutet eine falsch-positive biometrische Entscheidung?",
-        [
-            "Eine berechtigte Person wird abgelehnt",
-            "Eine unberechtigte Person wird akzeptiert",
-            "Der Sensor ist ausgeschaltet",
-            "Das biometrische Merkmal wird gelöscht"
-        ],
-        1,
-        "Falsch-positiv bedeutet, dass das System eine unberechtigte Person irrtümlich akzeptiert."
-    ),
-
-    q(
-        "a08",
-        "3. Authentifikation und Passwörter",
-        "Was bedeutet eine falsch-negative biometrische Entscheidung?",
-        [
-            "Eine berechtigte Person wird abgelehnt",
-            "Eine unberechtigte Person wird akzeptiert",
-            "Eine Person besitzt zwei Konten",
-            "Das System akzeptiert jedes Merkmal"
-        ],
-        0,
-        "Falsch-negativ bedeutet, dass eine berechtigte Person irrtümlich abgelehnt wird."
-    ),
-
-    q(
-        "a09",
-        "3. Authentifikation und Passwörter",
-        "Welche Maßnahme hilft gegen künstliche Fingerabdrücke?",
-        [
-            "Lebenderkennung",
-            "Deaktivierung aller Protokolle",
-            "Verkürzung der PIN",
-            "Speicherung des Passworts im Klartext"
-        ],
-        0,
-        "Lebenderkennung kann beispielsweise Temperatur, Feuchtigkeit, Durchblutung oder Bewegung prüfen."
-    ),
-
-    q(
-        "a10",
-        "3. Authentifikation und Passwörter",
-        "Warum ist die Wiederverwendung eines Passworts gefährlich?",
-        [
-            "Ein kompromittiertes Passwort kann den Zugriff auf mehrere Dienste ermöglichen",
-            "Das Passwort wird dadurch automatisch länger",
-            "Passwortmanager funktionieren dann nicht mehr",
-            "Die Verfügbarkeit des Internets sinkt"
-        ],
-        0,
-        "Bei Passwortwiederverwendung kann ein einzelnes Datenleck mehrere Konten gefährden."
-    ),
-
-    /* =====================================================
-       POOL 4: ZUGRIFFSKONTROLLE
-    ===================================================== */
-
-    q(
-        "z01",
-        "4. Zugriffskontrolle",
-        "Was ist die Aufgabe eines Referenzmonitors?",
-        [
-            "Er kontrolliert Zugriffsanfragen anhand geltender Regeln",
-            "Er erstellt ausschließlich Backups",
-            "Er ersetzt jeden Benutzer",
-            "Er verschlüsselt nur E-Mails"
-        ],
-        0,
-        "Ein Referenzmonitor fängt Zugriffsanfragen ab, prüft sie und erlaubt oder verweigert den Zugriff."
-    ),
-
-    q(
-        "z02",
-        "4. Zugriffskontrolle",
-        "Was bedeutet vollständige Mediation?",
-        [
-            "Nur erfolgreiche Zugriffe werden geprüft",
-            "Jeder relevante Zugriff wird kontrolliert",
-            "Jeder Benutzer erhält Administratorrechte",
-            "Nur Netzwerkzugriffe werden protokolliert"
-        ],
-        1,
-        "Vollständige Mediation verlangt, dass jeder sicherheitsrelevante Zugriff geprüft wird."
-    ),
-
-    q(
-        "z03",
-        "4. Zugriffskontrolle",
-        "Wie wird eine Zugriffskontrollmatrix durch ACLs dargestellt?",
-        [
-            "Zeilenweise nach Subjekten",
-            "Spaltenweise nach Objekten",
-            "Ausschließlich nach Rollen",
-            "Nur als Netzwerkpaket"
-        ],
-        1,
-        "ACLs speichern für jedes Objekt eine Liste berechtigter Subjekte und Rechte und entsprechen damit einer spaltenweisen Darstellung."
-    ),
-
-    q(
-        "z04",
-        "4. Zugriffskontrolle",
-        "Was ist eine Capability?",
-        [
-            "Ein manipulationssicheres Zugriffsticket eines Subjekts",
-            "Eine öffentlich lesbare Passwortliste",
-            "Eine vollständige Festplattenkopie",
-            "Eine Firewallregel ohne Ziel"
-        ],
-        0,
-        "Capabilities sind geschützte Berechtigungsnachweise, die einem Subjekt bestimmte Zugriffe erlauben."
-    ),
-
-    q(
-        "z05",
-        "4. Zugriffskontrolle",
-        "Was ist die Grundidee von RBAC?",
-        [
-            "Rechte werden ausschließlich IP-Adressen zugewiesen",
-            "Rechte werden Rollen und Rollen Benutzern zugewiesen",
-            "Alle Benutzer erhalten dieselben Rechte",
-            "Rechte werden zufällig vergeben"
-        ],
-        1,
-        "Bei RBAC werden Rechte an Rollen gebunden. Benutzer erhalten Rollen und damit deren Rechte."
-    ),
-
-    q(
-        "z06",
-        "4. Zugriffskontrolle",
-        "Was bedeutet Need-to-know?",
-        [
-            "Benutzer erhalten nur die Informationen, die sie für ihre Aufgabe benötigen",
-            "Jeder Benutzer darf alle Daten lesen",
-            "Nur Administratoren dürfen Passwörter verwenden",
-            "Alle Dateien müssen öffentlich sein"
-        ],
-        0,
-        "Need-to-know begrenzt Zugriff auf die für die jeweilige Aufgabe erforderlichen Informationen."
-    ),
-
-    q(
-        "z07",
-        "4. Zugriffskontrolle",
-        "Was bedeutet Separation of Duty?",
-        [
-            "Kritische Aufgaben werden auf mehrere Personen oder Rollen verteilt",
-            "Ein Benutzer führt alle kritischen Schritte allein aus",
-            "Private und öffentliche Schlüssel sind identisch",
-            "Alle Rollen werden abgeschafft"
-        ],
-        0,
-        "Separation of Duty verhindert, dass eine einzelne Person einen kritischen Vorgang vollständig allein kontrolliert."
-    ),
-
-    q(
-        "z08",
-        "4. Zugriffskontrolle",
-        "Welches Schutzziel verfolgt Bell-LaPadula hauptsächlich?",
-        [
-            "Integrität",
-            "Vertraulichkeit",
-            "Verfügbarkeit",
-            "Anonymität"
-        ],
-        1,
-        "Bell-LaPadula ist ein Mandatory-Access-Control-Modell zum Schutz der Vertraulichkeit."
-    ),
-
-    q(
-        "z09",
-        "4. Zugriffskontrolle",
-        "Welche Regel gehört zu Bell-LaPadula?",
-        [
-            "No read up",
-            "No read down",
-            "Jeder darf nach unten schreiben",
-            "Alle Daten müssen anonym sein"
-        ],
-        0,
-        "No read up verhindert, dass ein Subjekt Informationen oberhalb seiner Freigabe liest."
-    ),
-
-    q(
-        "z10",
-        "4. Zugriffskontrolle",
-        "Welches Ziel verfolgt das Chinese-Wall-Modell?",
-        [
-            "Vermeidung von Interessenkonflikten",
-            "Beschleunigung von Hashfunktionen",
-            "Erhöhung der Netzwerklast",
-            "Ersetzung aller Zertifikate"
-        ],
-        0,
-        "Das Chinese-Wall-Modell beschränkt zukünftige Zugriffe anhand früherer Zugriffe, um Interessenkonflikte zu verhindern."
-    ),
-
-    /* =====================================================
-       POOL 5: MALWARE UND SOCIAL ENGINEERING
-    ===================================================== */
-
-    q(
-        "m01",
-        "5. Malware und Social Engineering",
-        "Was kennzeichnet einen Trojaner?",
-        [
-            "Er besitzt eine versteckte schädliche Zusatzfunktion",
-            "Er ist immer ein Hardwaredefekt",
-            "Er benötigt zwingend ein Wirtsprogramm zur Reproduktion",
-            "Er ist ein Verschlüsselungsalgorithmus"
-        ],
-        0,
-        "Ein Trojaner tarnt sich häufig als nützliche Software, führt aber eine versteckte Zusatzfunktion aus."
-    ),
-
-    q(
-        "m02",
-        "5. Malware und Social Engineering",
-        "Was kennzeichnet einen Computervirus?",
-        [
-            "Er benötigt typischerweise ein Wirtsprogramm oder Dokument",
-            "Er ist immer selbstständig lauffähig",
-            "Er kann sich niemals vermehren",
-            "Er ist eine Firewallregel"
-        ],
-        0,
-        "Ein Virus infiziert typischerweise Programme, Bootbereiche oder Dokumente und wird häufig durch Benutzeraktionen aktiviert."
-    ),
-
-    q(
-        "m03",
-        "5. Malware und Social Engineering",
-        "Was kennzeichnet einen Wurm?",
-        [
-            "Er kann sich selbstständig über Netzwerke verbreiten",
-            "Er benötigt immer eine Textdatei als Wirt",
-            "Er ist ausschließlich ein physischer Angriff",
-            "Er dient nur der Datensicherung"
-        ],
-        0,
-        "Ein Wurm ist selbstständig lauffähig und verbreitet sich häufig automatisiert über Netzwerke."
-    ),
-
-    q(
-        "m04",
-        "5. Malware und Social Engineering",
-        "Was ist ein Botnetz?",
-        [
-            "Ein Verbund kompromittierter und fernsteuerbarer Geräte",
-            "Ein Netzwerk ausschließlich vertrauenswürdiger Administratoren",
-            "Eine Liste sicherer Passwörter",
-            "Ein System zur Zertifikatsprüfung"
-        ],
-        0,
-        "Botnetze bestehen aus infizierten Systemen, die von einem Angreifer kontrolliert werden."
-    ),
-
-    q(
-        "m05",
-        "5. Malware und Social Engineering",
-        "Wofür werden Botnetze häufig eingesetzt?",
-        [
-            "DDoS-Angriffe und Spam",
-            "Ausschließlich lokale Backups",
-            "Verbesserung der Passwortqualität",
-            "Erstellung digitaler Zertifikate"
-        ],
-        0,
-        "Botnetze werden unter anderem für DDoS, Spam, Datendiebstahl und die Verteilung weiterer Malware verwendet."
-    ),
-
-    q(
-        "m06",
-        "5. Malware und Social Engineering",
-        "Was nutzt Social Engineering primär aus?",
-        [
-            "Ausschließlich mathematische Schwächen",
-            "Menschliche Eigenschaften wie Vertrauen, Angst oder Hilfsbereitschaft",
-            "Nur defekte Festplatten",
-            "Nur veraltete Verschlüsselungsalgorithmen"
-        ],
-        1,
-        "Social Engineering manipuliert Menschen und nutzt beispielsweise Vertrauen, Neugier, Angst oder Autoritätsgläubigkeit."
-    ),
-
-    q(
-        "m07",
-        "5. Malware und Social Engineering",
-        "Welches Merkmal ist ein typisches Phishing-Warnsignal?",
-        [
-            "Ein unerwarteter dringender Handlungsaufruf",
-            "Eine selbst aufgerufene offizielle Website",
-            "Eine lokal gespeicherte Sicherungskopie",
-            "Ein korrekt gesetztes Sticky-Bit"
-        ],
-        0,
-        "Phishing verwendet häufig Zeitdruck, Drohungen, verdächtige Links und Aufforderungen zur Preisgabe sensibler Daten."
-    ),
-
-    q(
-        "m08",
-        "5. Malware und Social Engineering",
-        "Wie sollte man mit einem gefundenen unbekannten USB-Stick umgehen?",
-        [
-            "Sofort am Arbeitsplatzrechner öffnen",
-            "Nicht anschließen und über den vorgesehenen Meldeweg abgeben",
-            "An alle Mitarbeitenden weiterreichen",
-            "Den Inhalt automatisch ausführen"
-        ],
-        1,
-        "Unbekannte USB-Geräte können Malware, manipulierte Hardware oder USB-Killer enthalten und sollten nicht angeschlossen werden."
-    ),
-
-    q(
-        "m09",
-        "5. Malware und Social Engineering",
-        "Was ist Shoulder Surfing?",
-        [
-            "Beobachten einer Person bei der Eingabe vertraulicher Informationen",
-            "Verschlüsseln einer Netzwerkverbindung",
-            "Prüfen eines Zertifikats",
-            "Löschen eines Benutzerkontos"
-        ],
-        0,
-        "Beim Shoulder Surfing werden Eingaben wie Passwörter oder PINs durch Beobachtung ausgespäht."
-    ),
-
-    q(
-        "m10",
-        "5. Malware und Social Engineering",
-        "Was ist Pretexting?",
-        [
-            "Eine erfundene glaubwürdige Geschichte zur Manipulation des Opfers",
-            "Ein kryptographischer Hash",
-            "Eine Art von Backup",
-            "Eine UNIX-Berechtigung"
-        ],
-        0,
-        "Beim Pretexting konstruiert der Angreifer einen Vorwand oder eine Identität, um Informationen oder Handlungen zu erlangen."
-    ),
-
-    /* =====================================================
-       POOL 6: KRYPTOGRAPHISCHE GRUNDLAGEN
-    ===================================================== */
-
-    q(
-        "k01",
-        "6. Kryptographische Grundlagen",
-        "Was ist Kryptographie?",
-        [
-            "Die Entwicklung von Methoden zum Schutz von Informationen",
-            "Ausschließlich die physische Zerstörung von Datenträgern",
-            "Nur die Analyse sozialer Netzwerke",
-            "Ein Firewalltyp"
-        ],
-        0,
-        "Kryptographie umfasst Methoden zur Absicherung von Informationen, unter anderem Verschlüsselung, MACs und Signaturen."
-    ),
-
-    q(
-        "k02",
-        "6. Kryptographische Grundlagen",
-        "Was ist Kryptoanalyse?",
-        [
-            "Das Erzeugen von Backups",
-            "Die Analyse und das Brechen kryptographischer Verfahren",
-            "Die Vergabe von UNIX-Rechten",
-            "Die Erstellung einer Firewallregel"
-        ],
-        1,
-        "Kryptoanalyse untersucht kryptographische Verfahren und versucht, deren Schutz zu überwinden."
-    ),
-
-    q(
-        "k03",
-        "6. Kryptographische Grundlagen",
-        "Was ist Kryptologie?",
-        [
-            "Kryptographie und Kryptoanalyse zusammen",
-            "Nur asymmetrische Verschlüsselung",
-            "Nur klassische Chiffren",
-            "Ein Datenschutzgesetz"
-        ],
-        0,
-        "Kryptologie ist der Oberbegriff für Kryptographie und Kryptoanalyse."
-    ),
-
-    q(
-        "k04",
-        "6. Kryptographische Grundlagen",
-        "Was ist Steganographie?",
-        [
-            "Das Verbergen der Existenz einer Nachricht",
-            "Das öffentliche Signieren eines Zertifikats",
-            "Das Sperren eines Benutzerkontos",
-            "Das Berechnen eines Risikos"
-        ],
-        0,
-        "Steganographie versucht, bereits die Existenz einer Nachricht zu verbergen."
-    ),
-
-    q(
-        "k05",
-        "6. Kryptographische Grundlagen",
-        "Was besagt das Kerckhoffs-Prinzip?",
-        [
-            "Der Algorithmus muss geheim bleiben",
-            "Die Sicherheit soll nur von der Geheimhaltung des Schlüssels abhängen",
-            "Öffentliche Schlüssel dürfen nicht veröffentlicht werden",
-            "Jede Verschlüsselung muss proprietär sein"
-        ],
-        1,
-        "Ein Verfahren soll auch bei bekanntem Algorithmus sicher sein. Geheim bleiben muss der geheime Schlüssel."
-    ),
-
-    q(
-        "k06",
-        "6. Kryptographische Grundlagen",
-        "Wann ist ein One-Time Pad theoretisch sicher?",
-        [
-            "Wenn ein kurzer Schlüssel beliebig oft wiederholt wird",
-            "Wenn der Schlüssel zufällig, nachrichtenlang und einmalig ist",
-            "Wenn der Algorithmus unbekannt ist",
-            "Wenn nur Großbuchstaben verwendet werden"
-        ],
-        1,
-        "Die informationstheoretische Sicherheit gilt nur bei einem echt zufälligen, nachrichtenlangen und einmalig verwendeten Schlüssel."
-    ),
-
-    q(
-        "k07",
-        "6. Kryptographische Grundlagen",
-        "Warum ist die Caesar-Chiffre unsicher?",
-        [
-            "Sie besitzt einen sehr kleinen Schlüsselraum",
-            "Sie verwendet zu lange Schlüssel",
-            "Sie ist informationstheoretisch sicher",
-            "Sie kann nicht entschlüsselt werden"
-        ],
-        0,
-        "Die wenigen möglichen Verschiebungen können einfach ausprobiert werden."
-    ),
-
-    q(
-        "k08",
-        "6. Kryptographische Grundlagen",
-        "Warum ist eine monoalphabetische Substitutionschiffre trotz großem Schlüsselraum angreifbar?",
-        [
-            "Wegen statistischer Sprachmerkmale und Häufigkeitsanalyse",
-            "Weil sie überhaupt keinen Schlüssel verwendet",
-            "Weil jede Nachricht automatisch gelöscht wird",
-            "Weil sie nur mit Quantencomputern funktioniert"
-        ],
-        0,
-        "Buchstaben- und Musterhäufigkeiten natürlicher Sprachen bleiben in veränderter Form erkennbar."
-    ),
-
-    q(
-        "k09",
-        "6. Kryptographische Grundlagen",
-        "Was macht eine Transpositionschiffre?",
-        [
-            "Sie ordnet Zeichen um, ohne sie grundsätzlich zu ersetzen",
-            "Sie löscht jeden zweiten Buchstaben",
-            "Sie verwendet zwingend RSA",
-            "Sie erzeugt einen Passwort-Hash"
-        ],
-        0,
-        "Bei einer Transposition werden Zeichenpositionen verändert, während die Zeichen selbst erhalten bleiben."
-    ),
-
-    q(
-        "k10",
-        "6. Kryptographische Grundlagen",
-        "Was ist ein Brute-Force-Angriff?",
-        [
-            "Systematisches Ausprobieren möglicher Schlüssel oder Passwörter",
-            "Ausschließlich das Mitlesen eines Gesprächs",
-            "Eine Zertifikatsverlängerung",
-            "Eine Art von Datensicherung"
-        ],
-        0,
-        "Beim Brute Force werden mögliche Werte systematisch getestet, bis ein passender gefunden wird."
-    ),
-
-    /* =====================================================
-       POOL 7: HASH, MAC, VERSCHLÜSSELUNG UND PKI
-    ===================================================== */
-
-    q(
-        "c01",
-        "7. Hash, MAC, Verschlüsselung und PKI",
-        "Welche Eigenschaft besitzt eine kryptographische Hashfunktion?",
-        [
-            "Sie bildet Eingaben beliebiger Länge auf Werte fester Länge ab",
-            "Sie kann nur genau acht Zeichen verarbeiten",
-            "Sie benötigt immer einen privaten Schlüssel",
-            "Sie garantiert, dass keine Kollision existiert"
-        ],
-        0,
-        "Hashfunktionen erzeugen aus Eingaben variabler Länge einen Hashwert fester Länge."
-    ),
-
-    q(
-        "c02",
-        "7. Hash, MAC, Verschlüsselung und PKI",
-        "Was bedeutet starke Kollisionsresistenz?",
-        [
-            "Es soll schwer sein, zwei beliebige verschiedene Nachrichten mit gleichem Hash zu finden",
-            "Jeder Hash muss entschlüsselbar sein",
-            "Alle Nachrichten müssen denselben Hash besitzen",
-            "Der Schlüssel muss öffentlich sein"
-        ],
-        0,
-        "Starke Kollisionsresistenz erschwert das Finden beliebiger unterschiedlicher Eingaben mit gleichem Hashwert."
-    ),
-
-    q(
-        "c03",
-        "7. Hash, MAC, Verschlüsselung und PKI",
-        "Wie hoch ist der ungefähre Kollisionsaufwand für einen n-Bit-Hash beim Geburtstagsangriff?",
-        [
-            "2 hoch n",
-            "2 hoch n/2",
-            "n mal 2",
-            "n geteilt durch 4"
-        ],
-        1,
-        "Aufgrund des Geburtstagsparadoxons liegt der Aufwand ungefähr bei 2^(n/2)."
-    ),
-
-    q(
-        "c04",
-        "7. Hash, MAC, Verschlüsselung und PKI",
-        "Welche Schutzziele unterstützt ein MAC?",
-        [
-            "Integrität und Ursprungsauthentizität",
-            "Nur Verfügbarkeit",
-            "Nur Anonymität",
-            "Ausschließlich Nicht-Abstreitbarkeit gegenüber Dritten"
-        ],
-        0,
-        "Ein MAC schützt Integrität und authentifiziert den Ursprung gegenüber Parteien, die das gemeinsame Geheimnis kennen."
-    ),
-
-    q(
-        "c05",
-        "7. Hash, MAC, Verschlüsselung und PKI",
-        "Welcher Schlüssel wird zum Erzeugen einer digitalen Signatur verwendet?",
-        [
-            "Der private Signaturschlüssel",
-            "Ausschließlich der öffentliche Schlüssel",
-            "Ein beliebiger Salt",
-            "Die IP-Adresse des Absenders"
-        ],
-        0,
-        "Der Signierende erzeugt die Signatur mit seinem privaten Schlüssel."
-    ),
-
-    q(
-        "c06",
-        "7. Hash, MAC, Verschlüsselung und PKI",
-        "Welcher Schlüssel wird zur Prüfung einer digitalen Signatur verwendet?",
-        [
-            "Der öffentliche Verifikationsschlüssel",
-            "Der private Schlüssel des Empfängers",
-            "Das Benutzerpasswort",
-            "Ein einmaliger Salt"
-        ],
-        0,
-        "Die Signatur wird mit dem authentischen öffentlichen Schlüssel des Signierenden geprüft."
-    ),
-
-    q(
-        "c07",
-        "7. Hash, MAC, Verschlüsselung und PKI",
-        "Welches Verfahren ist symmetrisch?",
-        [
-            "AES",
-            "RSA",
-            "X.509",
-            "Certificate Transparency"
-        ],
-        0,
-        "AES ist eine symmetrische Blockchiffre."
-    ),
-
-    q(
-        "c08",
-        "7. Hash, MAC, Verschlüsselung und PKI",
-        "Warum gilt DES heute als unsicher?",
-        [
-            "Wegen seiner kurzen Schlüssellänge von 56 Bit",
-            "Weil DES keinen Schlüssel verwendet",
-            "Weil DES ein Hashverfahren ist",
-            "Weil DES nur öffentliche Schlüssel besitzt"
-        ],
-        0,
-        "Der 56-Bit-Schlüssel kann mit ausreichenden Ressourcen durch vollständiges Ausprobieren gebrochen werden."
-    ),
-
-    q(
-        "c09",
-        "7. Hash, MAC, Verschlüsselung und PKI",
-        "Worauf beruht die klassische Sicherheit von RSA hauptsächlich?",
-        [
-            "Auf der Schwierigkeit der Faktorisierung großer Zahlen",
-            "Auf der Geheimhaltung des RSA-Algorithmus",
-            "Auf einer kurzen Caesar-Verschiebung",
-            "Auf der Verwendung derselben Primzahl für alle Nutzer"
-        ],
-        0,
-        "RSA nutzt die Schwierigkeit, große zusammengesetzte Zahlen in ihre Primfaktoren zu zerlegen."
-    ),
-
-    q(
-        "c10",
-        "7. Hash, MAC, Verschlüsselung und PKI",
-        "Was bindet ein digitales Zertifikat an eine Identität?",
-        [
-            "Einen öffentlichen Schlüssel",
-            "Den privaten Schlüssel im Klartext",
-            "Eine vollständige Passwortliste",
-            "Ein Backupmedium"
-        ],
-        0,
-        "Ein Zertifikat bestätigt die Zuordnung eines öffentlichen Schlüssels zu einer Identität."
-    ),
-
-    /* =====================================================
-       POOL 8: KOMMUNIKATIONS- UND NETZWERKSICHERHEIT
-    ===================================================== */
-
-    q(
-        "n01",
-        "8. Kommunikations- und Netzwerksicherheit",
-        "Welche Schutzziele unterstützt TLS?",
-        [
-            "Authentifikation, Integrität und Vertraulichkeit",
-            "Nur Verfügbarkeit",
-            "Nur Anonymität",
-            "Ausschließlich Datensicherung"
-        ],
-        0,
-        "TLS schützt typischerweise die Vertraulichkeit und Integrität der Übertragung und authentifiziert mindestens den Server."
-    ),
-
-    q(
-        "n02",
-        "8. Kommunikations- und Netzwerksicherheit",
-        "Welche Aufgabe besitzt der TLS-Handshake?",
-        [
-            "Aushandlung von Verfahren, Authentifikation und Ableitung von Schlüsselmaterial",
-            "Ausschließlich die Speicherung von Passwörtern",
-            "Das Löschen des IP-Headers",
-            "Die Vergabe von UNIX-Dateirechten"
-        ],
-        0,
-        "Der TLS-Handshake handelt kryptographische Parameter aus, prüft Zertifikate und etabliert Schlüsselmaterial."
-    ),
-
-    q(
-        "n03",
-        "8. Kommunikations- und Netzwerksicherheit",
-        "Welche Aufgabe besitzt das TLS-Record-Protokoll?",
-        [
-            "Schutz der übertragenen Anwendungsdaten",
-            "Erstellung von Benutzerkonten",
-            "Vergabe physischer Zutrittskarten",
-            "Berechnung der DREAD-Werte"
-        ],
-        0,
-        "Das Record-Protokoll schützt die eigentlichen Daten mit den im Handshake abgeleiteten Schlüsseln."
-    ),
-
-    q(
-        "n04",
-        "8. Kommunikations- und Netzwerksicherheit",
-        "Was ist die Grundidee von Certificate Transparency?",
-        [
-            "Ausgestellte Zertifikate werden in öffentlich prüfbaren Logs erfasst",
-            "Private CA-Schlüssel werden veröffentlicht",
-            "TLS-Verkehr wird im Klartext gespeichert",
-            "Alle Zertifikate werden abgeschafft"
-        ],
-        0,
-        "Certificate Transparency macht ausgestellte Zertifikate nachvollziehbar und erleichtert das Erkennen unberechtigter Zertifikate."
-    ),
-
-    q(
-        "n05",
-        "8. Kommunikations- und Netzwerksicherheit",
-        "Was bietet IPsec ESP?",
-        [
-            "Vertraulichkeit, Integrität, Ursprungsauthentifikation und Replay-Schutz",
-            "Nur die Vergabe von IP-Adressen",
-            "Ausschließlich Passwortspeicherung",
-            "Nur physische Zutrittskontrolle"
-        ],
-        0,
-        "ESP kann IP-Pakete verschlüsseln, authentisieren und gegen Wiederholungsangriffe schützen."
-    ),
-
-    q(
-        "n06",
-        "8. Kommunikations- und Netzwerksicherheit",
-        "Was wird im IPsec-Tunnelmodus geschützt?",
-        [
-            "Das gesamte ursprüngliche IP-Paket wird gekapselt",
-            "Nur die Zielportnummer",
-            "Ausschließlich das Benutzerpasswort",
-            "Nur ein einzelnes Zeichen"
-        ],
-        0,
-        "Im Tunnelmodus wird das ursprüngliche IP-Paket vollständig in ein neues Paket eingebettet."
-    ),
-
-    q(
-        "n07",
-        "8. Kommunikations- und Netzwerksicherheit",
-        "Nach welchen Angaben filtert ein klassischer Paketfilter?",
-        [
-            "IP-Adressen, Protokoll, Ports und Richtung",
-            "Ausschließlich Dateiinhalte",
-            "Nur biometrische Merkmale",
-            "Nur den Namen des Administrators"
-        ],
-        0,
-        "Paketfilter arbeiten typischerweise mit Headerinformationen auf Netzwerk- und Transportschicht."
-    ),
-
-    q(
-        "n08",
-        "8. Kommunikations- und Netzwerksicherheit",
-        "Was kennzeichnet ein Application-Level Gateway?",
-        [
-            "Es kann anwendungsspezifische Inhalte analysieren",
-            "Es betrachtet ausschließlich elektrische Signale",
-            "Es ersetzt jede Form von Authentifikation",
-            "Es arbeitet nur mit UNIX-Dateirechten"
-        ],
-        0,
-        "Ein Application-Level Gateway arbeitet als anwendungsspezifischer Proxy und kann Inhalte feingranular prüfen."
-    ),
-
-    q(
-        "n09",
-        "8. Kommunikations- und Netzwerksicherheit",
-        "Was ist eine DMZ?",
-        [
-            "Ein getrenntes Netzsegment für öffentlich erreichbare Dienste",
-            "Ein unverschlüsseltes Passwortarchiv",
-            "Eine biometrische Datenbank",
-            "Eine Form der Caesar-Chiffre"
-        ],
-        0,
-        "Eine DMZ trennt öffentlich erreichbare Systeme vom besonders schützenswerten internen Netz."
-    ),
-
-    q(
-        "n10",
-        "8. Kommunikations- und Netzwerksicherheit",
-        "Wogegen schützt eine Firewall allein nur unzureichend?",
-        [
-            "Angriffe durch berechtigte Innentäter",
-            "Jedes Paket, das durch eine korrekte Regel blockiert wird",
-            "Ausschließlich ausgeschaltete Systeme",
-            "Nur physische Stromausfälle"
-        ],
-        0,
-        "Firewalls kontrollieren Netzverkehr, verhindern aber nicht automatisch Missbrauch durch Innentäter, Malware auf Endpunkten oder Tunneling."
-    ),
-
-    /* =====================================================
-       POOL 9: PRIVATHEIT UND DATENSCHUTZ
-    ===================================================== */
-
-    q(
-        "p01",
-        "9. Privatheit und Datenschutz",
-        "Was sind personenbezogene Daten?",
-        [
-            "Informationen über eine identifizierte oder identifizierbare natürliche Person",
-            "Nur öffentlich zugängliche Wetterdaten",
-            "Ausschließlich vollständig anonyme Statistiken",
-            "Nur verschlüsselte Dateien"
-        ],
-        0,
-        "Personenbezogene Daten beziehen sich direkt oder indirekt auf eine identifizierte oder identifizierbare natürliche Person."
-    ),
-
-    q(
-        "p02",
-        "9. Privatheit und Datenschutz",
-        "Kann eine IP-Adresse personenbezogen sein?",
-        [
-            "Ja, wenn ein Personenbezug hergestellt werden kann",
-            "Nein, grundsätzlich niemals",
-            "Nur wenn sie aus vier identischen Zahlen besteht",
-            "Nur bei ausgeschaltetem Computer"
-        ],
-        0,
-        "IP-Adressen können Online-Kennungen sein und unter den jeweiligen Umständen einen Personenbezug ermöglichen."
-    ),
-
-    q(
-        "p03",
-        "9. Privatheit und Datenschutz",
-        "Was bedeutet Pseudonymisierung?",
-        [
-            "Ersetzen direkter Identifikatoren durch ein Ersatzkennzeichen",
-            "Unwiderrufliche Vernichtung aller Daten",
-            "Veröffentlichung aller Namen",
-            "Automatische Verschlüsselung ohne Schlüssel"
-        ],
-        0,
-        "Bei der Pseudonymisierung wird ein Ersatzkennzeichen verwendet. Über Zusatzinformationen kann eine Zuordnung weiterhin möglich sein."
-    ),
-
-    q(
-        "p04",
-        "9. Privatheit und Datenschutz",
-        "Was bedeutet Anonymität?",
-        [
-            "Daten sind einer Identität nicht zuordenbar",
-            "Der Name wird durch eine leicht umkehrbare Nummer ersetzt",
-            "Alle Daten werden öffentlich",
-            "Jeder Nutzer erhält Administratorrechte"
-        ],
-        0,
-        "Bei wirksamer Anonymisierung ist eine Zuordnung zu einer Person praktisch nicht mehr möglich."
-    ),
-
-    q(
-        "p05",
-        "9. Privatheit und Datenschutz",
-        "Was bedeutet Zweckbindung?",
-        [
-            "Daten dürfen nur für festgelegte legitime Zwecke verarbeitet werden",
-            "Daten dürfen ohne Zweck unbegrenzt gesammelt werden",
-            "Jede Datei muss denselben Namen tragen",
-            "Daten müssen immer öffentlich sein"
-        ],
-        0,
-        "Zweckbindung begrenzt die Verarbeitung auf festgelegte, eindeutige und legitime Zwecke."
-    ),
-
-    q(
-        "p06",
-        "9. Privatheit und Datenschutz",
-        "Was bedeutet Datenminimierung?",
-        [
-            "Es werden nur die für den Zweck erforderlichen Daten verarbeitet",
-            "Alle verfügbaren Daten werden vorsorglich gespeichert",
-            "Daten werden niemals gelöscht",
-            "Jeder Nutzer darf alle Daten lesen"
-        ],
-        0,
-        "Datenminimierung begrenzt Umfang und Detailgrad personenbezogener Daten auf das Erforderliche."
-    ),
-
-    q(
-        "p07",
-        "9. Privatheit und Datenschutz",
-        "Was bedeutet Privacy by Design?",
-        [
-            "Datenschutz wird bereits in die Gestaltung des Systems eingebaut",
-            "Datenschutz wird erst nach einem Vorfall berücksichtigt",
-            "Nur die Datenschutzerklärung wird verlängert",
-            "Alle Sicherheitsmaßnahmen werden entfernt"
-        ],
-        0,
-        "Privacy by Design integriert Datenschutz proaktiv in Architektur, Funktionen und Lebenszyklus eines Systems."
-    ),
-
-    q(
-        "p08",
-        "9. Privatheit und Datenschutz",
-        "Was bedeutet Datenschutz als Standardeinstellung?",
-        [
-            "Ohne Zutun des Nutzers gelten datenschutzfreundliche Einstellungen",
-            "Standardmäßig werden alle Daten veröffentlicht",
-            "Standardmäßig werden alle Nutzer Administrator",
-            "Die Einwilligung wird grundsätzlich ignoriert"
-        ],
-        0,
-        "Privacy by Default bedeutet, dass die Voreinstellungen bereits möglichst datenschutzfreundlich sind."
-    ),
-
-    q(
-        "p09",
-        "9. Privatheit und Datenschutz",
-        "Warum kann Pseudonymisierung allein unzureichend sein?",
-        [
-            "Zusatzinformationen und charakteristische Muster können eine Re-Identifikation ermöglichen",
-            "Pseudonyme sind immer länger als Namen",
-            "Pseudonymisierung verhindert jede Statistik",
-            "Pseudonymisierung löscht automatisch alle Daten"
-        ],
-        0,
-        "Seltene Merkmale, Standortmuster, Zeitangaben oder externe Datenquellen können eine Person trotz Pseudonym identifizierbar machen."
-    ),
-
-    q(
-        "p10",
-        "9. Privatheit und Datenschutz",
-        "Welche Maßnahme kann das Re-Identifikationsrisiko reduzieren?",
-        [
-            "Aggregation und kontrolliertes Hinzufügen von Rauschen",
-            "Veröffentlichung aller Rohdaten",
-            "Speicherung direkter Namen in jedem Datensatz",
-            "Aufhebung aller Zugriffsbeschränkungen"
-        ],
-        0,
-        "Aggregation, Generalisierung, Rauschen und Zugriffskontrollen können das Risiko einer Re-Identifikation reduzieren."
-    ),
-
-    /* =====================================================
-       POOL 10: UNIX-SICHERHEIT
-    ===================================================== */
-
-    q(
-        "u01",
-        "10. UNIX-Sicherheit",
-        "Was ist die UID?",
-        [
-            "Die numerische Kennung eines Benutzers",
-            "Die Kennung eines Netzwerkports",
-            "Ein Verschlüsselungsalgorithmus",
-            "Eine Firewallregel"
-        ],
-        0,
-        "UID steht für User Identifier und bezeichnet die numerische Benutzerkennung."
-    ),
-
-    q(
-        "u02",
-        "10. UNIX-Sicherheit",
-        "Welche UID besitzt Root?",
-        [
-            "0",
-            "1",
-            "100",
-            "65535"
-        ],
-        0,
-        "Der UNIX-Superuser Root besitzt die UID 0."
-    ),
-
-    q(
-        "u03",
-        "10. UNIX-Sicherheit",
-        "Warum werden Passwort-Hashes typischerweise in /etc/shadow gespeichert?",
-        [
-            "Weil /etc/shadow stärker zugriffsbeschränkt ist",
-            "Weil /etc/passwd niemals existiert",
-            "Weil Hashwerte öffentlich verteilt werden müssen",
-            "Weil /etc/shadow ein Netzwerkprotokoll ist"
-        ],
-        0,
-        "/etc/passwd ist häufig allgemein lesbar. /etc/shadow schützt Passwort-Hashes durch strengere Zugriffsrechte."
-    ),
-
-    q(
-        "u04",
-        "10. UNIX-Sicherheit",
-        "Welche Rechte beschreibt -rw-r--r--?",
-        [
-            "Eigentümer lesen und schreiben; Gruppe und andere lesen",
-            "Alle dürfen lesen, schreiben und ausführen",
-            "Nur die Gruppe darf schreiben",
-            "Es handelt sich um ein Verzeichnis mit Sticky-Bit"
-        ],
-        0,
-        "Das erste Zeichen kennzeichnet eine normale Datei. Der Eigentümer besitzt rw, Gruppe und andere jeweils r."
-    ),
-
-    q(
-        "u05",
-        "10. UNIX-Sicherheit",
-        "Welche symbolischen Rechte entsprechen chmod 755?",
-        [
-            "rwxr-xr-x",
-            "rw-------",
-            "rwxrwxrwx",
-            "r--r--r--"
-        ],
-        0,
-        "7 entspricht rwx, 5 entspricht r-x. Daher ergibt 755 die Rechte rwxr-xr-x."
-    ),
-
-    q(
-        "u06",
-        "10. UNIX-Sicherheit",
-        "Welche symbolischen Rechte entsprechen chmod 600?",
-        [
-            "rw-------",
-            "rwxr-xr-x",
-            "r--r--r--",
-            "rwxrwxrwx"
-        ],
-        0,
-        "6 entspricht rw-. Gruppe und andere erhalten mit 0 keine Rechte."
-    ),
-
-    q(
-        "u07",
-        "10. UNIX-Sicherheit",
-        "Was bedeutet das Ausführungsrecht x bei einem Verzeichnis?",
-        [
-            "Das Verzeichnis darf betreten und als Pfadbestandteil verwendet werden",
-            "Alle Dateien werden automatisch ausgeführt",
-            "Das Verzeichnis wird gelöscht",
-            "Der Inhalt wird verschlüsselt"
-        ],
-        0,
-        "Das x-Recht bei Verzeichnissen erlaubt das Betreten beziehungsweise Durchsuchen über bekannte Namen."
-    ),
-
-    q(
-        "u08",
-        "10. UNIX-Sicherheit",
-        "Was bewirkt das Sticky-Bit bei einem gemeinsam beschreibbaren Verzeichnis?",
-        [
-            "Nur Dateiinhaber, Verzeichnisinhaber oder Root dürfen Dateien löschen",
-            "Jeder darf jede Datei löschen",
-            "Alle Dateien werden ausführbar",
-            "Alle Dateien erhalten SUID"
-        ],
-        0,
-        "Das Sticky-Bit schützt beispielsweise in /tmp vor dem Löschen fremder Dateien durch andere normale Benutzer."
-    ),
-
-    q(
-        "u09",
-        "10. UNIX-Sicherheit",
-        "Was bewirkt SUID bei einem ausführbaren Programm?",
-        [
-            "Das Programm läuft mit der effektiven UID seines Dateieigentümers",
-            "Das Programm wird anonymisiert",
-            "Das Programm läuft immer ohne Rechte",
-            "Die Gruppe des Verzeichnisses wird gelöscht"
-        ],
-        0,
-        "SUID setzt bei der Ausführung die effektive UID auf die UID des Dateieigentümers. Fehlerhafte SUID-Programme können gefährlich sein."
-    ),
-
-    q(
-        "u10",
-        "10. UNIX-Sicherheit",
-        "Was bewirkt SGID bei einem Verzeichnis?",
-        [
-            "Neue Dateien übernehmen typischerweise die Gruppe des Verzeichnisses",
-            "Neue Dateien erhalten automatisch Root als Eigentümer",
-            "Alle Dateien werden gelöscht",
-            "Das Verzeichnis wird öffentlich lesbar"
-        ],
-        0,
-        "SGID auf einem Verzeichnis sorgt typischerweise dafür, dass neue Einträge die Gruppe des Verzeichnisses übernehmen."
-    )
+    /* POOL 1: GRUNDLAGEN UND SCHUTZZIELE */
+    q("g01", "1. Grundlagen und Schutzziele", "Was ist ein Subjekt in einem IT-System?",
+      ["Eine ausschließlich passive Datei", "Ein Benutzer oder ein in seinem Auftrag handelnder Prozess", "Nur ein physischer Server", "Eine Sicherungskopie"],
+      1, "Ein Subjekt ist eine aktive Einheit, beispielsweise ein Benutzer oder ein Prozess, der im Auftrag eines Benutzers handelt."),
+    q("g02", "1. Grundlagen und Schutzziele", "Was ist ein Objekt im Kontext der Zugriffskontrolle?",
+      ["Eine Einheit, die ausschließlich Angriffe ausführt", "Eine Repräsentation von Informationen, auf die zugegriffen werden kann", "Nur eine natürliche Person", "Ausschließlich ein Netzwerkrouter"],
+      1, "Ein Objekt repräsentiert oder enthält Informationen, beispielsweise eine Datei, einen Datensatz oder eine Ressource."),
+    q("g03", "1. Grundlagen und Schutzziele", "Was bezeichnet der Begriff Asset?",
+      ["Ein beliebiges temporäres Passwort", "Ein schutzwürdiges Gut", "Nur eine Hardwarekomponente", "Eine öffentlich bekannte Schwachstelle"],
+      1, "Assets sind schutzwürdige Güter wie Daten, Software, Hardware, Dienste, finanzielle Werte oder Reputation."),
+    q("g04", "1. Grundlagen und Schutzziele", "Welches Schutzziel wird verletzt, wenn ein Angreifer eine vertrauliche E-Mail mitliest?",
+      ["Verfügbarkeit", "Verbindlichkeit", "Vertraulichkeit", "Authentizität"],
+      2, "Unbefugtes Mitlesen verletzt die Vertraulichkeit."),
+    q("g05", "1. Grundlagen und Schutzziele", "Welches Schutzziel wird durch eine unbemerkte Veränderung einer Datei verletzt?",
+      ["Integrität", "Verfügbarkeit", "Anonymität", "Authentizität"],
+      0, "Integrität bedeutet, dass Daten nicht unautorisiert und unbemerkt verändert werden können."),
+    q("g06", "1. Grundlagen und Schutzziele", "Welches Schutzziel ist bei einem erfolgreichen DDoS-Angriff hauptsächlich betroffen?",
+      ["Verbindlichkeit", "Verfügbarkeit", "Pseudonymität", "Datenminimierung"],
+      1, "Ein DDoS-Angriff verhindert oder erschwert die Nutzung eines Dienstes und verletzt damit die Verfügbarkeit."),
+    q("g07", "1. Grundlagen und Schutzziele", "Was bedeutet Authentizität?",
+      ["Daten sind jederzeit verfügbar", "Die Echtheit eines Subjekts oder Objekts ist überprüfbar", "Daten werden automatisch gelöscht", "Jede Kommunikation erfolgt anonym"],
+      1, "Authentizität beschreibt die Echtheit und Glaubwürdigkeit einer Identität, Nachricht oder eines Objekts."),
+    q("g08", "1. Grundlagen und Schutzziele", "Was bedeutet Verbindlichkeit beziehungsweise Nicht-Abstreitbarkeit?",
+      ["Eine Aktion kann später nicht glaubhaft abgestritten werden", "Alle Daten müssen öffentlich sein", "Ein Dienst muss jederzeit verfügbar sein", "Passwörter müssen regelmäßig geändert werden"],
+      0, "Verbindlichkeit soll verhindern, dass ein Akteur eine von ihm ausgeführte Aktion später abstreitet."),
+    q("g09", "1. Grundlagen und Schutzziele", "Was beschreibt Safety am besten?",
+      ["Schutz personenbezogener Daten vor Werbung", "Erfüllung der Soll-Funktion unter normalen Bedingungen", "Verschlüsselung jeder gespeicherten Datei", "Ausschließliche Verwendung digitaler Signaturen"],
+      1, "Safety beziehungsweise Funktionssicherheit betrifft die korrekte und gefahrlose Erfüllung der vorgesehenen Funktion."),
+    q("g10", "1. Grundlagen und Schutzziele", "Welcher Zielkonflikt kann bei zusätzlichen Backups entstehen?",
+      ["Backups erhöhen die Verfügbarkeit, können aber zusätzliche Risiken für die Vertraulichkeit erzeugen", "Backups senken grundsätzlich die Verfügbarkeit", "Backups verhindern jede Form von Authentifikation", "Backups machen Zugriffskontrollen überflüssig"],
+      0, "Zusätzliche Kopien verbessern die Wiederherstellbarkeit, vergrößern aber die Zahl der zu schützenden Datenträger und Speicherorte."),
+
+    /* POOL 2: RISIKEN UND SICHERHEITSMANAGEMENT */
+    q("r01", "2. Risiken und Sicherheitsmanagement", "Was ist eine Schwachstelle?",
+      ["Eine bereits vollständig realisierte Attacke", "Eine Schwäche eines Systems", "Eine Form der Datensicherung", "Ein kryptographischer Schlüssel"],
+      1, "Eine Schwachstelle ist eine Schwäche, die ein System potenziell verwundbar macht."),
+    q("r02", "2. Risiken und Sicherheitsmanagement", "Was ist ein Exploit?",
+      ["Eine Vorgehensweise oder Software zur Ausnutzung einer Verwundbarkeit", "Eine Sicherheitsrichtlinie", "Ein Backupserver", "Ein biometrisches Merkmal"],
+      0, "Ein Exploit nutzt eine konkrete Verwundbarkeit technisch oder organisatorisch aus."),
+    q("r03", "2. Risiken und Sicherheitsmanagement", "Was ist ein Zero-Day-Exploit?",
+      ["Ein Exploit, der erst Jahre nach einem Patch entsteht", "Ein Exploit für eine noch nicht oder gerade erst öffentlich bekannte Schwachstelle", "Ein Angriff ohne möglichen Schaden", "Ein offiziell genehmigtes Update"],
+      1, "Bei einem Zero-Day-Exploit steht häufig noch kein allgemein verfügbarer Schutz oder Patch bereit."),
+    q("r04", "2. Risiken und Sicherheitsmanagement", "Wie wird Risiko in einem vereinfachten Modell berechnet?",
+      ["Schaden plus Eintrittswahrscheinlichkeit", "Schaden geteilt durch Eintrittswahrscheinlichkeit", "Schadenshöhe mal Eintrittswahrscheinlichkeit", "Anzahl der Benutzer mal Passwortlänge"],
+      2, "Im vereinfachten Modell gilt R = S · E."),
+    q("r05", "2. Risiken und Sicherheitsmanagement", "Welcher STRIDE-Kategorie entspricht das Vortäuschen einer fremden Identität?",
+      ["Tampering", "Spoofing", "Repudiation", "Denial of Service"],
+      1, "Spoofing bezeichnet das Vortäuschen einer falschen Identität."),
+    q("r06", "2. Risiken und Sicherheitsmanagement", "Welcher STRIDE-Kategorie entspricht die Manipulation eines Datenbankeintrags?",
+      ["Tampering", "Spoofing", "Information Disclosure", "Repudiation"],
+      0, "Tampering bezeichnet die unautorisierte Veränderung von Daten oder Systemen."),
+    q("r07", "2. Risiken und Sicherheitsmanagement", "Welcher STRIDE-Kategorie entspricht das Erlangen von Administratorrechten durch einen normalen Nutzer?",
+      ["Information Disclosure", "Elevation of Privilege", "Repudiation", "Spoofing"],
+      1, "Elevation of Privilege bedeutet das Erlangen höherer Rechte als vorgesehen."),
+    q("r08", "2. Risiken und Sicherheitsmanagement", "Wofür steht das D in DREAD?",
+      ["Decryption", "Damage", "Database", "Delegation"],
+      1, "Damage bewertet die mögliche Schadenshöhe eines Angriffs."),
+    q("r09", "2. Risiken und Sicherheitsmanagement", "Was sollte ein Angreifermodell enthalten?",
+      ["Nur den Namen des Angreifers", "Rolle, Ressourcen, Fähigkeiten, Motivation und Zugriffsmöglichkeiten", "Nur den verwendeten Browser", "Ausschließlich die Schadenshöhe"],
+      1, "Ein Angreifermodell beschreibt unter anderem Rolle, Ressourcen, Wissen, Fähigkeiten, Motivation und Zugriffspunkte."),
+    q("r10", "2. Risiken und Sicherheitsmanagement", "Was ist mehrseitige Sicherheit?",
+      ["Ausschließlicher Schutz der Interessen des Betreibers", "Berücksichtigung der Schutzinteressen aller beteiligten Parteien", "Verwendung mehrerer Firewalls ohne Richtlinie", "Ein Synonym für mehrfache Datensicherung"],
+      1, "Mehrseitige Sicherheit erkennt unterschiedliche Schutzinteressen und versucht, Konflikte angemessen auszuhandeln und technisch umzusetzen."),
+
+    /* POOL 3: AUTHENTIFIKATION UND PASSWÖRTER */
+    q("a01", "3. Authentifikation und Passwörter", "Was ist Identifikation?",
+      ["Die Prüfung eines Passworts durch das System", "Die Angabe einer behaupteten Identität", "Die Verschlüsselung eines Benutzernamens", "Die Sperrung eines Kontos"],
+      1, "Bei der Identifikation wird eine Identität angegeben, beispielsweise durch einen Benutzernamen."),
+    q("a02", "3. Authentifikation und Passwörter", "Was ist Authentisierung?",
+      ["Der Nutzer weist seine Identität nach", "Das System erstellt ein Backup", "Ein Administrator löscht ein Konto", "Eine Datei erhält neue Rechte"],
+      0, "Bei der Authentisierung legt der Nutzer einen Nachweis seiner behaupteten Identität vor."),
+    q("a03", "3. Authentifikation und Passwörter", "Was ist Authentifizierung?",
+      ["Die Angabe eines Benutzernamens", "Die Prüfung des Identitätsnachweises durch das System", "Die Vergabe einer Rolle", "Die Verschlüsselung eines Datenträgers"],
+      1, "Authentifizierung bezeichnet die Prüfung des vorgelegten Nachweises durch das System."),
+    q("a04", "3. Authentifikation und Passwörter", "Zu welchem Faktor gehört ein Passwort?",
+      ["Besitz", "Ort", "Wissen", "Biometrie"],
+      2, "Ein Passwort ist ein Wissensfaktor."),
+    q("a05", "3. Authentifikation und Passwörter", "Zu welchem Faktor gehört eine Chipkarte?",
+      ["Besitz", "Wissen", "Ort", "Verhalten"],
+      0, "Eine Chipkarte ist ein Besitzfaktor."),
+    q("a06", "3. Authentifikation und Passwörter", "Welche Kombination ist echte Zwei-Faktor-Authentifikation?",
+      ["Passwort und PIN", "Passwort und Sicherheitsfrage", "Chipkarte und PIN", "Zwei verschiedene Passwörter"],
+      2, "Chipkarte und PIN verbinden Besitz und Wissen. Die anderen Kombinationen verwenden jeweils nur den Wissensfaktor."),
+    q("a07", "3. Authentifikation und Passwörter", "Was bedeutet eine falsch-positive biometrische Entscheidung?",
+      ["Eine berechtigte Person wird abgelehnt", "Eine unberechtigte Person wird akzeptiert", "Der Sensor ist ausgeschaltet", "Das biometrische Merkmal wird gelöscht"],
+      1, "Falsch-positiv bedeutet, dass das System eine unberechtigte Person irrtümlich akzeptiert."),
+    q("a08", "3. Authentifikation und Passwörter", "Was bedeutet eine falsch-negative biometrische Entscheidung?",
+      ["Eine berechtigte Person wird abgelehnt", "Eine unberechtigte Person wird akzeptiert", "Eine Person besitzt zwei Konten", "Das System akzeptiert jedes Merkmal"],
+      0, "Falsch-negativ bedeutet, dass eine berechtigte Person irrtümlich abgelehnt wird."),
+    q("a09", "3. Authentifikation und Passwörter", "Welche Maßnahme hilft gegen künstliche Fingerabdrücke?",
+      ["Lebenderkennung", "Deaktivierung aller Protokolle", "Verkürzung der PIN", "Speicherung des Passworts im Klartext"],
+      0, "Lebenderkennung kann beispielsweise Temperatur, Feuchtigkeit, Durchblutung oder Bewegung prüfen."),
+    q("a10", "3. Authentifikation und Passwörter", "Warum ist die Wiederverwendung eines Passworts gefährlich?",
+      ["Ein kompromittiertes Passwort kann den Zugriff auf mehrere Dienste ermöglichen", "Das Passwort wird dadurch automatisch länger", "Passwortmanager funktionieren dann nicht mehr", "Die Verfügbarkeit des Internets sinkt"],
+      0, "Bei Passwortwiederverwendung kann ein einzelnes Datenleck mehrere Konten gefährden."),
+
+    /* POOL 4: ZUGRIFFSKONTROLLE */
+    q("z01", "4. Zugriffskontrolle", "Was ist die Aufgabe eines Referenzmonitors?",
+      ["Er kontrolliert Zugriffsanfragen anhand geltender Regeln", "Er erstellt ausschließlich Backups", "Er ersetzt jeden Benutzer", "Er verschlüsselt nur E-Mails"],
+      0, "Ein Referenzmonitor fängt Zugriffsanfragen ab, prüft sie und erlaubt oder verweigert den Zugriff."),
+    q("z02", "4. Zugriffskontrolle", "Was bedeutet vollständige Mediation?",
+      ["Nur erfolgreiche Zugriffe werden geprüft", "Jeder relevante Zugriff wird kontrolliert", "Jeder Benutzer erhält Administratorrechte", "Nur Netzwerkzugriffe werden protokolliert"],
+      1, "Vollständige Mediation verlangt, dass jeder sicherheitsrelevante Zugriff geprüft wird."),
+    q("z03", "4. Zugriffskontrolle", "Wie wird eine Zugriffskontrollmatrix durch ACLs dargestellt?",
+      ["Zeilenweise nach Subjekten", "Spaltenweise nach Objekten", "Ausschließlich nach Rollen", "Nur als Netzwerkpaket"],
+      1, "ACLs speichern für jedes Objekt eine Liste berechtigter Subjekte und Rechte und entsprechen damit einer spaltenweisen Darstellung."),
+    q("z04", "4. Zugriffskontrolle", "Was ist eine Capability?",
+      ["Ein manipulationssicheres Zugriffsticket eines Subjekts", "Eine öffentlich lesbare Passwortliste", "Eine vollständige Festplattenkopie", "Eine Firewallregel ohne Ziel"],
+      0, "Capabilities sind geschützte Berechtigungsnachweise, die einem Subjekt bestimmte Zugriffe erlauben."),
+    q("z05", "4. Zugriffskontrolle", "Was ist die Grundidee von RBAC?",
+      ["Rechte werden ausschließlich IP-Adressen zugewiesen", "Rechte werden Rollen und Rollen Benutzern zugewiesen", "Alle Benutzer erhalten dieselben Rechte", "Rechte werden zufällig vergeben"],
+      1, "Bei RBAC werden Rechte an Rollen gebunden. Benutzer erhalten Rollen und damit deren Rechte."),
+    q("z06", "4. Zugriffskontrolle", "Was bedeutet Need-to-know?",
+      ["Benutzer erhalten nur die Informationen, die sie für ihre Aufgabe benötigen", "Jeder Benutzer darf alle Daten lesen", "Nur Administratoren dürfen Passwörter verwenden", "Alle Dateien müssen öffentlich sein"],
+      0, "Need-to-know begrenzt Zugriff auf die für die jeweilige Aufgabe erforderlichen Informationen."),
+    q("z07", "4. Zugriffskontrolle", "Was bedeutet Separation of Duty?",
+      ["Kritische Aufgaben werden auf mehrere Personen oder Rollen verteilt", "Ein Benutzer führt alle kritischen Schritte allein aus", "Private und öffentliche Schlüssel sind identisch", "Alle Rollen werden abgeschafft"],
+      0, "Separation of Duty verhindert, dass eine einzelne Person einen kritischen Vorgang vollständig allein kontrolliert."),
+    q("z08", "4. Zugriffskontrolle", "Welches Schutzziel verfolgt Bell-LaPadula hauptsächlich?",
+      ["Integrität", "Vertraulichkeit", "Verfügbarkeit", "Anonymität"],
+      1, "Bell-LaPadula ist ein Mandatory-Access-Control-Modell zum Schutz der Vertraulichkeit."),
+    q("z09", "4. Zugriffskontrolle", "Welche Regel gehört zu Bell-LaPadula?",
+      ["No read up", "No read down", "Jeder darf nach unten schreiben", "Alle Daten müssen anonym sein"],
+      0, "No read up verhindert, dass ein Subjekt Informationen oberhalb seiner Freigabe liest."),
+    q("z10", "4. Zugriffskontrolle", "Welches Ziel verfolgt das Chinese-Wall-Modell?",
+      ["Vermeidung von Interessenkonflikten", "Beschleunigung von Hashfunktionen", "Erhöhung der Netzwerklast", "Ersetzung aller Zertifikate"],
+      0, "Das Chinese-Wall-Modell beschränkt zukünftige Zugriffe anhand früherer Zugriffe, um Interessenkonflikte zu verhindern."),
+
+    /* POOL 5: MALWARE UND SOCIAL ENGINEERING */
+    q("m01", "5. Malware und Social Engineering", "Was kennzeichnet einen Trojaner?",
+      ["Er besitzt eine versteckte schädliche Zusatzfunktion", "Er ist immer ein Hardwaredefekt", "Er benötigt zwingend ein Wirtsprogramm zur Reproduktion", "Er ist ein Verschlüsselungsalgorithmus"],
+      0, "Ein Trojaner tarnt sich häufig als nützliche Software, führt aber eine versteckte Zusatzfunktion aus."),
+    q("m02", "5. Malware und Social Engineering", "Was kennzeichnet einen Computervirus?",
+      ["Er benötigt typischerweise ein Wirtsprogramm oder Dokument", "Er ist immer selbstständig lauffähig", "Er kann sich niemals vermehren", "Er ist eine Firewallregel"],
+      0, "Ein Virus infiziert typischerweise Programme, Bootbereiche oder Dokumente und wird häufig durch Benutzeraktionen aktiviert."),
+    q("m03", "5. Malware und Social Engineering", "Was kennzeichnet einen Wurm?",
+      ["Er kann sich selbstständig über Netzwerke verbreiten", "Er benötigt immer eine Textdatei als Wirt", "Er ist ausschließlich ein physischer Angriff", "Er dient nur der Datensicherung"],
+      0, "Ein Wurm ist selbstständig lauffähig und verbreitet sich häufig automatisiert über Netzwerke."),
+    q("m04", "5. Malware und Social Engineering", "Was ist ein Botnetz?",
+      ["Ein Verbund kompromittierter und fernsteuerbarer Geräte", "Ein Netzwerk ausschließlich vertrauenswürdiger Administratoren", "Eine Liste sicherer Passwörter", "Ein System zur Zertifikatsprüfung"],
+      0, "Botnetze bestehen aus infizierten Systemen, die von einem Angreifer kontrolliert werden."),
+    q("m05", "5. Malware und Social Engineering", "Wofür werden Botnetze häufig eingesetzt?",
+      ["DDoS-Angriffe und Spam", "Ausschließlich lokale Backups", "Verbesserung der Passwortqualität", "Erstellung digitaler Zertifikate"],
+      0, "Botnetze werden unter anderem für DDoS, Spam, Datendiebstahl und die Verteilung weiterer Malware verwendet."),
+    q("m06", "5. Malware und Social Engineering", "Was nutzt Social Engineering primär aus?",
+      ["Ausschließlich mathematische Schwächen", "Menschliche Eigenschaften wie Vertrauen, Angst oder Hilfsbereitschaft", "Nur defekte Festplatten", "Nur veraltete Verschlüsselungsalgorithmen"],
+      1, "Social Engineering manipuliert Menschen und nutzt beispielsweise Vertrauen, Neugier, Angst oder Autoritätsgläubigkeit."),
+    q("m07", "5. Malware und Social Engineering", "Welches Merkmal ist ein typisches Phishing-Warnsignal?",
+      ["Ein unerwarteter dringender Handlungsaufruf", "Eine selbst aufgerufene offizielle Website", "Eine lokal gespeicherte Sicherungskopie", "Ein korrekt gesetztes Sticky-Bit"],
+      0, "Phishing verwendet häufig Zeitdruck, Drohungen, verdächtige Links und Aufforderungen zur Preisgabe sensibler Daten."),
+    q("m08", "5. Malware und Social Engineering", "Wie sollte man mit einem gefundenen unbekannten USB-Stick umgehen?",
+      ["Sofort am Arbeitsplatzrechner öffnen", "Nicht anschließen und über den vorgesehenen Meldeweg abgeben", "An alle Mitarbeitenden weiterreichen", "Den Inhalt automatisch ausführen"],
+      1, "Unbekannte USB-Geräte können Malware, manipulierte Hardware oder USB-Killer enthalten und sollten nicht angeschlossen werden."),
+    q("m09", "5. Malware und Social Engineering", "Was ist Shoulder Surfing?",
+      ["Beobachten einer Person bei der Eingabe vertraulicher Informationen", "Verschlüsseln einer Netzwerkverbindung", "Prüfen eines Zertifikats", "Löschen eines Benutzerkontos"],
+      0, "Beim Shoulder Surfing werden Eingaben wie Passwörter oder PINs durch Beobachtung ausgespäht."),
+    q("m10", "5. Malware und Social Engineering", "Was ist Pretexting?",
+      ["Eine erfundene glaubwürdige Geschichte zur Manipulation des Opfers", "Ein kryptographischer Hash", "Eine Art von Backup", "Eine UNIX-Berechtigung"],
+      0, "Beim Pretexting konstruiert der Angreifer einen Vorwand oder eine Identität, um Informationen oder Handlungen zu erlangen."),
+
+    /* POOL 6: KRYPTOGRAPHISCHE GRUNDLAGEN */
+    q("k01", "6. Kryptographische Grundlagen", "Was ist Kryptographie?",
+      ["Die Entwicklung von Methoden zum Schutz von Informationen", "Ausschließlich die physische Zerstörung von Datenträgern", "Nur die Analyse sozialer Netzwerke", "Ein Firewalltyp"],
+      0, "Kryptographie umfasst Methoden zur Absicherung von Informationen, unter anderem Verschlüsselung, MACs und Signaturen."),
+    q("k02", "6. Kryptographische Grundlagen", "Was ist Kryptoanalyse?",
+      ["Das Erzeugen von Backups", "Die Analyse und das Brechen kryptographischer Verfahren", "Die Vergabe von UNIX-Rechten", "Die Erstellung einer Firewallregel"],
+      1, "Kryptoanalyse untersucht kryptographische Verfahren und versucht, deren Schutz zu überwinden."),
+    q("k03", "6. Kryptographische Grundlagen", "Was ist Kryptologie?",
+      ["Kryptographie und Kryptoanalyse zusammen", "Nur asymmetrische Verschlüsselung", "Nur klassische Chiffren", "Ein Datenschutzgesetz"],
+      0, "Kryptologie ist der Oberbegriff für Kryptographie und Kryptoanalyse."),
+    q("k04", "6. Kryptographische Grundlagen", "Was ist Steganographie?",
+      ["Das Verbergen der Existenz einer Nachricht", "Das öffentliche Signieren eines Zertifikats", "Das Sperren eines Benutzerkontos", "Das Berechnen eines Risikos"],
+      0, "Steganographie versucht, bereits die Existenz einer Nachricht zu verbergen."),
+    q("k05", "6. Kryptographische Grundlagen", "Was besagt das Kerckhoffs-Prinzip?",
+      ["Der Algorithmus muss geheim bleiben", "Die Sicherheit soll nur von der Geheimhaltung des Schlüssels abhängen", "Öffentliche Schlüssel dürfen nicht veröffentlicht werden", "Jede Verschlüsselung muss proprietär sein"],
+      1, "Ein Verfahren soll auch bei bekanntem Algorithmus sicher sein. Geheim bleiben muss der geheime Schlüssel."),
+    q("k06", "6. Kryptographische Grundlagen", "Wann ist ein One-Time Pad theoretisch sicher?",
+      ["Wenn ein kurzer Schlüssel beliebig oft wiederholt wird", "Wenn der Schlüssel zufällig, nachrichtenlang und einmalig ist", "Wenn der Algorithmus unbekannt ist", "Wenn nur Großbuchstaben verwendet werden"],
+      1, "Die informationstheoretische Sicherheit gilt nur bei einem echt zufälligen, nachrichtenlangen und einmalig verwendeten Schlüssel."),
+    q("k07", "6. Kryptographische Grundlagen", "Warum ist die Caesar-Chiffre unsicher?",
+      ["Sie besitzt einen sehr kleinen Schlüsselraum", "Sie verwendet zu lange Schlüssel", "Sie ist informationstheoretisch sicher", "Sie kann nicht entschlüsselt werden"],
+      0, "Die wenigen möglichen Verschiebungen können einfach ausprobiert werden."),
+    q("k08", "6. Kryptographische Grundlagen", "Warum ist eine monoalphabetische Substitutionschiffre trotz großem Schlüsselraum angreifbar?",
+      ["Wegen statistischer Sprachmerkmale und Häufigkeitsanalyse", "Weil sie überhaupt keinen Schlüssel verwendet", "Weil jede Nachricht automatisch gelöscht wird", "Weil sie nur mit Quantencomputern funktioniert"],
+      0, "Buchstaben- und Musterhäufigkeiten natürlicher Sprachen bleiben in veränderter Form erkennbar."),
+    q("k09", "6. Kryptographische Grundlagen", "Was macht eine Transpositionschiffre?",
+      ["Sie ordnet Zeichen um, ohne sie grundsätzlich zu ersetzen", "Sie löscht jeden zweiten Buchstaben", "Sie verwendet zwingend RSA", "Sie erzeugt einen Passwort-Hash"],
+      0, "Bei einer Transposition werden Zeichenpositionen verändert, während die Zeichen selbst erhalten bleiben."),
+    q("k10", "6. Kryptographische Grundlagen", "Was ist ein Brute-Force-Angriff?",
+      ["Systematisches Ausprobieren möglicher Schlüssel oder Passwörter", "Ausschließlich das Mitlesen eines Gesprächs", "Eine Zertifikatsverlängerung", "Eine Art von Datensicherung"],
+      0, "Beim Brute Force werden mögliche Werte systematisch getestet, bis ein passender gefunden wird."),
+
+    /* POOL 7: HASH, MAC, VERSCHLÜSSELUNG UND PKI */
+    q("c01", "7. Hash, MAC, Verschlüsselung und PKI", "Welche Eigenschaft besitzt eine kryptographische Hashfunktion?",
+      ["Sie bildet Eingaben beliebiger Länge auf Werte fester Länge ab", "Sie kann nur genau acht Zeichen verarbeiten", "Sie benötigt immer einen privaten Schlüssel", "Sie garantiert, dass keine Kollision existiert"],
+      0, "Hashfunktionen erzeugen aus Eingaben variabler Länge einen Hashwert fester Länge."),
+    q("c02", "7. Hash, MAC, Verschlüsselung und PKI", "Was bedeutet starke Kollisionsresistenz?",
+      ["Es soll schwer sein, zwei beliebige verschiedene Nachrichten mit gleichem Hash zu finden", "Jeder Hash muss entschlüsselbar sein", "Alle Nachrichten müssen denselben Hash besitzen", "Der Schlüssel muss öffentlich sein"],
+      0, "Starke Kollisionsresistenz erschwert das Finden beliebiger unterschiedlicher Eingaben mit gleichem Hashwert."),
+    q("c03", "7. Hash, MAC, Verschlüsselung und PKI", "Wie hoch ist der ungefähre Kollisionsaufwand für einen n-Bit-Hash beim Geburtstagsangriff?",
+      ["2 hoch n", "2 hoch n/2", "n mal 2", "n geteilt durch 4"],
+      1, "Aufgrund des Geburtstagsparadoxons liegt der Aufwand ungefähr bei 2^(n/2)."),
+    q("c04", "7. Hash, MAC, Verschlüsselung und PKI", "Welche Schutzziele unterstützt ein MAC?",
+      ["Integrität und Ursprungsauthentizität", "Nur Verfügbarkeit", "Nur Anonymität", "Ausschließlich Nicht-Abstreitbarkeit gegenüber Dritten"],
+      0, "Ein MAC schützt Integrität und authentifiziert den Ursprung gegenüber Parteien, die das gemeinsame Geheimnis kennen."),
+    q("c05", "7. Hash, MAC, Verschlüsselung und PKI", "Welcher Schlüssel wird zum Erzeugen einer digitalen Signatur verwendet?",
+      ["Der private Signaturschlüssel", "Ausschließlich der öffentliche Schlüssel", "Ein beliebiger Salt", "Die IP-Adresse des Absenders"],
+      0, "Der Signierende erzeugt die Signatur mit seinem privaten Schlüssel."),
+    q("c06", "7. Hash, MAC, Verschlüsselung und PKI", "Welcher Schlüssel wird zur Prüfung einer digitalen Signatur verwendet?",
+      ["Der öffentliche Verifikationsschlüssel", "Der private Schlüssel des Empfängers", "Das Benutzerpasswort", "Ein einmaliger Salt"],
+      0, "Die Signatur wird mit dem authentischen öffentlichen Schlüssel des Signierenden geprüft."),
+    q("c07", "7. Hash, MAC, Verschlüsselung und PKI", "Welches Verfahren ist symmetrisch?",
+      ["AES", "RSA", "X.509", "Certificate Transparency"],
+      0, "AES ist eine symmetrische Blockchiffre."),
+    q("c08", "7. Hash, MAC, Verschlüsselung und PKI", "Warum gilt DES heute als unsicher?",
+      ["Wegen seiner kurzen Schlüssellänge von 56 Bit", "Weil DES keinen Schlüssel verwendet", "Weil DES ein Hashverfahren ist", "Weil DES nur öffentliche Schlüssel besitzt"],
+      0, "Der 56-Bit-Schlüssel kann mit ausreichenden Ressourcen durch vollständiges Ausprobieren gebrochen werden."),
+    q("c09", "7. Hash, MAC, Verschlüsselung und PKI", "Worauf beruht die klassische Sicherheit von RSA hauptsächlich?",
+      ["Auf der Schwierigkeit der Faktorisierung großer Zahlen", "Auf der Geheimhaltung des RSA-Algorithmus", "Auf einer kurzen Caesar-Verschiebung", "Auf der Verwendung derselben Primzahl für alle Nutzer"],
+      0, "RSA nutzt die Schwierigkeit, große zusammengesetzte Zahlen in ihre Primfaktoren zu zerlegen."),
+    q("c10", "7. Hash, MAC, Verschlüsselung und PKI", "Was bindet ein digitales Zertifikat an eine Identität?",
+      ["Einen öffentlichen Schlüssel", "Den privaten Schlüssel im Klartext", "Eine vollständige Passwortliste", "Ein Backupmedium"],
+      0, "Ein Zertifikat bestätigt die Zuordnung eines öffentlichen Schlüssels zu einer Identität."),
+
+    /* POOL 8: KOMMUNIKATIONS- UND NETZWERKSICHERHEIT */
+    q("n01", "8. Kommunikations- und Netzwerksicherheit", "Welche Schutzziele unterstützt TLS?",
+      ["Authentifikation, Integrität und Vertraulichkeit", "Nur Verfügbarkeit", "Nur Anonymität", "Ausschließlich Datensicherung"],
+      0, "TLS schützt typischerweise die Vertraulichkeit und Integrität der Übertragung und authentifiziert mindestens den Server."),
+    q("n02", "8. Kommunikations- und Netzwerksicherheit", "Welche Aufgabe besitzt der TLS-Handshake?",
+      ["Aushandlung von Verfahren, Authentifikation und Ableitung von Schlüsselmaterial", "Ausschließlich die Speicherung von Passwörtern", "Das Löschen des IP-Headers", "Die Vergabe von UNIX-Dateirechten"],
+      0, "Der TLS-Handshake handelt kryptographische Parameter aus, prüft Zertifikate und etabliert Schlüsselmaterial."),
+    q("n03", "8. Kommunikations- und Netzwerksicherheit", "Welche Aufgabe besitzt das TLS-Record-Protokoll?",
+      ["Schutz der übertragenen Anwendungsdaten", "Erstellung von Benutzerkonten", "Vergabe physischer Zutrittskarten", "Berechnung der DREAD-Werte"],
+      0, "Das Record-Protokoll schützt die eigentlichen Daten mit den im Handshake abgeleiteten Schlüsseln."),
+    q("n04", "8. Kommunikations- und Netzwerksicherheit", "Was ist die Grundidee von Certificate Transparency?",
+      ["Ausgestellte Zertifikate werden in öffentlich prüfbaren Logs erfasst", "Private CA-Schlüssel werden veröffentlicht", "TLS-Verkehr wird im Klartext gespeichert", "Alle Zertifikate werden abgeschafft"],
+      0, "Certificate Transparency macht ausgestellte Zertifikate nachvollziehbar und erleichtert das Erkennen unberechtigter Zertifikate."),
+    q("n05", "8. Kommunikations- und Netzwerksicherheit", "Was bietet IPsec ESP?",
+      ["Vertraulichkeit, Integrität, Ursprungsauthentifikation und Replay-Schutz", "Nur die Vergabe von IP-Adressen", "Ausschließlich Passwortspeicherung", "Nur physische Zutrittskontrolle"],
+      0, "ESP kann IP-Pakete verschlüsseln, authentisieren und gegen Wiederholungsangriffe schützen."),
+    q("n06", "8. Kommunikations- und Netzwerksicherheit", "Was wird im IPsec-Tunnelmodus geschützt?",
+      ["Das gesamte ursprüngliche IP-Paket wird gekapselt", "Nur die Zielportnummer", "Ausschließlich das Benutzerpasswort", "Nur ein einzelnes Zeichen"],
+      0, "Im Tunnelmodus wird das ursprüngliche IP-Paket vollständig in ein neues Paket eingebettet."),
+    q("n07", "8. Kommunikations- und Netzwerksicherheit", "Nach welchen Angaben filtert ein klassischer Paketfilter?",
+      ["IP-Adressen, Protokoll, Ports und Richtung", "Ausschließlich Dateiinhalte", "Nur biometrische Merkmale", "Nur den Namen des Administrators"],
+      0, "Paketfilter arbeiten typischerweise mit Headerinformationen auf Netzwerk- und Transportschicht."),
+    q("n08", "8. Kommunikations- und Netzwerksicherheit", "Was kennzeichnet ein Application-Level Gateway?",
+      ["Es kann anwendungsspezifische Inhalte analysieren", "Es betrachtet ausschließlich elektrische Signale", "Es ersetzt jede Form von Authentifikation", "Es arbeitet nur mit UNIX-Dateirechten"],
+      0, "Ein Application-Level Gateway arbeitet als anwendungsspezifischer Proxy und kann Inhalte feingranular prüfen."),
+    q("n09", "8. Kommunikations- und Netzwerksicherheit", "Was ist eine DMZ?",
+      ["Ein getrenntes Netzsegment für öffentlich erreichbare Dienste", "Ein unverschlüsseltes Passwortarchiv", "Eine biometrische Datenbank", "Eine Form der Caesar-Chiffre"],
+      0, "Eine DMZ trennt öffentlich erreichbare Systeme vom besonders schützenswerten internen Netz."),
+    q("n10", "8. Kommunikations- und Netzwerksicherheit", "Wogegen schützt eine Firewall allein nur unzureichend?",
+      ["Angriffe durch berechtigte Innentäter", "Jedes Paket, das durch eine korrekte Regel blockiert wird", "Ausschließlich ausgeschaltete Systeme", "Nur physische Stromausfälle"],
+      0, "Firewalls kontrollieren Netzverkehr, verhindern aber nicht automatisch Missbrauch durch Innentäter, Malware auf Endpunkten oder Tunneling."),
+
+    /* POOL 9: PRIVATHEIT UND DATENSCHUTZ */
+    q("p01", "9. Privatheit und Datenschutz", "Was sind personenbezogene Daten?",
+      ["Informationen über eine identifizierte oder identifizierbare natürliche Person", "Nur öffentlich zugängliche Wetterdaten", "Ausschließlich vollständig anonyme Statistiken", "Nur verschlüsselte Dateien"],
+      0, "Personenbezogene Daten beziehen sich direkt oder indirekt auf eine identifizierte oder identifizierbare natürliche Person."),
+    q("p02", "9. Privatheit und Datenschutz", "Kann eine IP-Adresse personenbezogen sein?",
+      ["Ja, wenn ein Personenbezug hergestellt werden kann", "Nein, grundsätzlich niemals", "Nur wenn sie aus vier identischen Zahlen besteht", "Nur bei ausgeschaltetem Computer"],
+      0, "IP-Adressen können Online-Kennungen sein und unter den jeweiligen Umständen einen Personenbezug ermöglichen."),
+    q("p03", "9. Privatheit und Datenschutz", "Was bedeutet Pseudonymisierung?",
+      ["Ersetzen direkter Identifikatoren durch ein Ersatzkennzeichen", "Unwiderrufliche Vernichtung aller Daten", "Veröffentlichung aller Namen", "Automatische Verschlüsselung ohne Schlüssel"],
+      0, "Bei der Pseudonymisierung wird ein Ersatzkennzeichen verwendet. Über Zusatzinformationen kann eine Zuordnung weiterhin möglich sein."),
+    q("p04", "9. Privatheit und Datenschutz", "Was bedeutet Anonymität?",
+      ["Daten sind einer Identität nicht zuordenbar", "Der Name wird durch eine leicht umkehrbare Nummer ersetzt", "Alle Daten werden öffentlich", "Jeder Nutzer erhält Administratorrechte"],
+      0, "Bei wirksamer Anonymisierung ist eine Zuordnung zu einer Person praktisch nicht mehr möglich."),
+    q("p05", "9. Privatheit und Datenschutz", "Was bedeutet Zweckbindung?",
+      ["Daten dürfen nur für festgelegte legitime Zwecke verarbeitet werden", "Daten dürfen ohne Zweck unbegrenzt gesammelt werden", "Jede Datei muss denselben Namen tragen", "Daten müssen immer öffentlich sein"],
+      0, "Zweckbindung begrenzt die Verarbeitung auf festgelegte, eindeutige und legitime Zwecke."),
+    q("p06", "9. Privatheit und Datenschutz", "Was bedeutet Datenminimierung?",
+      ["Es werden nur die für den Zweck erforderlichen Daten verarbeitet", "Alle verfügbaren Daten werden vorsorglich gespeichert", "Daten werden niemals gelöscht", "Jeder Nutzer darf alle Daten lesen"],
+      0, "Datenminimierung begrenzt Umfang und Detailgrad personenbezogener Daten auf das Erforderliche."),
+    q("p07", "9. Privatheit und Datenschutz", "Was bedeutet Privacy by Design?",
+      ["Datenschutz wird bereits in die Gestaltung des Systems eingebaut", "Datenschutz wird erst nach einem Vorfall berücksichtigt", "Nur die Datenschutzerklärung wird verlängert", "Alle Sicherheitsmaßnahmen werden entfernt"],
+      0, "Privacy by Design integriert Datenschutz proaktiv in Architektur, Funktionen und Lebenszyklus eines Systems."),
+    q("p08", "9. Privatheit und Datenschutz", "Was bedeutet Datenschutz als Standardeinstellung?",
+      ["Ohne Zutun des Nutzers gelten datenschutzfreundliche Einstellungen", "Standardmäßig werden alle Daten veröffentlicht", "Standardmäßig werden alle Nutzer Administrator", "Die Einwilligung wird grundsätzlich ignoriert"],
+      0, "Privacy by Default bedeutet, dass die Voreinstellungen bereits möglichst datenschutzfreundlich sind."),
+    q("p09", "9. Privatheit und Datenschutz", "Warum kann Pseudonymisierung allein unzureichend sein?",
+      ["Zusatzinformationen und charakteristische Muster können eine Re-Identifikation ermöglichen", "Pseudonyme sind immer länger als Namen", "Pseudonymisierung verhindert jede Statistik", "Pseudonymisierung löscht automatisch alle Daten"],
+      0, "Seltene Merkmale, Standortmuster, Zeitangaben oder externe Datenquellen können eine Person trotz Pseudonym identifizierbar machen."),
+    q("p10", "9. Privatheit und Datenschutz", "Welche Maßnahme kann das Re-Identifikationsrisiko reduzieren?",
+      ["Aggregation und kontrolliertes Hinzufügen von Rauschen", "Veröffentlichung aller Rohdaten", "Speicherung direkter Namen in jedem Datensatz", "Aufhebung aller Zugriffsbeschränkungen"],
+      0, "Aggregation, Generalisierung, Rauschen und Zugriffskontrollen können das Risiko einer Re-Identifikation reduzieren."),
+
+    /* POOL 10: UNIX-SICHERHEIT */
+    q("u01", "10. UNIX-Sicherheit", "Was ist die UID?",
+      ["Die numerische Kennung eines Benutzers", "Die Kennung eines Netzwerkports", "Ein Verschlüsselungsalgorithmus", "Eine Firewallregel"],
+      0, "UID steht für User Identifier und bezeichnet die numerische Benutzerkennung."),
+    q("u02", "10. UNIX-Sicherheit", "Welche UID besitzt Root?",
+      ["0", "1", "100", "65535"],
+      0, "Der UNIX-Superuser Root besitzt die UID 0."),
+    q("u03", "10. UNIX-Sicherheit", "Warum werden Passwort-Hashes typischerweise in /etc/shadow gespeichert?",
+      ["Weil /etc/shadow stärker zugriffsbeschränkt ist", "Weil /etc/passwd niemals existiert", "Weil Hashwerte öffentlich verteilt werden müssen", "Weil /etc/shadow ein Netzwerkprotokoll ist"],
+      0, "/etc/passwd ist häufig allgemein lesbar. /etc/shadow schützt Passwort-Hashes durch strengere Zugriffsrechte."),
+    q("u04", "10. UNIX-Sicherheit", "Welche Rechte beschreibt -rw-r--r--?",
+      ["Eigentümer lesen und schreiben; Gruppe und andere lesen", "Alle dürfen lesen, schreiben und ausführen", "Nur die Gruppe darf schreiben", "Es handelt sich um ein Verzeichnis mit Sticky-Bit"],
+      0, "Das erste Zeichen kennzeichnet eine normale Datei. Der Eigentümer besitzt rw, Gruppe und andere jeweils r."),
+    q("u05", "10. UNIX-Sicherheit", "Welche symbolischen Rechte entsprechen chmod 755?",
+      ["rwxr-xr-x", "rw-------", "rwxrwxrwx", "r--r--r--"],
+      0, "7 entspricht rwx, 5 entspricht r-x. Daher ergibt 755 die Rechte rwxr-xr-x."),
+    q("u06", "10. UNIX-Sicherheit", "Welche symbolischen Rechte entsprechen chmod 600?",
+      ["rw-------", "rwxr-xr-x", "r--r--r--", "rwxrwxrwx"],
+      0, "6 entspricht rw-. Gruppe und andere erhalten mit 0 keine Rechte."),
+    q("u07", "10. UNIX-Sicherheit", "Was bedeutet das Ausführungsrecht x bei einem Verzeichnis?",
+      ["Das Verzeichnis darf betreten und als Pfadbestandteil verwendet werden", "Alle Dateien werden automatisch ausgeführt", "Das Verzeichnis wird gelöscht", "Der Inhalt wird verschlüsselt"],
+      0, "Das x-Recht bei Verzeichnissen erlaubt das Betreten beziehungsweise Durchsuchen über bekannte Namen."),
+    q("u08", "10. UNIX-Sicherheit", "Was bewirkt das Sticky-Bit bei einem gemeinsam beschreibbaren Verzeichnis?",
+      ["Nur Dateiinhaber, Verzeichnisinhaber oder Root dürfen Dateien löschen", "Jeder darf jede Datei löschen", "Alle Dateien werden ausführbar", "Alle Dateien erhalten SUID"],
+      0, "Das Sticky-Bit schützt beispielsweise in /tmp vor dem Löschen fremder Dateien durch andere normale Benutzer."),
+    q("u09", "10. UNIX-Sicherheit", "Was bewirkt SUID bei einem ausführbaren Programm?",
+      ["Das Programm läuft mit der effektiven UID seines Dateieigentümers", "Das Programm wird anonymisiert", "Das Programm läuft immer ohne Rechte", "Die Gruppe des Verzeichnisses wird gelöscht"],
+      0, "SUID setzt bei der Ausführung die effektive UID auf die UID des Dateieigentümers. Fehlerhafte SUID-Programme können gefährlich sein."),
+    q("u10", "10. UNIX-Sicherheit", "Was bewirkt SGID bei einem Verzeichnis?",
+      ["Neue Dateien übernehmen typischerweise die Gruppe des Verzeichnisses", "Neue Dateien erhalten automatisch Root als Eigentümer", "Alle Dateien werden gelöscht", "Das Verzeichnis wird öffentlich lesbar"],
+      0, "SGID auf einem Verzeichnis sorgt typischerweise dafür, dass neue Einträge die Gruppe des Verzeichnisses übernehmen.")
 ];
 
 /* =========================================================
-   KONFIGURATION
+   KONFIGURATION & STATUS
 ========================================================= */
-
-const STORAGE_KEY = "sicherheit-privatheit-100er-pool-v1";
-
+const STORAGE_KEY = "sicherheit-privatheit-100er-pool-shuffled-v2";
 const EXAM_DURATION_SECONDS = 2 * 60 * 60;
 const QUESTIONS_PER_POOL = 5;
 const PASS_PERCENTAGE = 50;
 
-const poolNames = [
-    ...new Set(
-        questionBank.map(question => question.pool)
-    )
-];
+const poolNames = [...new Set(questionBank.map(q => q.pool))];
 
 let questions = [];
 
@@ -2452,28 +1302,22 @@ let state = {
     flags: {},
     submitted: false,
     startedAt: Date.now(),
-    activeQuestionIds: [],
+    /* Speichert für jede aktive Frage ID und Optionen-Permutation */
+    activeQuestionsData: [],
     previousQuestionIds: []
 };
 
 let timerInterval = null;
 
 /* =========================================================
-   HILFSFUNKTIONEN
+   HILFSFUNKTIONEN (Fisher-Yates Shuffle & Escaping)
 ========================================================= */
-
 function shuffleArray(array) {
     const copy = [...array];
-
     for (let i = copy.length - 1; i > 0; i--) {
-        const randomIndex = Math.floor(
-            Math.random() * (i + 1)
-        );
-
-        [copy[i], copy[randomIndex]] =
-            [copy[randomIndex], copy[i]];
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[randomIndex]] = [copy[randomIndex], copy[i]];
     }
-
     return copy;
 }
 
@@ -2487,91 +1331,82 @@ function escapeHtml(value) {
 }
 
 function totalPoints() {
-    return questions.reduce(
-        (sum, question) => sum + question.points,
-        0
-    );
+    return questions.reduce((sum, q) => sum + q.points, 0);
 }
 
 function questionById(id) {
-    return questionBank.find(
-        question => question.id === id
-    );
+    return questionBank.find(q => q.id === id);
 }
 
 function showToast(message) {
     const toast = document.getElementById("toast");
-
     toast.textContent = message;
     toast.classList.add("show");
-
     clearTimeout(showToast.timeout);
-
     showToast.timeout = setTimeout(() => {
         toast.classList.remove("show");
     }, 2500);
 }
 
 /* =========================================================
-   ZUFALLSAUSWAHL
+   ZUFALLSAUSWAHL & OPTIONEN-SHUFFLING
+   - Antwortoptionen werden pro Frage permutiert
+   - Der richtige Antwortindex wird exakt angepasst
 ========================================================= */
+function buildShuffledQuestionInstance(originalQuestion, permutationOrder = null) {
+    const optionCount = originalQuestion.options.length;
+    let order;
+
+    if (Array.isArray(permutationOrder) && permutationOrder.length === optionCount) {
+        order = permutationOrder;
+    } else {
+        // Erzeuge Permutation [0, 1, ..., n-1] und mische
+        order = shuffleArray(Array.from({ length: optionCount }, (_, i) => i));
+    }
+
+    const shuffledOptions = order.map(origIdx => originalQuestion.options[origIdx]);
+    const newAnswerIndex = order.indexOf(originalQuestion.answer);
+
+    return {
+        ...originalQuestion,
+        options: shuffledOptions,
+        answer: newAnswerIndex,
+        permutationOrder: order
+    };
+}
 
 function generateRandomExam(previousQuestionIds = []) {
     const previousSet = new Set(previousQuestionIds);
-    const selectedQuestions = [];
+    const selectedRawQuestions = [];
 
     poolNames.forEach(poolName => {
-        const pool = questionBank.filter(
-            question => question.pool === poolName
-        );
+        const pool = questionBank.filter(q => q.pool === poolName);
+        const unusedQuestions = shuffleArray(pool.filter(q => !previousSet.has(q.id)));
+        const previousQuestions = shuffleArray(pool.filter(q => previousSet.has(q.id)));
 
-        const unusedQuestions = shuffleArray(
-            pool.filter(
-                question => !previousSet.has(question.id)
-            )
-        );
+        const selectedFromPool = unusedQuestions.slice(0, QUESTIONS_PER_POOL);
 
-        const previousQuestions = shuffleArray(
-            pool.filter(
-                question => previousSet.has(question.id)
-            )
-        );
-
-        const selectedFromPool = unusedQuestions.slice(
-            0,
-            QUESTIONS_PER_POOL
-        );
-
-        /*
-         * Diese Reserve wird nur benötigt, falls die Poolgröße
-         * später verändert wird. Bei zehn Fragen und fünf
-         * ausgewählten Fragen sind im Folgeversuch immer fünf
-         * vollständig neue Fragen vorhanden.
-         */
         if (selectedFromPool.length < QUESTIONS_PER_POOL) {
-            const missing =
-                QUESTIONS_PER_POOL - selectedFromPool.length;
-
-            selectedFromPool.push(
-                ...previousQuestions.slice(0, missing)
-            );
+            const missing = QUESTIONS_PER_POOL - selectedFromPool.length;
+            selectedFromPool.push(...previousQuestions.slice(0, missing));
         }
 
-        selectedQuestions.push(
-            ...shuffleArray(selectedFromPool)
-        );
+        selectedRawQuestions.push(...shuffleArray(selectedFromPool));
     });
 
-    return selectedQuestions;
+    // Erzeuge für jede gezogene Frage die gemischten Optionen
+    return selectedRawQuestions.map(rawQ => buildShuffledQuestionInstance(rawQ));
 }
 
-function restoreQuestions(ids) {
-    if (!Array.isArray(ids)) {
-        return [];
-    }
+function restoreQuestions(activeQuestionsData) {
+    if (!Array.isArray(activeQuestionsData)) return [];
 
-    return ids
-        .map(questionById)
+    return activeQuestionsData
+        .map(entry => {
+            const base = questionById(entry.id);
+            if (!base) return null;
+            return buildShuffledQuestionInstance(base, entry.order);
+        })
         .filter(Boolean);
 }
 
@@ -2583,9 +1418,10 @@ function createNewAttempt(previousQuestionIds = []) {
         flags: {},
         submitted: false,
         startedAt: Date.now(),
-        activeQuestionIds: questions.map(
-            question => question.id
-        ),
+        activeQuestionsData: questions.map(q => ({
+            id: q.id,
+            order: q.permutationOrder
+        })),
         previousQuestionIds: [...previousQuestionIds]
     };
 
@@ -2595,39 +1431,32 @@ function createNewAttempt(previousQuestionIds = []) {
 /* =========================================================
    SPEICHERN UND LADEN
 ========================================================= */
-
 function saveState(showMessage = false) {
-    state.activeQuestionIds = questions.map(
-        question => question.id
-    );
+    state.activeQuestionsData = questions.map(q => ({
+        id: q.id,
+        order: q.permutationOrder
+    }));
 
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(state)
-    );
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 
     if (showMessage) {
-        showToast(
-            "Der aktuelle Zwischenstand wurde lokal gespeichert."
-        );
+        showToast("Der aktuelle Zwischenstand wurde lokal gespeichert.");
     }
 }
 
 function sanitizeLoadedState() {
-    const activeIds = new Set(
-        questions.map(question => question.id)
-    );
+    const activeIds = new Set(questions.map(q => q.id));
 
     Object.keys(state.answers).forEach(questionId => {
-        const question = questionById(questionId);
+        const qInst = questions.find(q => q.id === questionId);
         const answer = Number(state.answers[questionId]);
 
         if (
             !activeIds.has(questionId) ||
-            !question ||
+            !qInst ||
             !Number.isInteger(answer) ||
             answer < 0 ||
-            answer >= question.options.length
+            answer >= qInst.options.length
         ) {
             delete state.answers[questionId];
         }
@@ -2643,103 +1472,56 @@ function sanitizeLoadedState() {
 function loadState() {
     try {
         const raw = localStorage.getItem(STORAGE_KEY);
-
         if (!raw) {
             createNewAttempt([]);
             return;
         }
 
         const saved = JSON.parse(raw);
-
-        if (
-            !saved ||
-            typeof saved !== "object" ||
-            !Array.isArray(saved.activeQuestionIds)
-        ) {
+        if (!saved || typeof saved !== "object" || !Array.isArray(saved.activeQuestionsData)) {
             createNewAttempt([]);
             return;
         }
 
-        const restoredQuestions = restoreQuestions(
-            saved.activeQuestionIds
-        );
+        const restoredQuestions = restoreQuestions(saved.activeQuestionsData);
 
-        if (
-            restoredQuestions.length !==
-            poolNames.length * QUESTIONS_PER_POOL
-        ) {
-            createNewAttempt(
-                saved.activeQuestionIds || []
-            );
+        if (restoredQuestions.length !== poolNames.length * QUESTIONS_PER_POOL) {
+            const fallbackPrevIds = (saved.activeQuestionsData || []).map(item => item.id).filter(Boolean);
+            createNewAttempt(fallbackPrevIds);
             return;
         }
 
         questions = restoredQuestions;
 
         state = {
-            answers:
-                saved.answers &&
-                typeof saved.answers === "object"
-                    ? saved.answers
-                    : {},
-
-            flags:
-                saved.flags &&
-                typeof saved.flags === "object"
-                    ? saved.flags
-                    : {},
-
+            answers: saved.answers && typeof saved.answers === "object" ? saved.answers : {},
+            flags: saved.flags && typeof saved.flags === "object" ? saved.flags : {},
             submitted: Boolean(saved.submitted),
-
-            startedAt:
-                Number.isFinite(Number(saved.startedAt))
-                    ? Number(saved.startedAt)
-                    : Date.now(),
-
-            activeQuestionIds:
-                [...saved.activeQuestionIds],
-
-            previousQuestionIds:
-                Array.isArray(saved.previousQuestionIds)
-                    ? [...saved.previousQuestionIds]
-                    : []
+            startedAt: Number.isFinite(Number(saved.startedAt)) ? Number(saved.startedAt) : Date.now(),
+            activeQuestionsData: [...saved.activeQuestionsData],
+            previousQuestionIds: Array.isArray(saved.previousQuestionIds) ? [...saved.previousQuestionIds] : []
         };
 
         sanitizeLoadedState();
     } catch (error) {
-        console.warn(
-            "Der gespeicherte Versuch konnte nicht geladen werden.",
-            error
-        );
-
+        console.warn("Gespeicherter Versuch konnte nicht geladen werden:", error);
         createNewAttempt([]);
     }
 }
 
 /* =========================================================
-   ANTWORTSTATUS UND BEWERTUNG
+   ANTWORTSTATUS & BEWERTUNG
 ========================================================= */
-
 function hasAnswer(question) {
-    return Object.prototype.hasOwnProperty.call(
-        state.answers,
-        question.id
-    );
+    return Object.prototype.hasOwnProperty.call(state.answers, question.id);
 }
 
 function isCorrect(question) {
-    return (
-        hasAnswer(question) &&
-        Number(state.answers[question.id]) === question.answer
-    );
+    return hasAnswer(question) && Number(state.answers[question.id]) === question.answer;
 }
 
 function achievedPoints() {
-    return questions.reduce(
-        (sum, question) =>
-            sum + (isCorrect(question) ? question.points : 0),
-        0
-    );
+    return questions.reduce((sum, q) => sum + (isCorrect(q) ? q.points : 0), 0);
 }
 
 function correctAnswerCount() {
@@ -2751,18 +1533,12 @@ function answeredCount() {
 }
 
 /* =========================================================
-   DARSTELLUNG
+   DARSTELLUNG DER BENUTZEROBERFLÄCHE
 ========================================================= */
-
 function updateMetadata() {
-    document.getElementById("heroQuestionCount").textContent =
-        questions.length;
-
-    document.getElementById("heroBankCount").textContent =
-        questionBank.length;
-
-    document.getElementById("heroPointCount").textContent =
-        totalPoints();
+    document.getElementById("heroQuestionCount").textContent = questions.length;
+    document.getElementById("heroBankCount").textContent = questionBank.length;
+    document.getElementById("heroPointCount").textContent = totalPoints();
 }
 
 function renderExam() {
@@ -2777,98 +1553,63 @@ function renderExam() {
     questions.forEach((question, index) => {
         if (question.section !== currentSection) {
             currentSection = question.section;
-
-            const sectionHeading =
-                document.createElement("section");
-
+            const sectionHeading = document.createElement("section");
             sectionHeading.className = "section-heading";
-            sectionHeading.innerHTML = `
-                <h2>${escapeHtml(currentSection)}</h2>
-            `;
-
+            sectionHeading.innerHTML = `<h2>${escapeHtml(currentSection)}</h2>`;
             exam.appendChild(sectionHeading);
         }
 
         const card = renderQuestion(question, index);
         exam.appendChild(card);
 
-        const navButton =
-            document.createElement("button");
-
+        const navButton = document.createElement("button");
         navButton.type = "button";
         navButton.className = "nav-button";
         navButton.textContent = String(index + 1);
-        navButton.title =
-            `Aufgabe ${index + 1}: ${question.question}`;
+        navButton.title = `Aufgabe ${index + 1}: ${question.question}`;
 
         navButton.addEventListener("click", () => {
-            document
-                .getElementById(`question-${index}`)
-                .scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
+            const target = document.getElementById(`question-${index}`);
+            if (target) {
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
         });
 
         navigation.appendChild(navButton);
     });
 
-    document.body.classList.toggle(
-        "submitted",
-        state.submitted
-    );
-
+    document.body.classList.toggle("submitted", state.submitted);
     updateInterface();
 }
 
 function renderQuestion(question, index) {
     const article = document.createElement("article");
-
     article.className = "question-card";
     article.id = `question-${index}`;
 
-    const selectedAnswer =
-        state.answers[question.id];
+    const selectedAnswer = state.answers[question.id];
 
     article.innerHTML = `
         <div class="question-header">
             <div>
-                <div class="question-number">
-                    Aufgabe ${index + 1}
-                </div>
-
-                <h3 class="question-title">
-                    ${escapeHtml(question.question)}
-                </h3>
+                <div class="question-number">Aufgabe ${index + 1}</div>
+                <h3 class="question-title">${escapeHtml(question.question)}</h3>
             </div>
-
-            <span class="points-badge">
-                ${question.points} Punkte
-            </span>
+            <span class="points-badge">${question.points} Punkte</span>
         </div>
 
         <div class="options">
             ${question.options.map((option, optionIndex) => `
-                <label
-                    class="option"
-                    data-option="${optionIndex}"
-                >
+                <label class="option" data-option="${optionIndex}">
                     <input
                         type="radio"
                         name="question-${index}"
                         value="${optionIndex}"
-                        ${
-                            Number(selectedAnswer) === optionIndex
-                                ? "checked"
-                                : ""
-                        }
+                        ${Number(selectedAnswer) === optionIndex ? "checked" : ""}
                         ${state.submitted ? "disabled" : ""}
                     >
-
                     <span>
-                        <strong>
-                            ${String.fromCharCode(65 + optionIndex)})
-                        </strong>
+                        <strong>${String.fromCharCode(65 + optionIndex)})</strong>
                         ${escapeHtml(option)}
                     </span>
                 </label>
@@ -2880,19 +1621,11 @@ function renderQuestion(question, index) {
                 <input
                     type="checkbox"
                     class="flag-input"
-                    ${
-                        state.flags[question.id]
-                            ? "checked"
-                            : ""
-                    }
+                    ${state.flags[question.id] ? "checked" : ""}
                 >
                 Zur Kontrolle markieren
             </label>
-
-            <span
-                class="question-score"
-                id="score-${index}"
-            ></span>
+            <span class="question-score" id="score-${index}"></span>
         </div>
 
         <div class="solution">
@@ -2901,119 +1634,74 @@ function renderQuestion(question, index) {
                 ${String.fromCharCode(65 + question.answer)})
                 ${escapeHtml(question.options[question.answer])}
             </strong>
-
-            <p>
-                ${escapeHtml(question.explanation)}
-            </p>
+            <p>${escapeHtml(question.explanation)}</p>
         </div>
     `;
 
-    attachQuestionEvents(
-        article,
-        question
-    );
-
+    attachQuestionEvents(article, question);
     return article;
 }
 
 function attachQuestionEvents(article, question) {
-    const radioButtons =
-        article.querySelectorAll(
-            '.options input[type="radio"]'
-        );
-
+    const radioButtons = article.querySelectorAll('.options input[type="radio"]');
     radioButtons.forEach(radioButton => {
         radioButton.addEventListener("change", event => {
-            state.answers[question.id] =
-                Number(event.target.value);
-
+            state.answers[question.id] = Number(event.target.value);
             saveState();
             updateInterface();
         });
     });
 
-    const flagInput =
-        article.querySelector(".flag-input");
-
+    const flagInput = article.querySelector(".flag-input");
     flagInput.addEventListener("change", event => {
-        state.flags[question.id] =
-            event.target.checked;
-
+        state.flags[question.id] = event.target.checked;
         saveState();
         updateInterface();
     });
 }
 
-/* =========================================================
-   OBERFLÄCHE AKTUALISIEREN
-========================================================= */
-
 function updateInterface() {
     const answered = answeredCount();
+    const percentageComplete = questions.length > 0 ? (answered / questions.length) * 100 : 0;
 
-    const percentageComplete =
-        questions.length > 0
-            ? answered / questions.length * 100
-            : 0;
+    document.getElementById("progressBar").style.width = `${percentageComplete}%`;
+    document.getElementById("progressLabel").textContent = `${answered} von ${questions.length} Fragen beantwortet`;
 
-    document.getElementById("progressBar").style.width =
-        `${percentageComplete}%`;
-
-    document.getElementById("progressLabel").textContent =
-        `${answered} von ${questions.length} Fragen beantwortet`;
-
-    const navigationButtons =
-        document.querySelectorAll(".nav-button");
+    const navigationButtons = document.querySelectorAll(".nav-button");
 
     questions.forEach((question, index) => {
-        const navButton =
-            navigationButtons[index];
+        const navButton = navigationButtons[index];
+        const questionCard = document.getElementById(`question-${index}`);
+        const scoreElement = document.getElementById(`score-${index}`);
 
-        const questionCard =
-            document.getElementById(`question-${index}`);
+        if (!navButton || !questionCard || !scoreElement) return;
 
-        const scoreElement =
-            document.getElementById(`score-${index}`);
+        navButton.classList.remove("answered", "correct", "incorrect");
+        navButton.classList.toggle("flagged", Boolean(state.flags[question.id]));
 
-        navButton.classList.remove(
-            "answered",
-            "correct",
-            "incorrect"
-        );
-
-        navButton.classList.toggle(
-            "flagged",
-            Boolean(state.flags[question.id])
-        );
-
-        questionCard.classList.remove(
-            "correct-card",
-            "incorrect-card"
-        );
+        questionCard.classList.remove("correct-card", "incorrect-card");
 
         if (!state.submitted) {
             if (hasAnswer(question)) {
                 navButton.classList.add("answered");
             }
-
             scoreElement.textContent = "";
         } else {
             if (isCorrect(question)) {
                 navButton.classList.add("correct");
                 questionCard.classList.add("correct-card");
-                scoreElement.textContent = "2 / 2 Punkte";
+                scoreElement.textContent = `${question.points} / ${question.points} Punkte`;
             } else {
                 navButton.classList.add("incorrect");
                 questionCard.classList.add("incorrect-card");
-                scoreElement.textContent = "0 / 2 Punkte";
+                scoreElement.textContent = `0 / ${question.points} Punkte`;
             }
 
             markSolution(question, index);
         }
     });
 
-    document.getElementById("newAttemptButton").disabled =
-        !state.submitted;
+    document.getElementById("newAttemptButton").disabled = !state.submitted;
 
     if (state.submitted) {
         updateResult();
@@ -3021,187 +1709,107 @@ function updateInterface() {
 }
 
 function markSolution(question, index) {
-    const card =
-        document.getElementById(`question-${index}`);
+    const card = document.getElementById(`question-${index}`);
+    if (!card) return;
 
     card.querySelectorAll(".option").forEach(optionElement => {
-        const optionIndex =
-            Number(optionElement.dataset.option);
+        const optionIndex = Number(optionElement.dataset.option);
+        const input = optionElement.querySelector("input");
 
-        const input =
-            optionElement.querySelector("input");
-
-        optionElement.classList.remove(
-            "solution-correct",
-            "solution-wrong"
-        );
+        optionElement.classList.remove("solution-correct", "solution-wrong");
 
         if (optionIndex === question.answer) {
-            optionElement.classList.add(
-                "solution-correct"
-            );
-        } else if (input.checked) {
-            optionElement.classList.add(
-                "solution-wrong"
-            );
+            optionElement.classList.add("solution-correct");
+        } else if (input && input.checked) {
+            optionElement.classList.add("solution-wrong");
         }
     });
 }
 
 /* =========================================================
-   ERGEBNIS UND BESTEHENSGRENZE
+   ERGEBNIS & BEWERTUNG
 ========================================================= */
-
 function updateResult() {
     const points = achievedPoints();
     const maximum = totalPoints();
     const correct = correctAnswerCount();
     const answered = answeredCount();
 
-    const percentage =
-        maximum > 0
-            ? points / maximum * 100
-            : 0;
+    const percentage = maximum > 0 ? (points / maximum) * 100 : 0;
+    const passed = percentage >= PASS_PERCENTAGE;
 
-    const passed =
-        percentage >= PASS_PERCENTAGE;
-
-    const resultCard =
-        document.getElementById("resultCard");
-
+    const resultCard = document.getElementById("resultCard");
     resultCard.classList.add("visible");
+    resultCard.classList.toggle("passed", passed);
+    resultCard.classList.toggle("failed", !passed);
 
-    resultCard.classList.toggle(
-        "passed",
-        passed
-    );
-
-    resultCard.classList.toggle(
-        "failed",
-        !passed
-    );
-
-    document.getElementById("resultHeading").textContent =
-        passed
-            ? "Klausur bestanden"
-            : "Klausur nicht bestanden";
+    document.getElementById("resultHeading").textContent = passed ? "Klausur bestanden" : "Klausur nicht bestanden";
 
     let message;
-
     if (percentage >= 90) {
-        message =
-            "Hervorragende Leistung. Sie beherrschen die behandelten Themen sehr sicher.";
+        message = "Hervorragende Leistung! Sie beherrschen die behandelten Themen der IT-Sicherheit und Privatheit sehr sicher.";
     } else if (percentage >= 75) {
-        message =
-            "Sehr gute Leistung. Sie haben die Klausur deutlich bestanden.";
+        message = "Sehr gute Leistung! Sie haben die Klausur mit einem überzeugenden Ergebnis bestanden.";
     } else if (percentage >= 50) {
-        message =
-            "Sie haben die Bestehensgrenze von 50 Prozent erreicht.";
+        message = "Sie haben die Bestehensgrenze von 50 Prozent erfolgreich erreicht.";
     } else {
-        message =
-            "Für das Bestehen sind mindestens 50 von 100 Punkten erforderlich. Arbeiten Sie die eingeblendeten Erklärungen durch und starten Sie anschließend einen neuen Versuch.";
+        message = "Für das Bestehen sind mindestens 50 von 100 Punkten erforderlich. Analysieren Sie die Erklärungen bei den falschen Antworten und versuchen Sie es erneut.";
     }
 
-    document.getElementById("resultMessage").textContent =
-        message;
-
-    document.getElementById("resultPoints").textContent =
-        `${points} / ${maximum}`;
-
-    document.getElementById("resultPercent").textContent =
-        `${percentage.toFixed(1).replace(".", ",")} %`;
-
-    document.getElementById("resultCorrect").textContent =
-        `${correct} / ${questions.length}`;
-
-    document.getElementById("resultAnswered").textContent =
-        `${answered} / ${questions.length}`;
+    document.getElementById("resultMessage").textContent = message;
+    document.getElementById("resultPoints").textContent = `${points} / ${maximum}`;
+    document.getElementById("resultPercent").textContent = `${percentage.toFixed(1).replace(".", ",")} %`;
+    document.getElementById("resultCorrect").textContent = `${correct} / ${questions.length}`;
+    document.getElementById("resultAnswered").textContent = `${answered} / ${questions.length}`;
 }
 
 /* =========================================================
-   TIMER: ZWEI STUNDEN
+   TIMER (2 STUNDEN)
 ========================================================= */
-
 function updateTimer() {
+    const timerElem = document.getElementById("timer");
     if (state.submitted) {
-        document.getElementById("timer").textContent =
-            "abgegeben";
-
+        timerElem.textContent = "abgegeben";
         return;
     }
 
-    const elapsedSeconds = Math.floor(
-        (Date.now() - state.startedAt) / 1000
-    );
+    const elapsedSeconds = Math.floor((Date.now() - state.startedAt) / 1000);
+    const remainingSeconds = Math.max(0, EXAM_DURATION_SECONDS - elapsedSeconds);
 
-    const remainingSeconds = Math.max(
-        0,
-        EXAM_DURATION_SECONDS - elapsedSeconds
-    );
+    const hours = Math.floor(remainingSeconds / 3600);
+    const minutes = Math.floor((remainingSeconds % 3600) / 60);
+    const seconds = remainingSeconds % 60;
 
-    const hours = Math.floor(
-        remainingSeconds / 3600
-    );
-
-    const minutes = Math.floor(
-        (remainingSeconds % 3600) / 60
-    );
-
-    const seconds =
-        remainingSeconds % 60;
-
-    document.getElementById("timer").textContent =
+    timerElem.textContent =
         `${String(hours).padStart(2, "0")}:` +
         `${String(minutes).padStart(2, "0")}:` +
         `${String(seconds).padStart(2, "0")}`;
 
-    const timerBox =
-        document.getElementById("timerBox");
-
-    timerBox.classList.toggle(
-        "warning",
-        remainingSeconds <= 15 * 60 &&
-        remainingSeconds > 5 * 60
-    );
-
-    timerBox.classList.toggle(
-        "danger",
-        remainingSeconds <= 5 * 60
-    );
+    const timerBox = document.getElementById("timerBox");
+    timerBox.classList.toggle("warning", remainingSeconds <= 15 * 60 && remainingSeconds > 5 * 60);
+    timerBox.classList.toggle("danger", remainingSeconds <= 5 * 60);
 
     if (remainingSeconds === 0) {
         clearInterval(timerInterval);
-
         submitExam(false);
-
-        showToast(
-            "Die Bearbeitungszeit ist abgelaufen. Die Klausur wurde automatisch abgegeben."
-        );
+        showToast("Die Bearbeitungszeit ist abgelaufen. Die Klausur wurde automatisch abgegeben.");
     }
 }
 
 /* =========================================================
-   ABGABE
+   ABGABE & AKTIONEN
 ========================================================= */
-
 function submitExam(requireConfirmation = true) {
     if (state.submitted) {
-        document
-            .getElementById("resultCard")
-            .scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
+        document.getElementById("resultCard").scrollIntoView({ behavior: "smooth", block: "start" });
         return;
     }
 
-    const unanswered =
-        questions.length - answeredCount();
+    const unanswered = questions.length - answeredCount();
 
     if (requireConfirmation) {
         const message = unanswered > 0
-            ? `Es sind noch ${unanswered} Fragen unbeantwortet. Möchten Sie trotzdem abgeben?`
+            ? `Es sind noch ${unanswered} Fragen unbeantwortet. Möchten Sie die Klausur trotzdem jetzt abgeben?`
             : "Möchten Sie die Klausur jetzt verbindlich abgeben?";
 
         if (!window.confirm(message)) {
@@ -3210,216 +1818,121 @@ function submitExam(requireConfirmation = true) {
     }
 
     state.submitted = true;
-
     saveState();
     renderExam();
     updateTimer();
 
-    document.getElementById("submitButton").textContent =
-        "Zum Ergebnis";
-
-    document
-        .getElementById("resultCard")
-        .scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+    document.getElementById("submitButton").textContent = "Zum Ergebnis";
+    document.getElementById("resultCard").scrollIntoView({ behavior: "smooth", block: "start" });
 }
-
-/* =========================================================
-   NEUE ZUFALLSKLAUSUR
-========================================================= */
 
 function startNewAttempt() {
     if (!state.submitted) {
-        showToast(
-            "Der aktuelle Versuch muss zuerst abgegeben werden."
-        );
-
+        showToast("Der aktuelle Versuch muss zuerst abgegeben werden.");
         return;
     }
 
     const confirmed = window.confirm(
         "Möchten Sie eine neue Zufallsklausur starten?\n\n" +
-        "Der neue Versuch enthält 50 Fragen und keine Fragen " +
-        "des unmittelbar vorherigen Versuchs. Die Bearbeitungszeit " +
-        "beträgt erneut zwei Stunden."
+        "Der neue Versuch enthält 50 Fragen und keine Fragen des unmittelbar vorherigen Versuchs. " +
+        "Die Antwortmöglichkeiten werden neu gemischt und die Bearbeitungszeit beträgt erneut zwei Stunden."
     );
 
-    if (!confirmed) {
-        return;
-    }
+    if (!confirmed) return;
 
-    const previousIds =
-        [...state.activeQuestionIds];
-
+    const previousIds = state.activeQuestionsData.map(item => item.id);
     createNewAttempt(previousIds);
 
-    document.getElementById("resultCard").className =
-        "result-card";
-
-    document.getElementById("submitButton").textContent =
-        "Klausur abgeben";
+    document.getElementById("resultCard").className = "result-card";
+    document.getElementById("submitButton").textContent = "Klausur abgeben";
 
     clearInterval(timerInterval);
-
     updateMetadata();
     renderExam();
     updateTimer();
 
-    timerInterval = setInterval(
-        updateTimer,
-        1000
-    );
+    timerInterval = setInterval(updateTimer, 1000);
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-    showToast(
-        "Eine neue Klausur mit 50 anderen Fragen wurde erstellt."
-    );
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    showToast("Eine neue Klausur mit 50 anderen Fragen und gemischten Antworten wurde erstellt.");
 }
-
-/* =========================================================
-   VERSUCH ZURÜCKSETZEN
-========================================================= */
 
 function resetCurrentAttempt() {
     const confirmed = window.confirm(
         "Möchten Sie alle Antworten dieses Versuchs löschen?\n\n" +
-        "Die aktuellen 50 Fragen bleiben erhalten. Der Timer wird " +
-        "wieder auf zwei Stunden gesetzt."
+        "Die aktuellen 50 Fragen samt Antwortreihenfolge bleiben erhalten. Der Timer wird wieder auf zwei Stunden zurückgesetzt."
     );
 
-    if (!confirmed) {
-        return;
-    }
+    if (!confirmed) return;
 
     state = {
         answers: {},
         flags: {},
         submitted: false,
         startedAt: Date.now(),
-        activeQuestionIds: questions.map(
-            question => question.id
-        ),
-        previousQuestionIds:
-            state.previousQuestionIds || []
+        activeQuestionsData: state.activeQuestionsData,
+        previousQuestionIds: state.previousQuestionIds || []
     };
 
     saveState();
 
-    document.getElementById("resultCard").className =
-        "result-card";
-
-    document.getElementById("submitButton").textContent =
-        "Klausur abgeben";
+    document.getElementById("resultCard").className = "result-card";
+    document.getElementById("submitButton").textContent = "Klausur abgeben";
 
     clearInterval(timerInterval);
-
     renderExam();
     updateTimer();
 
-    timerInterval = setInterval(
-        updateTimer,
-        1000
-    );
-
-    showToast(
-        "Der aktuelle Versuch wurde zurückgesetzt."
-    );
+    timerInterval = setInterval(updateTimer, 1000);
+    showToast("Der aktuelle Versuch wurde zurückgesetzt.");
 }
 
 /* =========================================================
-   BUTTONS
+   EVENT LISTENER
 ========================================================= */
+document.getElementById("submitButton").addEventListener("click", () => submitExam(true));
+document.getElementById("newAttemptButton").addEventListener("click", () => startNewAttempt());
+document.getElementById("saveButton").addEventListener("click", () => saveState(true));
+document.getElementById("resetButton").addEventListener("click", () => resetCurrentAttempt());
 
-document
-    .getElementById("submitButton")
-    .addEventListener("click", () => {
-        submitExam(true);
-    });
+document.getElementById("printButton").addEventListener("click", () => {
+    document.body.classList.remove("print-solutions");
+    window.print();
+});
 
-document
-    .getElementById("newAttemptButton")
-    .addEventListener("click", () => {
-        startNewAttempt();
-    });
-
-document
-    .getElementById("saveButton")
-    .addEventListener("click", () => {
-        saveState(true);
-    });
-
-document
-    .getElementById("resetButton")
-    .addEventListener("click", () => {
-        resetCurrentAttempt();
-    });
-
-document
-    .getElementById("printButton")
-    .addEventListener("click", () => {
-        document.body.classList.remove(
-            "print-solutions"
+document.getElementById("printSolutionsButton").addEventListener("click", () => {
+    if (!state.submitted) {
+        const confirmed = window.confirm(
+            "Die Lösungen sind vor der Abgabe normalerweise verborgen. Möchten Sie trotzdem mit Lösungen drucken?"
         );
+        if (!confirmed) return;
+    }
 
-        window.print();
-    });
-
-document
-    .getElementById("printSolutionsButton")
-    .addEventListener("click", () => {
-        if (!state.submitted) {
-            const confirmed = window.confirm(
-                "Die Lösungen sind vor der Abgabe normalerweise verborgen. Möchten Sie trotzdem mit Lösungen drucken?"
-            );
-
-            if (!confirmed) {
-                return;
-            }
-        }
-
-        document.body.classList.add(
-            "print-solutions"
-        );
-
-        window.print();
-
-        setTimeout(() => {
-            document.body.classList.remove(
-                "print-solutions"
-            );
-        }, 500);
-    });
+    document.body.classList.add("print-solutions");
+    window.print();
+    setTimeout(() => {
+        document.body.classList.remove("print-solutions");
+    }, 500);
+});
 
 /* =========================================================
-   INITIALISIERUNG
+   START & INITIALISIERUNG
 ========================================================= */
-
 loadState();
 updateMetadata();
 
 if (state.submitted) {
-    document.getElementById("submitButton").textContent =
-        "Zum Ergebnis";
+    document.getElementById("submitButton").textContent = "Zum Ergebnis";
 }
 
 renderExam();
 updateTimer();
 
-timerInterval = setInterval(
-    updateTimer,
-    1000
-);
+timerInterval = setInterval(updateTimer, 1000);
 
 window.addEventListener("beforeunload", () => {
     saveState();
 });
 </script>
-
 </body>
 </html>
