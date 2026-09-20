@@ -797,7 +797,7 @@
         <span class="eyebrow">Interaktive Zufallsklausur</span>
         <h1>Einführung in Sicherheit und Privatheit</h1>
         <p class="hero-description">
-            Die Fragenbank enthält über 100 Aufgaben aus zehn Themengebieten.
+            Die Fragenbank enthält über 140 Aufgaben aus zehn Themengebieten.
             Pro Versuch werden 50 Aufgaben ausgewählt und die Antwortoptionen dynamisch
             zufällig durchgemischt. Der unmittelbar folgende Versuch verwendet die
             jeweils anderen Fragen der Themenpools.
@@ -808,7 +808,7 @@
                 <span>Fragen pro Versuch</span>
             </div>
             <div class="hero-stat">
-                <strong id="heroBankCount">100+</strong>
+                <strong id="heroBankCount">140</strong>
                 <span>Fragen in der Bank</span>
             </div>
             <div class="hero-stat">
@@ -844,7 +844,7 @@
 
         <div class="pool-information">
             <strong>Zufallsauswahl & Permutation</strong>
-            Aus jedem der zehn Themenpools werden 5 von über 10 Fragen gezogen. Die Optionen
+            Aus jedem der zehn Themenpools werden 5 von über 14 Fragen gezogen. Die Optionen
             werden gleichmäßig gemischt. Der nächste Versuch enthält keine Fragen des
             vorherigen Versuchs.
         </div>
@@ -894,7 +894,7 @@
             <div class="instruction-grid">
                 <div class="instruction">
                     <strong>50 zufällige Fragen</strong>
-                    Pro Themengebiet werden fünf von über zehn Fragen ausgewählt. Jede Frage ist mit zwei Punkten bewertet.
+                    Pro Themengebiet werden fünf von über vierzehn Fragen ausgewählt. Jede Frage ist mit zwei Punkten bewertet.
                 </div>
                 <div class="instruction">
                     <strong>Automatische Auswertung</strong>
@@ -961,7 +961,7 @@ function q(id, pool, question, options, answer, explanation) {
 }
 
 /* =========================================================
-   FRAGENBANK (10 Themenpools mit über 10 Fragen pro Pool)
+   FRAGENBANK (10 Themenpools mit über 14 Fragen pro Pool)
 ========================================================= */
 const questionBank = [
     /* POOL 1: GRUNDLAGEN UND SCHUTZZIELE */
@@ -998,6 +998,15 @@ const questionBank = [
     q("g11", "1. Grundlagen und Schutzziele", "Was bedeutet mehrseitige Sicherheit?",
       ["Einbeziehung der Schutzinteressen aller Beteiligten", "Ausschließlicher Schutz des Betreibers", "Nur technische Maßnahmen ohne Organisation", "Ein Synonym für Datensicherung"],
       0, "Mehrseitige Sicherheit berücksichtigt die Schutzinteressen aller Beteiligten und versucht, Konflikte auszuhandeln."),
+    q("g12", "1. Grundlagen und Schutzziele", "Was ist der Unterschied zwischen Safety und Security?",
+      ["Safety betrifft die Funktionssicherheit, Security den Schutz vor Angriffen", "Safety schützt vor Angriffen, Security vor Unfällen", "Es gibt keinen Unterschied", "Safety ist ein Teil von Security"],
+      0, "Safety bezieht sich auf die gefahrlose Funktion, Security auf den Schutz vor unautorisierten Eingriffen."),
+    q("g13", "1. Grundlagen und Schutzziele", "Was ist Datensicherung (Backup)?",
+      ["Schutz vor Datenverlust durch Sicherungskopien", "Verschlüsselung aller Daten", "Löschung alter Daten", "Zugriffskontrolle auf Dateien"],
+      0, "Datensicherung bedeutet, Sicherungskopien zu erstellen, um Datenverlust zu vermeiden."),
+    q("g14", "1. Grundlagen und Schutzziele", "Was ist Dependability?",
+      ["Kombination aus Funktionssicherheit und zuverlässiger Leistungserbringung", "Nur die Verfügbarkeit eines Systems", "Nur die Vertraulichkeit von Daten", "Ein Synonym für Datensicherung"],
+      0, "Dependability (Verlässlichkeit) kombiniert Funktionssicherheit mit zuverlässiger Leistungserbringung."),
 
     /* POOL 2: RISIKEN UND SICHERHEITSMANAGEMENT */
     q("r01", "2. Risiken und Sicherheitsmanagement", "Was ist eine Schwachstelle?",
@@ -1033,6 +1042,15 @@ const questionBank = [
     q("r11", "2. Risiken und Sicherheitsmanagement", "Was ist ein Man-in-the-Middle-Angriff?",
       ["Ein Angreifer setzt sich zwischen zwei Kommunikationspartner", "Ein Angreifer löscht alle Daten", "Ein Angreifer verschlüsselt das Netzwerk", "Ein Angreifer deaktiviert die Firewall"],
       0, "Ein MITM-Angreifer fängt Nachrichten zwischen zwei Parteien ab und kann sie manipulieren."),
+    q("r12", "2. Risiken und Sicherheitsmanagement", "Was ist ein passiver Angriff?",
+      ["Mithören von Kommunikation ohne Veränderung", "Verändern von Nachrichten", "Löschen von Daten", "Überlastung eines Dienstes"],
+      0, "Ein passiver Angriff beobachtet Kommunikation, ohne sie zu verändern."),
+    q("r13", "2. Risiken und Sicherheitsmanagement", "Was ist ein aktiver Angriff?",
+      ["Verändern, Löschen oder Einspielen von Nachrichten", "Nur das Mithören von Gesprächen", "Das Beobachten von Verkehrsmustern", "Das Aufzeichnen von Metadaten"],
+      0, "Ein aktiver Angriff greift direkt in die Kommunikation oder den Betrieb ein."),
+    q("r14", "2. Risiken und Sicherheitsmanagement", "Was ist ein White Hat?",
+      ["Ein ethischer Hacker, der Schwachstellen findet und meldet", "Ein Angreifer mit kriminellen Absichten", "Ein Script Kiddie", "Ein Geheimdienst"],
+      0, "White Hats arbeiten ethisch und melden gefundene Schwachstellen."),
 
     /* POOL 3: AUTHENTIFIKATION UND PASSWÖRTER */
     q("a01", "3. Authentifikation und Passwörter", "Was ist Identifikation?",
@@ -1071,6 +1089,12 @@ const questionBank = [
     q("a12", "3. Authentifikation und Passwörter", "Welches System wählen Sie bei hohen Sicherheitsanforderungen?",
       ["Ein System mit hoher FAR und niedriger FRR", "Ein System mit hoher FRR und niedriger FAR", "Ein System ohne biometrische Merkmale", "Ein System mit Passwort als einzigem Faktor"],
       1, "Bei hohen Sicherheitsanforderungen ist eine niedrige FAR wichtiger, auch wenn die FRR höher ist."),
+    q("a13", "3. Authentifikation und Passwörter", "Was ist ein Wörterbuchangriff?",
+      ["Das Durchprobieren von Listen häufig verwendeter Passwörter", "Das Beobachten einer Person bei der Eingabe", "Das Abfangen von Netzwerkpaketen", "Das Löschen aller Passwort-Hashes"],
+      0, "Beim Wörterbuchangriff werden Listen bekannter Passwörter direkt gegen Hashes getestet."),
+    q("a14", "3. Authentifikation und Passwörter", "Was ist ein Shoulder-Surfing-Angriff?",
+      ["Beobachten einer Person bei der Eingabe vertraulicher Informationen", "Das Abfangen von Netzwerkpaketen", "Das Ausprobieren aller Passwortkombinationen", "Das Einschleusen von Malware"],
+      0, "Beim Shoulder Surfing werden Eingaben wie Passwörter oder PINs durch Beobachtung ausgespäht."),
 
     /* POOL 4: ZUGRIFFSKONTROLLE */
     q("z01", "4. Zugriffskontrolle", "Was ist die Aufgabe eines Referenzmonitors?",
@@ -1103,6 +1127,12 @@ const questionBank = [
     q("z10", "4. Zugriffskontrolle", "Welches Ziel verfolgt das Chinese-Wall-Modell?",
       ["Vermeidung von Interessenkonflikten", "Beschleunigung von Hashfunktionen", "Erhöhung der Netzwerklast", "Ersetzung aller Zertifikate"],
       0, "Das Chinese-Wall-Modell beschränkt zukünftige Zugriffe anhand früherer Zugriffe, um Interessenkonflikte zu verhindern."),
+    q("z11", "4. Zugriffskontrolle", "Was ist ein Buffer-Overflow-Angriff?",
+      ["Das Überschreiben von Speicherbereichen durch zu lange Eingaben", "Das Abfangen von Netzwerkpaketen", "Das Erraten von Passwörtern", "Das Löschen von Logdateien"],
+      0, "Ein Buffer Overflow tritt auf, wenn mehr Daten in einen Puffer geschrieben werden als vorgesehen."),
+    q("z12", "4. Zugriffskontrolle", "Was ist Path Traversal?",
+      ["Zugriff auf Dateien außerhalb des vorgesehenen Verzeichnisses", "Das Verfolgen von Netzwerkpfaden", "Das Umgehen der Firewall", "Das Löschen von Verzeichnissen"],
+      0, "Path Traversal nutzt unsichere Pfadangaben, um auf geschützte Dateien zuzugreifen."),
 
     /* POOL 5: MALWARE UND SOCIAL ENGINEERING */
     q("m01", "5. Malware und Social Engineering", "Was kennzeichnet einen Trojaner?",
@@ -1138,6 +1168,15 @@ const questionBank = [
     q("m11", "5. Malware und Social Engineering", "Was ist der Unterschied zwischen einem Virus und einem Wurm?",
       ["Ein Virus braucht ein Wirtsprogramm, ein Wurm ist selbstständig", "Ein Wurm braucht ein Wirtsprogramm, ein Virus ist selbstständig", "Es gibt keinen Unterschied", "Ein Virus ist eine Hardware, ein Wurm ist Software"],
       0, "Viren benötigen ein Wirtsprogramm und oft eine Benutzeraktion. Würmer sind eigenständig und verbreiten sich selbstständig."),
+    q("m12", "5. Malware und Social Engineering", "Was ist ein USB-Drop-Angriff?",
+      ["Das Liegenlassen manipulierter USB-Sticks in der Hoffnung, dass sie angeschlossen werden", "Das Abfangen von USB-Daten", "Das Löschen von USB-Inhalten", "Das Verschlüsseln von USB-Sticks"],
+      0, "Bei USB-Drop-Angriffen werden manipulierte USB-Sticks absichtlich platziert, damit neugierige Personen sie anschließen."),
+    q("m13", "5. Malware und Social Engineering", "Was ist ein Keylogger?",
+      ["Software oder Hardware, die Tastatureingaben aufzeichnet", "Ein Programm zur Passwortverschlüsselung", "Ein Tool zur Netzwerküberwachung", "Eine Firewall"],
+      0, "Ein Keylogger zeichnet Tastatureingaben auf, um Passwörter und andere vertrauliche Daten zu stehlen."),
+    q("m14", "5. Malware und Social Engineering", "Was ist ein Fake-Antivirus?",
+      ["Ein Trojaner, der vorgibt, ein Antivirenprogramm zu sein", "Ein echtes Antivirenprogramm", "Eine Firewall", "Ein Backup-Tool"],
+      0, "Ein Fake-Antivirus täuscht eine Sicherheitssoftware vor und fordert oft Zahlungen für unnötige Dienste."),
 
     /* POOL 6: KRYPTOGRAPHISCHE GRUNDLAGEN */
     q("k01", "6. Kryptographische Grundlagen", "Was ist Kryptographie?",
@@ -1176,6 +1215,12 @@ const questionBank = [
     q("k12", "6. Kryptographische Grundlagen", "Entschlüsseln Sie die Chiffre TVMZEXLIMX mit der Caesar-Verschlüsselung und k=4.",
       ["PRIVATHEIT", "PRIVATHEIM", "PRIVATHEID", "PRIVATHEIZ"],
       0, "Die Entschlüsselung mit k=4 ergibt PRIVATHEIT."),
+    q("k13", "6. Kryptographische Grundlagen", "Was ist ein Salt bei der Passwortspeicherung?",
+      ["Ein zufälliger Wert, der vor dem Hashen zum Passwort hinzugefügt wird", "Ein Schlüssel zur Entschlüsselung", "Ein Algorithmus zur Verschlüsselung", "Eine Firewallregel"],
+      0, "Ein Salt ist ein zufälliger Wert, der verhindert, dass gleiche Passwörter gleiche Hashes ergeben."),
+    q("k14", "6. Kryptographische Grundlagen", "Warum werden langsame Hashverfahren für Passwörter empfohlen?",
+      ["Sie verlangsamen Brute-Force-Angriffe", "Sie sind schneller zu implementieren", "Sie benötigen weniger Speicher", "Sie sind einfacher zu programmieren"],
+      0, "Langsame Hashverfahren erhöhen den Zeitaufwand für jeden Rateversuch und erschweren Angriffe."),
 
     /* POOL 7: HASH, MAC, VERSCHLÜSSELUNG UND PKI */
     q("c01", "7. Hash, MAC, Verschlüsselung und PKI", "Welche Eigenschaft besitzt eine kryptographische Hashfunktion?",
@@ -1214,6 +1259,12 @@ const questionBank = [
     q("c12", "7. Hash, MAC, Verschlüsselung und PKI", "Was ist das Prinzip des Diffie-Hellman-Schlüsselaustauschs?",
       ["Modulare Potenzierung zum gemeinsamen Geheimnis", "Symmetrische Verschlüsselung ohne Schlüsselaustausch", "Faktorisierung großer Primzahlen", "Verwendung von Hashfunktionen ohne Schlüssel"],
       0, "Diffie-Hellman nutzt modulare Potenzierung, damit beide Parteien ein gemeinsames Geheimnis berechnen können."),
+    q("c13", "7. Hash, MAC, Verschlüsselung und PKI", "Was ist ein Man-in-the-Middle-Angriff auf Diffie-Hellman?",
+      ["Ein Angreifer fängt die Schlüsselaustausch-Nachrichten ab und gibt sich beiden Seiten als Partner aus", "Ein Angreifer löscht alle Schlüssel", "Ein Angreifer verschlüsselt die Verbindung", "Ein Angreifer deaktiviert die Firewall"],
+      0, "Ohne Authentifizierung kann ein MITM die Schlüsselaustausch-Nachrichten abfangen und manipulieren."),
+    q("c14", "7. Hash, MAC, Verschlüsselung und PKI", "Wie kann ein Man-in-the-Middle-Angriff auf Diffie-Hellman verhindert werden?",
+      ["Durch Authentifizierung der Kommunikationsteilnehmer", "Durch längere Schlüssel", "Durch schnellere Algorithmen", "Durch Verwendung von DES"],
+      0, "Authentifizierung der Teilnehmer verhindert, dass ein Angreifer sich als legitimer Partner ausgeben kann."),
 
     /* POOL 8: KOMMUNIKATIONS- UND NETZWERKSICHERHEIT */
     q("n01", "8. Kommunikations- und Netzwerksicherheit", "Welche Schutzziele unterstützt TLS?",
@@ -1258,6 +1309,12 @@ const questionBank = [
     q("n14", "8. Kommunikations- und Netzwerksicherheit", "Was ist das TOFU-Prinzip?",
       ["Trust-on-first-use: Das erste Zertifikat wird als vertrauenswürdig eingestuft", "Transfer-on-first-use: Daten werden beim ersten Zugriff übertragen", "Test-on-first-use: Jedes Zertifikat wird vor Nutzung getestet", "Time-on-first-use: Die Zeit wird beim ersten Zugriff gemessen"],
       0, "TOFU bedeutet, dass das erste erhaltene Zertifikat als vertrauenswürdig akzeptiert und für zukünftige Verbindungen verwendet wird."),
+    q("n15", "8. Kommunikations- und Netzwerksicherheit", "Was ist ein Circuit-Level Gateway?",
+      ["Ein Firewalltyp, der auf Transportschicht arbeitet", "Ein Firewalltyp, der auf Anwendungsschicht arbeitet", "Ein Firewalltyp, der nur auf Netzwerkschicht arbeitet", "Ein Firewalltyp, der keine Verbindungen überwacht"],
+      0, "Ein Circuit-Level Gateway arbeitet auf der Transportschicht und vermittelt Verbindungen."),
+    q("n16", "8. Kommunikations- und Netzwerksicherheit", "Was ist ein Screening Router?",
+      ["Ein Router mit integriertem Paketfilter", "Ein Router ohne Firewall", "Ein Router, der nur IPv6 unterstützt", "Ein Router, der keine Pakete filtert"],
+      0, "Ein Screening Router kombiniert Routing mit Paketfilterung."),
 
     /* POOL 9: PRIVATHEIT UND DATENSCHUTZ */
     q("p01", "9. Privatheit und Datenschutz", "Was sind personenbezogene Daten?",
@@ -1290,6 +1347,12 @@ const questionBank = [
     q("p10", "9. Privatheit und Datenschutz", "Welche Maßnahme kann das Re-Identifikationsrisiko reduzieren?",
       ["Aggregation und kontrolliertes Hinzufügen von Rauschen", "Veröffentlichung aller Rohdaten", "Speicherung direkter Namen in jedem Datensatz", "Aufhebung aller Zugriffsbeschränkungen"],
       0, "Aggregation, Generalisierung, Rauschen und Zugriffskontrollen können das Risiko einer Re-Identifikation reduzieren."),
+    q("p11", "9. Privatheit und Datenschutz", "Was ist die DSGVO?",
+      ["Die Datenschutz-Grundverordnung der EU", "Ein deutsches Gesetz zur IT-Sicherheit", "Ein internationales Handelsabkommen", "Eine Firewall-Konfiguration"],
+      0, "Die DSGVO ist die Datenschutz-Grundverordnung der Europäischen Union."),
+    q("p12", "9. Privatheit und Datenschutz", "Was bedeutet Transparenz im Datenschutz?",
+      ["Betroffene müssen über die Verarbeitung ihrer Daten informiert werden", "Alle Daten müssen öffentlich sein", "Jeder darf alle Daten einsehen", "Daten müssen verschlüsselt werden"],
+      0, "Transparenz bedeutet, dass die Verarbeitung personenbezogener Daten nachvollziehbar und verständlich sein muss."),
 
     /* POOL 10: UNIX-SICHERHEIT */
     q("u01", "10. UNIX-Sicherheit", "Was ist die UID?",
@@ -1321,13 +1384,25 @@ const questionBank = [
       0, "SUID setzt bei der Ausführung die effektive UID auf die UID des Dateieigentümers. Fehlerhafte SUID-Programme können gefährlich sein."),
     q("u10", "10. UNIX-Sicherheit", "Was bewirkt SGID bei einem Verzeichnis?",
       ["Neue Dateien übernehmen typischerweise die Gruppe des Verzeichnisses", "Neue Dateien erhalten automatisch Root als Eigentümer", "Alle Dateien werden gelöscht", "Das Verzeichnis wird öffentlich lesbar"],
-      0, "SGID auf einem Verzeichnis sorgt typischerweise dafür, dass neue Einträge die Gruppe des Verzeichnisses übernehmen.")
+      0, "SGID auf einem Verzeichnis sorgt typischerweise dafür, dass neue Einträge die Gruppe des Verzeichnisses übernehmen."),
+    q("u11", "10. UNIX-Sicherheit", "Was ist die GID?",
+      ["Die numerische Kennung einer Gruppe", "Die Kennung eines Benutzers", "Ein Verschlüsselungsalgorithmus", "Eine Firewallregel"],
+      0, "GID steht für Group Identifier und bezeichnet die numerische Gruppenkennung."),
+    q("u12", "10. UNIX-Sicherheit", "Was ist die effektive UID eines Prozesses?",
+      ["Die UID, die für die Rechteprüfung maßgeblich ist", "Die UID des Benutzers, der den Prozess gestartet hat", "Die UID des Systemadministrators", "Die UID des Dateieigentümers"],
+      0, "Die effektive UID bestimmt, mit welchen Rechten ein Prozess auf Ressourcen zugreifen darf."),
+    q("u13", "10. UNIX-Sicherheit", "Was ist ein SUID-Bit?",
+      ["Ein spezielles Dateirecht, das die effektive UID beim Ausführen setzt", "Ein Recht, das nur Root besitzt", "Ein Recht, das Dateien löscht", "Ein Recht, das Verzeichnisse schützt"],
+      0, "Das SUID-Bit bewirkt, dass ein Programm mit der effektiven UID des Dateieigentümers ausgeführt wird."),
+    q("u14", "10. UNIX-Sicherheit", "Warum sind SUID-Programme gefährlich?",
+      ["Fehlerhafte SUID-Programme können Rechteausweitungen ermöglichen", "Sie sind immer Viren", "Sie löschen automatisch Daten", "Sie verschlüsseln alle Dateien"],
+      0, "Wenn ein SUID-Programm Fehler enthält, kann ein Angreifer dadurch unberechtigt höhere Rechte erlangen.")
 ];
 
 /* =========================================================
    KONFIGURATION & STATUS
 ========================================================= */
-const STORAGE_KEY = "sicherheit-privatheit-100er-pool-shuffled-v3";
+const STORAGE_KEY = "sicherheit-privatheit-140er-pool-shuffled-v1";
 const EXAM_DURATION_SECONDS = 2 * 60 * 60;
 const QUESTIONS_PER_POOL = 5;
 const PASS_PERCENTAGE = 50;
