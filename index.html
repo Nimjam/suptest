@@ -797,7 +797,7 @@
         <span class="eyebrow">Interaktive Zufallsklausur</span>
         <h1>Einführung in Sicherheit und Privatheit</h1>
         <p class="hero-description">
-            Die Fragenbank enthält 100 Aufgaben aus zehn Themengebieten.
+            Die Fragenbank enthält über 100 Aufgaben aus zehn Themengebieten.
             Pro Versuch werden 50 Aufgaben ausgewählt und die Antwortoptionen dynamisch
             zufällig durchgemischt. Der unmittelbar folgende Versuch verwendet die
             jeweils anderen Fragen der Themenpools.
@@ -808,7 +808,7 @@
                 <span>Fragen pro Versuch</span>
             </div>
             <div class="hero-stat">
-                <strong id="heroBankCount">100</strong>
+                <strong id="heroBankCount">100+</strong>
                 <span>Fragen in der Bank</span>
             </div>
             <div class="hero-stat">
@@ -844,7 +844,7 @@
 
         <div class="pool-information">
             <strong>Zufallsauswahl & Permutation</strong>
-            Aus jedem der zehn Themenpools werden 5 von 10 Fragen gezogen. Die Optionen
+            Aus jedem der zehn Themenpools werden 5 von über 10 Fragen gezogen. Die Optionen
             werden gleichmäßig gemischt. Der nächste Versuch enthält keine Fragen des
             vorherigen Versuchs.
         </div>
@@ -894,7 +894,7 @@
             <div class="instruction-grid">
                 <div class="instruction">
                     <strong>50 zufällige Fragen</strong>
-                    Pro Themengebiet werden fünf von zehn Fragen ausgewählt. Jede Frage ist mit zwei Punkten bewertet.
+                    Pro Themengebiet werden fünf von über zehn Fragen ausgewählt. Jede Frage ist mit zwei Punkten bewertet.
                 </div>
                 <div class="instruction">
                     <strong>Automatische Auswertung</strong>
@@ -961,7 +961,7 @@ function q(id, pool, question, options, answer, explanation) {
 }
 
 /* =========================================================
-   FRAGENBANK (10 Themenpools à 10 Fragen = 100 Fragen)
+   FRAGENBANK (10 Themenpools mit über 10 Fragen pro Pool)
 ========================================================= */
 const questionBank = [
     /* POOL 1: GRUNDLAGEN UND SCHUTZZIELE */
@@ -995,6 +995,9 @@ const questionBank = [
     q("g10", "1. Grundlagen und Schutzziele", "Welcher Zielkonflikt kann bei zusätzlichen Backups entstehen?",
       ["Backups erhöhen die Verfügbarkeit, können aber zusätzliche Risiken für die Vertraulichkeit erzeugen", "Backups senken grundsätzlich die Verfügbarkeit", "Backups verhindern jede Form von Authentifikation", "Backups machen Zugriffskontrollen überflüssig"],
       0, "Zusätzliche Kopien verbessern die Wiederherstellbarkeit, vergrößern aber die Zahl der zu schützenden Datenträger und Speicherorte."),
+    q("g11", "1. Grundlagen und Schutzziele", "Was bedeutet mehrseitige Sicherheit?",
+      ["Einbeziehung der Schutzinteressen aller Beteiligten", "Ausschließlicher Schutz des Betreibers", "Nur technische Maßnahmen ohne Organisation", "Ein Synonym für Datensicherung"],
+      0, "Mehrseitige Sicherheit berücksichtigt die Schutzinteressen aller Beteiligten und versucht, Konflikte auszuhandeln."),
 
     /* POOL 2: RISIKEN UND SICHERHEITSMANAGEMENT */
     q("r01", "2. Risiken und Sicherheitsmanagement", "Was ist eine Schwachstelle?",
@@ -1027,6 +1030,9 @@ const questionBank = [
     q("r10", "2. Risiken und Sicherheitsmanagement", "Was ist mehrseitige Sicherheit?",
       ["Ausschließlicher Schutz der Interessen des Betreibers", "Berücksichtigung der Schutzinteressen aller beteiligten Parteien", "Verwendung mehrerer Firewalls ohne Richtlinie", "Ein Synonym für mehrfache Datensicherung"],
       1, "Mehrseitige Sicherheit erkennt unterschiedliche Schutzinteressen und versucht, Konflikte angemessen auszuhandeln und technisch umzusetzen."),
+    q("r11", "2. Risiken und Sicherheitsmanagement", "Was ist ein Man-in-the-Middle-Angriff?",
+      ["Ein Angreifer setzt sich zwischen zwei Kommunikationspartner", "Ein Angreifer löscht alle Daten", "Ein Angreifer verschlüsselt das Netzwerk", "Ein Angreifer deaktiviert die Firewall"],
+      0, "Ein MITM-Angreifer fängt Nachrichten zwischen zwei Parteien ab und kann sie manipulieren."),
 
     /* POOL 3: AUTHENTIFIKATION UND PASSWÖRTER */
     q("a01", "3. Authentifikation und Passwörter", "Was ist Identifikation?",
@@ -1059,6 +1065,12 @@ const questionBank = [
     q("a10", "3. Authentifikation und Passwörter", "Warum ist die Wiederverwendung eines Passworts gefährlich?",
       ["Ein kompromittiertes Passwort kann den Zugriff auf mehrere Dienste ermöglichen", "Das Passwort wird dadurch automatisch länger", "Passwortmanager funktionieren dann nicht mehr", "Die Verfügbarkeit des Internets sinkt"],
       0, "Bei Passwortwiederverwendung kann ein einzelnes Datenleck mehrere Konten gefährden."),
+    q("a11", "3. Authentifikation und Passwörter", "Was versteht man unter permanenter Authentifizierung?",
+      ["Die Zugriffskontrolle wird während der gesamten Benutzung durchgeführt", "Die Authentifizierung erfolgt nur einmal", "Die Authentifizierung wird nach einer Stunde ungültig", "Die Authentifizierung wird nur bei jedem Neustart durchgeführt"],
+      0, "Permanente Authentifizierung prüft die Identität nicht nur einmalig, sondern kontinuierlich während der Nutzung."),
+    q("a12", "3. Authentifikation und Passwörter", "Welches System wählen Sie bei hohen Sicherheitsanforderungen?",
+      ["Ein System mit hoher FAR und niedriger FRR", "Ein System mit hoher FRR und niedriger FAR", "Ein System ohne biometrische Merkmale", "Ein System mit Passwort als einzigem Faktor"],
+      1, "Bei hohen Sicherheitsanforderungen ist eine niedrige FAR wichtiger, auch wenn die FRR höher ist."),
 
     /* POOL 4: ZUGRIFFSKONTROLLE */
     q("z01", "4. Zugriffskontrolle", "Was ist die Aufgabe eines Referenzmonitors?",
@@ -1123,6 +1135,9 @@ const questionBank = [
     q("m10", "5. Malware und Social Engineering", "Was ist Pretexting?",
       ["Eine erfundene glaubwürdige Geschichte zur Manipulation des Opfers", "Ein kryptographischer Hash", "Eine Art von Backup", "Eine UNIX-Berechtigung"],
       0, "Beim Pretexting konstruiert der Angreifer einen Vorwand oder eine Identität, um Informationen oder Handlungen zu erlangen."),
+    q("m11", "5. Malware und Social Engineering", "Was ist der Unterschied zwischen einem Virus und einem Wurm?",
+      ["Ein Virus braucht ein Wirtsprogramm, ein Wurm ist selbstständig", "Ein Wurm braucht ein Wirtsprogramm, ein Virus ist selbstständig", "Es gibt keinen Unterschied", "Ein Virus ist eine Hardware, ein Wurm ist Software"],
+      0, "Viren benötigen ein Wirtsprogramm und oft eine Benutzeraktion. Würmer sind eigenständig und verbreiten sich selbstständig."),
 
     /* POOL 6: KRYPTOGRAPHISCHE GRUNDLAGEN */
     q("k01", "6. Kryptographische Grundlagen", "Was ist Kryptographie?",
@@ -1155,6 +1170,12 @@ const questionBank = [
     q("k10", "6. Kryptographische Grundlagen", "Was ist ein Brute-Force-Angriff?",
       ["Systematisches Ausprobieren möglicher Schlüssel oder Passwörter", "Ausschließlich das Mitlesen eines Gesprächs", "Eine Zertifikatsverlängerung", "Eine Art von Datensicherung"],
       0, "Beim Brute Force werden mögliche Werte systematisch getestet, bis ein passender gefunden wird."),
+    q("k11", "6. Kryptographische Grundlagen", "Verschlüsseln Sie das Wort 'Computersicherheit' mit der Caesar-Verschlüsselung und k=12.",
+      ["OAYBGFQDEUOTQDTQUF", "QCADIHSFGWQVSFVSWH", "OAYBGFQDEUOTQDTQUG", "OAYBGFQDEUOTQDTQVE"],
+      0, "Die korrekte Verschlüsselung mit k=12 ergibt OAYBGFQDEUOTQDTQUF."),
+    q("k12", "6. Kryptographische Grundlagen", "Entschlüsseln Sie die Chiffre TVMZEXLIMX mit der Caesar-Verschlüsselung und k=4.",
+      ["PRIVATHEIT", "PRIVATHEIM", "PRIVATHEID", "PRIVATHEIZ"],
+      0, "Die Entschlüsselung mit k=4 ergibt PRIVATHEIT."),
 
     /* POOL 7: HASH, MAC, VERSCHLÜSSELUNG UND PKI */
     q("c01", "7. Hash, MAC, Verschlüsselung und PKI", "Welche Eigenschaft besitzt eine kryptographische Hashfunktion?",
@@ -1187,6 +1208,12 @@ const questionBank = [
     q("c10", "7. Hash, MAC, Verschlüsselung und PKI", "Was bindet ein digitales Zertifikat an eine Identität?",
       ["Einen öffentlichen Schlüssel", "Den privaten Schlüssel im Klartext", "Eine vollständige Passwortliste", "Ein Backupmedium"],
       0, "Ein Zertifikat bestätigt die Zuordnung eines öffentlichen Schlüssels zu einer Identität."),
+    q("c11", "7. Hash, MAC, Verschlüsselung und PKI", "Berechnen Sie den öffentlichen Schlüssel für RSA mit p=17, q=11, e=7.",
+      ["(7, 187)", "(7, 187)", "(23, 187)", "(17, 187)"],
+      0, "n = 17*11 = 187, der öffentliche Schlüssel ist (e,n) = (7,187)."),
+    q("c12", "7. Hash, MAC, Verschlüsselung und PKI", "Was ist das Prinzip des Diffie-Hellman-Schlüsselaustauschs?",
+      ["Modulare Potenzierung zum gemeinsamen Geheimnis", "Symmetrische Verschlüsselung ohne Schlüsselaustausch", "Faktorisierung großer Primzahlen", "Verwendung von Hashfunktionen ohne Schlüssel"],
+      0, "Diffie-Hellman nutzt modulare Potenzierung, damit beide Parteien ein gemeinsames Geheimnis berechnen können."),
 
     /* POOL 8: KOMMUNIKATIONS- UND NETZWERKSICHERHEIT */
     q("n01", "8. Kommunikations- und Netzwerksicherheit", "Welche Schutzziele unterstützt TLS?",
@@ -1219,6 +1246,18 @@ const questionBank = [
     q("n10", "8. Kommunikations- und Netzwerksicherheit", "Wogegen schützt eine Firewall allein nur unzureichend?",
       ["Angriffe durch berechtigte Innentäter", "Jedes Paket, das durch eine korrekte Regel blockiert wird", "Ausschließlich ausgeschaltete Systeme", "Nur physische Stromausfälle"],
       0, "Firewalls kontrollieren Netzverkehr, verhindern aber nicht automatisch Missbrauch durch Innentäter, Malware auf Endpunkten oder Tunneling."),
+    q("n11", "8. Kommunikations- und Netzwerksicherheit", "Auf welcher OSI-Ebene arbeitet IPsec?",
+      ["Schicht 3 (Netzwerkschicht)", "Schicht 4 (Transportschicht)", "Schicht 7 (Anwendungsschicht)", "Schicht 2 (Sicherungsschicht)"],
+      0, "IPsec arbeitet auf der Netzwerkschicht (Schicht 3)."),
+    q("n12", "8. Kommunikations- und Netzwerksicherheit", "Auf welcher OSI-Ebene arbeitet TLS?",
+      ["Schicht 4 (Transportschicht)", "Schicht 3 (Netzwerkschicht)", "Schicht 7 (Anwendungsschicht)", "Schicht 2 (Sicherungsschicht)"],
+      0, "TLS arbeitet auf der Transportschicht (Schicht 4)."),
+    q("n13", "8. Kommunikations- und Netzwerksicherheit", "Was ist eine Replay-Attacke?",
+      ["Das Wiedereinspielen alter Nachrichten", "Das Überfordern eines Systems mit Anfragen", "Das Vortäuschen einer falschen Identität", "Das Löschen aller Logdateien"],
+      0, "Bei einer Replay-Attacke werden alte, legitime Nachrichten erneut übertragen."),
+    q("n14", "8. Kommunikations- und Netzwerksicherheit", "Was ist das TOFU-Prinzip?",
+      ["Trust-on-first-use: Das erste Zertifikat wird als vertrauenswürdig eingestuft", "Transfer-on-first-use: Daten werden beim ersten Zugriff übertragen", "Test-on-first-use: Jedes Zertifikat wird vor Nutzung getestet", "Time-on-first-use: Die Zeit wird beim ersten Zugriff gemessen"],
+      0, "TOFU bedeutet, dass das erste erhaltene Zertifikat als vertrauenswürdig akzeptiert und für zukünftige Verbindungen verwendet wird."),
 
     /* POOL 9: PRIVATHEIT UND DATENSCHUTZ */
     q("p01", "9. Privatheit und Datenschutz", "Was sind personenbezogene Daten?",
@@ -1288,7 +1327,7 @@ const questionBank = [
 /* =========================================================
    KONFIGURATION & STATUS
 ========================================================= */
-const STORAGE_KEY = "sicherheit-privatheit-100er-pool-shuffled-v2";
+const STORAGE_KEY = "sicherheit-privatheit-100er-pool-shuffled-v3";
 const EXAM_DURATION_SECONDS = 2 * 60 * 60;
 const QUESTIONS_PER_POOL = 5;
 const PASS_PERCENTAGE = 50;
