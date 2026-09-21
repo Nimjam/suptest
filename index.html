@@ -685,6 +685,37 @@
             font-size: 0.94rem;
         }
 
+                .question-card.partial-card {
+            border-color: #e6bd62;
+        }
+
+        .nav-button.partial {
+            color: var(--warning);
+            border-color: var(--accent);
+            background: var(--warning-light);
+        }
+
+        .manual-grading {
+            margin-top: 0.9rem;
+            padding: 0.9rem;
+            border: 1px solid #e8c66f;
+            border-radius: 11px;
+            background: var(--warning-light);
+        }
+
+        .manual-grading label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 700;
+        }
+
+        .manual-grading input {
+            max-width: 120px;
+            padding: 0.4rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
         /* Footer & Toast */
         .footer {
             padding: 2.5rem 1rem;
@@ -1572,6 +1603,7 @@ let questions = [];
 let state = {
     answers: {},
     flags: {},
+    manualScores: {},
     submitted: false,
     startedAt: Date.now(),
     activeQuestionsData: [],
@@ -1694,6 +1726,7 @@ function createNewAttempt(previousQuestionIds = []) {
     state = {
         answers: {},
         flags: {},
+        manualScores: {},
         submitted: false,
         startedAt: Date.now(),
         activeQuestionsData: questions.map(q => ({
@@ -1787,6 +1820,7 @@ function loadState() {
         state = {
             answers: saved.answers && typeof saved.answers === "object" ? saved.answers : {},
             flags: saved.flags && typeof saved.flags === "object" ? saved.flags : {},
+            manualScores: saved.manualScores && typeof saved.manualScores === "object" ? saved.manualScores : {},
             submitted: Boolean(saved.submitted),
             startedAt: Number.isFinite(Number(saved.startedAt)) ? Number(saved.startedAt) : Date.now(),
             activeQuestionsData: [...saved.activeQuestionsData],
@@ -1804,6 +1838,13 @@ function loadState() {
    ANTWORTSTATUS & BEWERTUNG
 ========================================================= */
 function hasAnswer(question) {
+    if (question.type === "text") {
+        return (
+            Object.prototype.hasOwnProperty.call(state.answers, question.id) &&
+            typeof state.answers[question.id] === "string" &&
+            state.answers[question.id].trim().length > 0
+        );
+    }
     return Object.prototype.hasOwnProperty.call(state.answers, question.id);
 }
 
@@ -1823,8 +1864,66 @@ function isCorrect(question) {
     return false;
 }
 
+function getQuestionScore(question) {
+    if (!hasAnswer(question)) return 0;
+
+    if (question.type === "single") {
+        return Number(state.answers[question.id]) === question.answer ? question.points : 0;
+    }
+
+    if (question.type === "multi") {
+        const selected = state.answers[question.id].map(Number);
+        const correct = question.answer.map(Number);
+
+        // Richtige ausgewählte Antworten
+        const correctSelected = selected.filter(idx => correct.includes(idx)).length;
+        // Falsch ausgewählte Antworten
+        const wrongSelected = selected.filter(idx => !correct.includes(idx)).length;
+
+        // Verhältnis: (richtige - falsche) / gesamte richtige
+        const ratio = Math.max(0, (correctSelected - wrongSelected) / correct.length);
+
+        return Math.round(question.points * Math.min(1, ratio) * 2) / 2;
+    }
+
+    if (question.type === "text") {
+        return Number(state.manualScores[question.id] || 0);
+    }
+
+    return 0;
+}
+
+function getQuestionScore(question) {
+    if (!hasAnswer(question)) return 0;
+
+    if (question.type === "single") {
+        return Number(state.answers[question.id]) === question.answer ? question.points : 0;
+    }
+
+    if (question.type === "multi") {
+        const selected = state.answers[question.id].map(Number);
+        const correct = question.answer.map(Number);
+
+        // Richtige ausgewählte Antworten
+        const correctSelected = selected.filter(idx => correct.includes(idx)).length;
+        // Falsch ausgewählte Antworten
+        const wrongSelected = selected.filter(idx => !correct.includes(idx)).length;
+
+        // Verhältnis: (richtige - falsche) / gesamte richtige
+        const ratio = Math.max(0, (correctSelected - wrongSelected) / correct.length);
+
+        return Math.round(question.points * Math.min(1, ratio) * 2) / 2;
+    }
+
+    if (question.type === "text") {
+        return Number(state.manualScores[question.id] || 0);
+    }
+
+    return 0;
+}
+
 function achievedPoints() {
-    return questions.reduce((sum, q) => sum + (isCorrect(q) ? q.points : 0), 0);
+    return questions.reduce((sum, q) => sum + getQuestionScore(q), 0);
 }
 
 function correctAnswerCount() {
@@ -1941,6 +2040,27 @@ function renderQuestion(question, index) {
                 placeholder="Formulieren Sie Ihre Antwort ausführlich."
                 ${state.submitted ? "disabled" : ""}
             >${selectedAnswer ? escapeHtml(selectedAnswer) : ""}</textarea>
+            ${
+                state.submitted
+                    ? `
+                    <div class="manual-grading">
+                        <label for="manual-${index}">
+                            Erreichte Punkte (0-${question.points}):
+                        </label>
+                        <input
+                            type="number"
+                            id="manual-${index}"
+                            class="manual-score"
+                            min="0"
+                            max="${question.points}"
+                            step="0.5"
+                            value="${state.manualScores[question.id] || 0}"
+                        >
+                        <span>von ${question.points} Punkten</span>
+                    </div>
+                    `
+                    : ""
+            }
         `;
     }
 
@@ -2046,6 +2166,19 @@ function attachQuestionEvents(article, question) {
         saveState();
         updateInterface();
     });
+
+        const manualInput = article.querySelector(".manual-score");
+    if (manualInput) {
+        manualInput.addEventListener("input", () => {
+            let value = Number(manualInput.value);
+            if (!Number.isFinite(value)) value = 0;
+            value = Math.max(0, Math.min(question.points, value));
+            state.manualScores[question.id] = value;
+            manualInput.value = value;
+            saveState();
+            updateInterface();
+        });
+    }
 }
 
 function updateInterface() {
@@ -2064,10 +2197,10 @@ function updateInterface() {
 
         if (!navButton || !questionCard || !scoreElement) return;
 
-        navButton.classList.remove("answered", "correct", "incorrect");
+        navButton.classList.remove("answered", "correct", "incorrect", "partial");
         navButton.classList.toggle("flagged", Boolean(state.flags[question.id]));
 
-        questionCard.classList.remove("correct-card", "incorrect-card");
+        questionCard.classList.remove("correct-card", "incorrect-card", "partial-card");
 
         if (!state.submitted) {
             if (hasAnswer(question)) {
@@ -2075,10 +2208,16 @@ function updateInterface() {
             }
             scoreElement.textContent = "";
         } else {
-            if (isCorrect(question)) {
+            const score = getQuestionScore(question);
+
+            if (score >= question.points) {
                 navButton.classList.add("correct");
                 questionCard.classList.add("correct-card");
-                scoreElement.textContent = `${question.points} / ${question.points} Punkte`;
+                scoreElement.textContent = `${score} / ${question.points} Punkte`;
+            } else if (score > 0) {
+                navButton.classList.add("partial");
+                questionCard.classList.add("partial-card");
+                scoreElement.textContent = `${score} / ${question.points} Punkte`;
             } else {
                 navButton.classList.add("incorrect");
                 questionCard.classList.add("incorrect-card");
@@ -2262,6 +2401,7 @@ function resetCurrentAttempt() {
     state = {
         answers: {},
         flags: {},
+        manualScores: {},
         submitted: false,
         startedAt: Date.now(),
         activeQuestionsData: state.activeQuestionsData,
