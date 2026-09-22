@@ -1585,7 +1585,165 @@ const questionBank = [
       1, "SUID an fehlerhafte Programme kann zu Rechteausweitung führen.", 3),
     bq("u15", "11. UNIX-Sicherheit", "Bewerten Sie: Ein Unternehmen setzt für alle Dateien die Rechte 777 ein.",
       ["Angemessen", "Nicht angemessen", "Nicht bewertbar", "Nur für öffentliche Dateien"],
-      1, "777 gibt allen alle Rechte und ist ein Sicherheitsrisiko.", 3)
+      1, "777 gibt allen alle Rechte und ist ein Sicherheitsrisiko.", 3),
+
+    /* =========================================================
+       ZUSÄTZLICHE AUFGABEN AUS DER PDF-AUFGABENSAMMLUNG
+    ========================================================= */
+
+    /* POOL 1: GRUNDLAGEN UND SCHUTZZIELE (Ergänzungen) */
+    tq("g16", "1. Grundlagen und Schutzziele", "Definieren Sie die Begriffe IT-System, Information, Daten, Objekt, Subjekt, Zugriff, Asset, Schwachstelle, Bedrohung und Risiko. Geben Sie jeweils ein Beispiel an.",
+      ["IT-System definiert (1 P)", "Information und Daten unterschieden (1 P)", "Objekt und Subjekt definiert (1 P)", "Zugriff und Asset definiert (1 P)", "Schwachstelle, Bedrohung, Risiko definiert (1 P)"],
+      "IT-System: technisches System zur Speicherung/Verarbeitung. Information: interpretierte Daten. Daten: Rohmaterial. Objekt: passive Informationsträger. Subjekt: aktive Einheit. Zugriff: Interaktion. Asset: schutzwürdiges Gut. Schwachstelle: Schwäche. Bedrohung: potenzieller Schaden. Risiko: Schaden × Wahrscheinlichkeit.", 5),
+    tq("g17", "1. Grundlagen und Schutzziele", "Ein Online-Shop verarbeitet Kundendaten, Zahlungsinformationen, Produktdaten, Logdateien und besitzt mehrere Webserver. Nennen Sie fünf schützenswerte Assets und ordnen Sie jedem ein relevantes Schutzziel zu.",
+      ["Fünf Assets genannt (2 P)", "Schutzziele zugeordnet (3 P)"],
+      "Kundendaten (Vertraulichkeit), Zahlungsinformationen (Integrität), Produktdaten (Verfügbarkeit), Logdateien (Integrität), Webserver (Verfügbarkeit).", 5),
+
+    /* POOL 2: RISIKEN UND SICHERHEITSMANAGEMENT (Ergänzungen) */
+    tq("r16", "2. Risiken und Sicherheitsmanagement", "Erklären Sie den Unterschied zwischen Schwachstelle, Verwundbarkeit, Exploit, Bedrohung und Angriff anhand eines Beispiels aus dem Bereich Webanwendungen.",
+      ["Schwachstelle erklärt (1 P)", "Verwundbarkeit erklärt (1 P)", "Exploit erklärt (1 P)", "Bedrohung erklärt (1 P)", "Angriff erklärt (1 P)"],
+      "Schwachstelle: fehlende Eingabevalidierung. Verwundbarkeit: ausnutzbare Schwachstelle. Exploit: SQL-Injection-Code. Bedrohung: Datenverlust. Angriff: tatsächliche SQL-Injection.", 5),
+    tq("r17", "2. Risiken und Sicherheitsmanagement", "Ein Unternehmen analysiert eine Bedrohung mit E=0,2 pro Jahr und S=100.000 Euro. Berechnen Sie das Risiko und interpretieren Sie das Ergebnis. Nennen Sie zwei Maßnahmen zur Risikoreduktion.",
+      ["Risiko berechnet (2 P)", "Interpretation (1 P)", "Zwei Maßnahmen (2 P)"],
+      "R = 0,2 × 100.000 = 20.000 Euro/Jahr. Interpretation: statistischer Erwartungswert. Maßnahmen: Firewall (reduziert E), Versicherung (reduziert S).", 5),
+    tq("r18", "2. Risiken und Sicherheitsmanagement", "Vergleichen Sie die Angreiferprofile Script Kiddie, Hacktivist, Wirtschaftsspion und Geheimdienst hinsichtlich Motivation, Ressourcen und Fähigkeiten.",
+      ["Script Kiddie (1 P)", "Hacktivist (1 P)", "Wirtschaftsspion (1 P)", "Geheimdienst (1 P)"],
+      "Script Kiddie: geringe Fähigkeiten, sucht Aufmerksamkeit. Hacktivist: politische Motivation. Wirtschaftsspion: finanzieller Gewinn, hohe Ressourcen. Geheimdienst: staatliche Interessen, höchste Ressourcen.", 4),
+    tq("r19", "2. Risiken und Sicherheitsmanagement", "Ein Unternehmen möchte eine Sicherheitsrichtlinie für Passwörter erstellen. Formulieren Sie mindestens sechs sinnvolle Regeln.",
+      ["Sechs Regeln genannt (6 P)"],
+      "1. Mindestlänge 12 Zeichen. 2. Keine Wiederverwendung. 3. Passwortmanager verwenden. 4. MFA aktivieren. 5. Keine Weitergabe. 6. Regelmäßige Überprüfung gegen kompromittierte Listen.", 6),
+
+    /* POOL 3: AUTHENTIFIKATION UND PASSWÖRTER (Ergänzungen) */
+    tq("a17", "3. Authentifikation und Passwörter", "Nennen Sie drei physiologische und drei verhaltensbasierte biometrische Merkmale. Erklären Sie Falsch-positiv-Rate und Falsch-negativ-Rate.",
+      ["Drei physiologische Merkmale (1 P)", "Drei verhaltensbasierte Merkmale (1 P)", "FAR erklärt (1 P)", "FRR erklärt (1 P)"],
+      "Physiologisch: Fingerabdruck, Iris, Gesicht. Verhaltensbasiert: Tippverhalten, Gang, Handschrift. FAR: unberechtigte Person wird akzeptiert. FRR: berechtigte Person wird abgelehnt.", 4),
+    tq("a18", "3. Authentifikation und Passwörter", "Beschreiben Sie einen Angriff auf ein Fingerabdrucksystem und nennen Sie zwei Gegenmaßnahmen.",
+      ["Angriff beschrieben (2 P)", "Zwei Gegenmaßnahmen (2 P)"],
+      "Angriff: Künstlicher Fingerabdruck aus Gummi. Gegenmaßnahmen: Lebenderkennung, Temperaturprüfung.", 4),
+    tq("a19", "3. Authentifikation und Passwörter", "Warum sind lange Passwörter besser als kurze komplexe? Warum können erzwungene Passwortänderungen problematisch sein? Welche Rolle spielen Passwortmanager?",
+      ["Lange Passwörter erklärt (2 P)", "Problem erzwungener Änderungen (2 P)", "Passwortmanager erklärt (1 P)"],
+      "Lange Passwörter erhöhen den Suchraum exponentiell. Erzwungene Änderungen führen zu vorhersehbaren Mustern. Passwortmanager ermöglichen einzigartige Passwörter pro Dienst.", 5),
+
+    /* POOL 4: ZUGRIFFSKONTROLLE (Ergänzungen) */
+    tq("z16", "4. Zugriffskontrolle", "Beschreiben Sie die Aufgabe eines Referenzmonitors und die drei Schritte bei einer Zugriffsanfrage.",
+      ["Aufgabe erklärt (2 P)", "Drei Schritte genannt (3 P)"],
+      "Der Referenzmonitor kontrolliert Zugriffe. Schritte: 1. Zugriff abfangen, 2. Rechte prüfen, 3. Erlauben oder verweigern.", 5),
+    tq("z17", "4. Zugriffskontrolle", "In einem Krankenhaus gibt es die Rollen Arzt, Pflegekraft, Verwaltung und Patient. Definieren Sie für jede Rolle mindestens zwei sinnvolle Rechte. Erklären Sie Need-to-know und Separation of Duty.",
+      ["Rollen definiert (4 P)", "Need-to-know erklärt (2 P)", "Separation of Duty erklärt (2 P)"],
+      "Arzt: Diagnosen lesen, Behandlungen dokumentieren. Pflegekraft: Pflegeinformationen, Medikamente. Verwaltung: Abrechnung, Stammdaten. Patient: eigene Daten. Need-to-know: nur notwendige Informationen. Separation of Duty: kritische Aufgaben trennen.", 8),
+    tq("z18", "4. Zugriffskontrolle", "Erklären Sie das Biba-Modell und warum es als Gegenstück zu Bell-LaPadula betrachtet wird.",
+      ["Biba erklärt (2 P)", "No-read-down erklärt (1 P)", "No-write-up erklärt (1 P)", "Gegenstück erklärt (2 P)"],
+      "Biba schützt Integrität. No-read-down: keine niedrigeren Integritätsstufen lesen. No-write-up: nicht in höhere Stufen schreiben. Bell-LaPadula schützt Vertraulichkeit mit umgekehrten Regeln.", 6),
+
+    /* POOL 5: MALWARE UND SOCIAL ENGINEERING (Ergänzungen) */
+    tq("m17", "5. Malware und Social Engineering", "Beschreiben Sie den typischen Aufbau eines Computervirus mit den Phasen Erkennung, Infektion, Schadenteil und Rücksprung.",
+      ["Erkennung (1 P)", "Infektion (1 P)", "Schadenteil (1 P)", "Rücksprung (1 P)"],
+      "Erkennung: Virus sucht Wirtsdatei. Infektion: kopiert sich in Wirt. Schadenteil: führt schädliche Aktion aus. Rücksprung: kehrt zum normalen Programmablauf zurück.", 4),
+    tq("m18", "5. Malware und Social Engineering", "Nennen Sie sechs Schutzmaßnahmen gegen Schadsoftware.",
+      ["Sechs Maßnahmen (6 P)"],
+      "1. Antivirus-Software. 2. Firewall. 3. Updates. 4. Eingeschränkte Benutzerrechte. 5. E-Mail-Filter. 6. Schulungen.", 6),
+    tq("m19", "5. Malware und Social Engineering", "Warum sind Peer-to-Peer-Botnetze schwerer zu bekämpfen als zentral gesteuerte?",
+      ["Dezentrale Struktur (2 P)", "Kein Single Point of Failure (2 P)", "Verschlüsselte Kommunikation (1 P)"],
+      "P2P-Botnetze haben keinen zentralen Server. Sie sind selbstorganisierend und nutzen verschlüsselte Kommunikation. Das Abschalten einzelner Knoten hilft wenig.", 5),
+
+    /* POOL 6: KRYPTOGRAPHISCHE GRUNDLAGEN (Ergänzungen) */
+    tq("k17", "6. Kryptographische Grundlagen", "Berechnen Sie das One-Time Pad: x=101101, k=011010. Berechnen Sie y=x⊕k und entschlüsseln Sie y wieder.",
+      ["Chiffretext berechnet (2 P)", "Entschlüsselung korrekt (2 P)"],
+      "y = 110111. Entschlüsselung: y⊕k = 101101 = x.", 4),
+    tq("k18", "6. Kryptographische Grundlagen", "Verschlüsseln Sie das Wort ANGRIFF mit der Caesar-Chiffre und k=3. Entschlüsseln Sie YHUWUDXHQ. Warum ist die Caesar-Chiffre unsicher?",
+      ["Verschlüsselung (2 P)", "Entschlüsselung (2 P)", "Unsicherheit erklärt (1 P)"],
+      "ANGRIFF → DQJULII. YHUWUDXHQ → VERTRAUEN. Unsicher wegen kleinem Schlüsselraum (25 Möglichkeiten).", 5),
+    tq("k19", "6. Kryptographische Grundlagen", "Warum ist ein großer Schlüsselraum allein kein ausreichender Sicherheitsnachweis? Erklären Sie die Buchstabenhäufigkeitsanalyse.",
+      ["Schlüsselraum-Problem (2 P)", "Häufigkeitsanalyse erklärt (3 P)"],
+      "Ein großer Schlüsselraum schützt nicht vor statistischen Angriffen. Häufigkeitsanalyse nutzt die unterschiedliche Verteilung von Buchstaben in natürlichen Sprachen.", 5),
+
+    /* POOL 7: HASH, MAC, VERSCHLÜSSELUNG UND PKI (Ergänzungen) */
+    tq("c17", "7. Hash, MAC, Verschlüsselung und PKI", "Beschreiben Sie schrittweise, wie ein Offline-Wörterbuchangriff gegen eine gestohlene Passwortdatenbank funktioniert.",
+      ["Schritte beschrieben (5 P)"],
+      "1. Hashes stehlen. 2. Wörterbuchliste erstellen. 3. Jedes Wort hashen. 4. Hashes vergleichen. 5. Passwort gefunden.", 5),
+    tq("c18", "7. Hash, MAC, Verschlüsselung und PKI", "Vergleichen Sie symmetrische und asymmetrische Verschlüsselung hinsichtlich Schlüsselanzahl, Geschwindigkeit, Schlüsselverteilungsproblem und typische Anwendungsfälle.",
+      ["Schlüsselanzahl (1 P)", "Geschwindigkeit (1 P)", "Schlüsselverteilung (1 P)", "Anwendungsfälle (1 P)"],
+      "Symmetrisch: ein gemeinsamer Schlüssel, schnell, Verteilungsproblem, für große Datenmengen. Asymmetrisch: Schlüsselpaar, langsam, einfachere Verteilung, für Schlüsselaustausch und Signaturen.", 4),
+    tq("c19", "7. Hash, MAC, Verschlüsselung und PKI", "Erklären Sie das Prinzip der hybriden Verschlüsselung und warum es in der Praxis verwendet wird.",
+      ["Prinzip erklärt (3 P)", "Praktische Bedeutung (2 P)"],
+      "Hybride Verschlüsselung kombiniert symmetrische Datenverschlüsselung mit asymmetrischem Schlüsselaustausch. Ein zufälliger Sitzungsschlüssel wird asymmetrisch geschützt, die Daten symmetrisch verschlüsselt.", 5),
+
+    /* POOL 8: KOMMUNIKATIONS- UND NETZWERKSICHERHEIT (Ergänzungen) */
+    tq("n19", "8. Kommunikations- und Netzwerksicherheit", "Nennen Sie vier Fähigkeiten eines aktiven Angreifers in einem Computernetzwerk und geben Sie jeweils ein Beispiel.",
+      ["Vier Fähigkeiten mit Beispielen (4 P)"],
+      "1. Nachrichten verändern (Manipulation). 2. Nachrichten löschen (DoS). 3. Nachrichten wiederholen (Replay). 4. Absenderadressen fälschen (Spoofing).", 4),
+    tq("n20", "8. Kommunikations- und Netzwerksicherheit", "Was ist ein sicherer Tunnel? Welche Schutzziele werden erreicht? Beschreiben Sie den typischen Aufbau.",
+      ["Definition (1 P)", "Schutzziele (2 P)", "Aufbau (3 P)"],
+      "Ein sicherer Tunnel ist eine geschützte Verbindung über ein unsicheres Netz. Schutzziele: Vertraulichkeit, Integrität, Authentizität. Aufbau: Schlüsselaustausch, symmetrische Verschlüsselung, MACs.", 6),
+    tq("n21", "8. Kommunikations- und Netzwerksicherheit", "Was ist IPsec? Welche Sicherheitsdienste bietet ESP? Was ist eine Security Association?",
+      ["IPsec erklärt (1 P)", "ESP-Dienste (2 P)", "SA erklärt (2 P)"],
+      "IPsec ist eine Sicherheitsarchitektur für IP. ESP bietet Vertraulichkeit, Integrität, Authentizität und Replay-Schutz. Eine SA ist eine Sicherheitsvereinbarung zwischen zwei Parteien.", 5),
+
+    /* POOL 9: FIREWALLS UND NETZWERKSICHERHEIT (Ergänzungen) */
+    tq("f17", "9. Firewalls und Netzwerksicherheit", "Vergleichen Sie Paketfilter, Circuit-Level Gateway und Application-Level Gateway hinsichtlich OSI-Schicht, Vorteilen und Nachteilen.",
+      ["Paketfilter (2 P)", "Circuit-Level (2 P)", "Application-Level (2 P)"],
+      "Paketfilter: Schicht 3/4, schnell, aber keine Inhaltsanalyse. Circuit-Level: Schicht 4, zustandsbehaftet, aber keine Inhaltsprüfung. Application-Level: Schicht 7, Inhaltsanalyse, aber langsam und komplex.", 6),
+    tq("f18", "9. Firewalls und Netzwerksicherheit", "Formulieren Sie ein Firewall-Regelwerk: Eingehende SSH verbieten, HTTPS zum Webserver erlauben, ausgehende DNS erlauben, alles andere verbieten.",
+      ["Regeln korrekt formuliert (4 P)"],
+      "1. ESTABLISHED/RELATED erlauben. 2. TCP 443 zum Webserver erlauben. 3. TCP 22 von außen verbieten. 4. UDP 53 nach außen erlauben. 5. Alles andere verwerfen.", 4),
+    tq("f19", "9. Firewalls und Netzwerksicherheit", "Nennen Sie fünf Grenzen von Firewalls.",
+      ["Fünf Grenzen (5 P)"],
+      "1. Kein Schutz vor Innentätern. 2. Kein Schutz vor Tunneling. 3. Keine Analyse verschlüsselter Inhalte. 4. Kein Ersatz für Schulungen. 5. Kein Schutz vor Malware auf Endgeräten.", 5),
+
+    /* POOL 10: PRIVATHEIT UND DATENSCHUTZ (Ergänzungen) */
+    tq("p16", "10. Privatheit und Datenschutz", "Erklären Sie die Begriffe Datenschutz, Privatheit, Privatsphäre, Vertraulichkeit, Anonymität und Pseudonymität.",
+      ["Sechs Begriffe erklärt (6 P)"],
+      "Datenschutz: rechtliche Regeln. Privatheit: Kontrolle über Daten. Privatsphäre: persönlicher Bereich. Vertraulichkeit: nur Berechtigte. Anonymität: nicht zuordenbar. Pseudonymität: Ersatzkennzeichen.", 6),
+    tq("p17", "10. Privatheit und Datenschutz", "Entscheiden Sie, ob Name, IP-Adresse, Matrikelnummer, Browser-Fingerabdruck, Geburtsort und anonymisierte Statistik personenbezogene Daten sind. Begründen Sie.",
+      ["Sechs Entscheidungen begründet (6 P)"],
+      "Name: ja. IP-Adresse: ja. Matrikelnummer: ja. Browser-Fingerabdruck: ja. Geburtsort: nein (allein). Anonymisierte Statistik: nein.", 6),
+    tq("p18", "10. Privatheit und Datenschutz", "Nennen Sie die sieben goldenen Regeln des Datenschutzes und erklären Sie drei davon ausführlicher.",
+      ["Sieben Regeln genannt (3 P)", "Drei erklärt (3 P)"],
+      "1. Rechtmäßigkeit. 2. Einwilligung. 3. Zweckbindung. 4. Datenminimierung. 5. Transparenz. 6. Datensicherheit. 7. Kontrolle.", 6),
+
+    /* POOL 11: UNIX-SICHERHEIT (Ergänzungen) */
+    tq("u17", "11. UNIX-Sicherheit", "Erklären Sie die Begriffe UID, GID, Root, reale UID, effektive UID und Prozess.",
+      ["Sechs Begriffe erklärt (6 P)"],
+      "UID: Benutzerkennung. GID: Gruppenkennung. Root: Superuser mit UID 0. Reale UID: tatsächlicher Benutzer. Effektive UID: für Rechteprüfung. Prozess: laufendes Programm mit UID/GID.", 6),
+    tq("u18", "11. UNIX-Sicherheit", "Interpretieren Sie die Rechte -rw-r--r--, drwxr-x---, -rwx------ und drwxrwxrwt.",
+      ["Vier Rechte interpretiert (4 P)"],
+      "-rw-r--r--: Datei, Eigentümer rw, Gruppe r, andere r. drwxr-x---: Verzeichnis, Eigentümer rwx, Gruppe rx, andere ---. -rwx------: Datei, nur Eigentümer rwx. drwxrwxrwt: Verzeichnis mit Sticky-Bit.", 4),
+    tq("u19", "11. UNIX-Sicherheit", "Geben Sie chmod-Befehle an für: Ausführungsrecht für Eigentümer, Schreibrecht für Gruppe entziehen, alle Rechte für andere entziehen, rwxr-xr-x setzen, nur rw für Eigentümer.",
+      ["Fünf Befehle (5 P)"],
+      "chmod u+x datei. chmod g-w datei. chmod o-rwx datei. chmod 755 datei. chmod 600 datei.", 5),
+
+    /* GEMISCHTE KLAUSURAUFGABEN */
+    tq("mix01", "12. Gemischte Klausuraufgaben", "Ein Online-Banking-System verwendet Benutzername, Passwort, SMS-TAN und TLS. Welche Authentifikationsfaktoren werden genutzt? Welche Schutzziele unterstützt TLS? Welche Angriffe sind trotz TLS möglich?",
+      ["Authentifikationsfaktoren (2 P)", "TLS-Schutzziele (2 P)", "Angriffe trotz TLS (2 P)"],
+      "Faktoren: Wissen (Passwort), Besitz (SMS-TAN). TLS: Vertraulichkeit, Integrität, Authentizität. Angriffe: Phishing, Malware, Social Engineering.", 6),
+    tq("mix02", "12. Gemischte Klausuraufgaben", "Eine Universität betreibt ein Campusnetz, Lernplattformen, E-Mail-Server und Studierendenverwaltung. Identifizieren Sie fünf Assets, nennen Sie Schutzziele und beschreiben Sie drei Bedrohungen.",
+      ["Fünf Assets (2 P)", "Schutzziele (2 P)", "Drei Bedrohungen (2 P)"],
+      "Assets: Campusnetz, Lernplattform, E-Mail, Studierendendaten, Server. Schutzziele: Verfügbarkeit, Vertraulichkeit, Integrität. Bedrohungen: DDoS, Datenleck, Phishing.", 6),
+    tq("mix03", "12. Gemischte Klausuraufgaben", "Ein Krankenhaus speichert Patientendaten digital. Warum sind diese besonders schutzwürdig? Welche Zugriffskontrollmodelle sind geeignet? Welche Datenschutzprinzipien sind relevant?",
+      ["Schutzwürdigkeit (2 P)", "Zugriffskontrolle (2 P)", "Datenschutzprinzipien (2 P)"],
+      "Patientendaten sind sensibel und besonders geschützt. RBAC mit Need-to-know ist geeignet. Prinzipien: Datenminimierung, Zweckbindung, Vertraulichkeit.", 6),
+    tq("mix04", "12. Gemischte Klausuraufgaben", "Entwerfen Sie ein Sicherheitskonzept für ein kleines Unternehmen mit 30 Mitarbeitenden. Berücksichtigen Sie Authentifikation, Zugriffskontrolle, Backup, Malware-Schutz, Firewall, Schulungen und Datenschutz.",
+      ["Authentifikation (1 P)", "Zugriffskontrolle (1 P)", "Backup (1 P)", "Malware-Schutz (1 P)", "Firewall (1 P)", "Schulungen (1 P)", "Datenschutz (1 P)"],
+      "MFA für alle. RBAC mit Least Privilege. 3-2-1-Backup. Antivirus und Updates. Firewall mit DMZ. Regelmäßige Schulungen. DSGVO-konforme Datenverarbeitung.", 7),
+
+    /* MULTIPLE-CHOICE-FRAGEN AUS DER PDF */
+    mq("mc01", "12. Gemischte Klausuraufgaben", "Welche Aussagen über Schutzziele sind richtig?",
+      ["Vertraulichkeit schützt vor unautorisierter Informationsgewinnung", "Integrität bedeutet, dass Daten immer verfügbar sind", "Verbindlichkeit kann durch digitale Signaturen unterstützt werden", "Verfügbarkeit ist bei DDoS-Angriffen typischerweise betroffen", "Authentizität bedeutet ausschließlich Verschlüsselung"],
+      [0, 2, 3], "Vertraulichkeit, Verbindlichkeit und Verfügbarkeit sind korrekt zugeordnet."),
+    mq("mc02", "12. Gemischte Klausuraufgaben", "Welche Aussagen über Zugriffskontrolle sind richtig?",
+      ["ACLs sind objektorientiert", "Capabilities sind Zugriffstickets", "RBAC vergibt Rechte direkt an einzelne Dateien ohne Rollen", "Bell-LaPadula schützt primär Vertraulichkeit", "Biba schützt primär Integrität"],
+      [0, 1, 3, 4], "ACLs, Capabilities, Bell-LaPadula und Biba sind korrekt beschrieben."),
+    mq("mc03", "12. Gemischte Klausuraufgaben", "Welche Aussagen über Kryptographie sind richtig?",
+      ["Das Kerckhoffs-Prinzip verlangt, dass der Algorithmus geheim bleibt", "AES ist ein symmetrisches Verfahren", "RSA basiert unter anderem auf der Schwierigkeit der Faktorisierung", "Hashfunktionen dienen primär der Entschlüsselung", "MACs benötigen einen geheimen Schlüssel"],
+      [1, 2, 4], "AES, RSA und MACs sind korrekt beschrieben."),
+    mq("mc04", "12. Gemischte Klausuraufgaben", "Welche Aussagen über TLS und PKI sind richtig?",
+      ["TLS kann Vertraulichkeit und Integrität schützen", "Zertifikate binden öffentliche Schlüssel an Identitäten", "Eine CA muss ihren privaten Schlüssel besonders schützen", "Certificate Transparency verhindert jede Art von Man-in-the-Middle-Angriff", "Browser vertrauen typischerweise mehreren Root-CAs"],
+      [0, 1, 2, 4], "TLS, Zertifikate, CA-Schutz und Browser-Vertrauen sind korrekt."),
+
+    /* ABSCHLUSSREFLEXION */
+    tq("final01", "12. Gemischte Klausuraufgaben", "Fassen Sie die fünf für Sie wichtigsten Konzepte der Veranstaltung zusammen. Erklären Sie jeweils Grundidee, Sicherheitsrelevanz, typische Angriffe und Gegenmaßnahmen.",
+      ["Fünf Konzepte genannt (5 P)", "Grundidee erklärt (5 P)", "Sicherheitsrelevanz erklärt (5 P)", "Angriffe und Gegenmaßnahmen (5 P)"],
+      "Individuelle Antwort. Mögliche Konzepte: Schutzziele, Authentifikation, Zugriffskontrolle, Kryptographie, Firewalls.", 20)
 ];
 
 /* =========================================================
@@ -1893,34 +2051,6 @@ function getQuestionScore(question) {
     return 0;
 }
 
-function getQuestionScore(question) {
-    if (!hasAnswer(question)) return 0;
-
-    if (question.type === "single") {
-        return Number(state.answers[question.id]) === question.answer ? question.points : 0;
-    }
-
-    if (question.type === "multi") {
-        const selected = state.answers[question.id].map(Number);
-        const correct = question.answer.map(Number);
-
-        // Richtige ausgewählte Antworten
-        const correctSelected = selected.filter(idx => correct.includes(idx)).length;
-        // Falsch ausgewählte Antworten
-        const wrongSelected = selected.filter(idx => !correct.includes(idx)).length;
-
-        // Verhältnis: (richtige - falsche) / gesamte richtige
-        const ratio = Math.max(0, (correctSelected - wrongSelected) / correct.length);
-
-        return Math.round(question.points * Math.min(1, ratio) * 2) / 2;
-    }
-
-    if (question.type === "text") {
-        return Number(state.manualScores[question.id] || 0);
-    }
-
-    return 0;
-}
 
 function achievedPoints() {
     return questions.reduce((sum, q) => sum + getQuestionScore(q), 0);
