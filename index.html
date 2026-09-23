@@ -860,7 +860,7 @@
         </p>
         <div class="hero-stats">
             <div class="hero-stat">
-                <strong id="heroQuestionCount">50</strong>
+                <strong id="heroQuestionCount">60</strong>
                 <span>Fragen pro Versuch</span>
             </div>
             <div class="hero-stat">
@@ -1492,6 +1492,87 @@ const questionBank = [
     bq("f15", "9. Firewalls und Netzwerksicherheit", "Bewerten Sie: Ein Unternehmen verwendet eine DMZ für öffentliche Dienste.",
       ["Sehr gut", "Mäßig", "Schlecht", "Nicht bewertbar"],
       0, "Eine DMZ ist eine bewährte Methode, um öffentliche Dienste vom internen Netz zu trennen.", 3),
+    /* Dual-Homed Firewall */
+    mq("f16", "9. Firewalls und Netzwerksicherheit", "Welche Aussagen über eine Dual-Homed Firewall sind richtig?",
+      ["Hat zwei Netzwerkschnittstellen", "Trennt internes und externes Netz", "Hat nur eine Netzwerkschnittstelle", "Der gesamte Verkehr muss durch den Rechner laufen"],
+      [0, 1, 3], "Eine Dual-Homed Firewall hat zwei Netzwerkschnittstellen und trennt die Netze vollständig. Der gesamte Verkehr muss durch diesen Rechner laufen."),
+    mq("f17", "9. Firewalls und Netzwerksicherheit", "Welche Eigenschaften hat eine Dual-Homed Firewall?",
+      ["Zwei Netzwerkkarten", "Kein direkter Verkehr zwischen den Netzen", "Der Rechner selbst ist die Firewall", "Ist ein Router"],
+      [0, 1, 2], "Eine Dual-Homed Firewall ist ein Rechner mit zwei Netzwerkkarten, der die Netze trennt. Der Rechner selbst ist die Firewall."),
+    tq("f18", "9. Firewalls und Netzwerksicherheit", "Beschreiben Sie den Aufbau einer Dual-Homed Firewall und erklären Sie, warum sie sicherer ist als ein einfacher Router.",
+      ["Aufbau beschrieben (2 P)", "Sicherheitsvorteil erklärt (2 P)"],
+      "Eine Dual-Homed Firewall hat zwei Netzwerkschnittstellen (intern + extern). Der gesamte Verkehr muss durch diesen Rechner laufen. Es gibt keinen direkten Weg zwischen den Netzen. Der Rechner selbst ist die Firewall und kann den Verkehr kontrollieren.", 4),
+
+    /* Screened Host */
+    mq("f19", "9. Firewalls und Netzwerksicherheit", "Welche Aussagen über eine Screened-Host-Architektur sind richtig?",
+      ["Ein Paketfilter steht vor dem Bastion Host", "Der Bastion Host ist besonders gehärtet", "Öffentliche Dienste laufen auf dem Bastion Host", "Es gibt keine Firewall"],
+      [0, 1, 2], "Bei einer Screened-Host-Architektur filtert ein Paketfilter den Verkehr und leitet ihn an einen gehärteten Bastion Host weiter."),
+    mq("f20", "9. Firewalls und Netzwerksicherheit", "Welche Rolle spielt der Bastion Host in einer Screened-Host-Architektur?",
+      ["Er ist besonders gehärtet", "Er stellt öffentliche Dienste bereit", "Er ist der einzige vom Internet erreichbare Rechner", "Er ist ein normaler Arbeitsplatzrechner"],
+      [0, 1, 2], "Der Bastion Host ist der einzige vom Internet erreichbare Rechner und stellt öffentliche Dienste bereit."),
+    tq("f21", "9. Firewalls und Netzwerksicherheit", "Erklären Sie den Aufbau einer Screened-Host-Architektur und die Rolle des Bastion Hosts.",
+      ["Aufbau beschrieben (2 P)", "Rolle des Bastion Hosts erklärt (2 P)"],
+      "Ein Paketfilter steht zwischen Internet und Bastion Host. Der Bastion Host ist besonders gehärtet und stellt öffentliche Dienste bereit. Er ist der einzige vom Internet erreichbare Rechner. Das interne Netz ist durch den Bastion Host geschützt.", 4),
+
+    /* Screened Subnet / DMZ */
+    mq("f22", "9. Firewalls und Netzwerksicherheit", "Welche Aussagen über eine DMZ (Demilitarisierte Zone) sind richtig?",
+      ["Ist ein separates Netzsegment", "Enthält öffentlich erreichbare Dienste", "Ist durch zwei Firewalls geschützt", "Ist ein Backup-Server"],
+      [0, 1, 2], "Eine DMZ ist ein separates Netzsegment für öffentliche Dienste, das durch zwei Firewalls geschützt ist."),
+    mq("f23", "9. Firewalls und Netzwerksicherheit", "Welche Systeme stehen typischerweise in einer DMZ?",
+      ["Webserver", "Mailserver", "DNS-Server", "Interne Datenbanken"],
+      [0, 1, 2], "In einer DMZ stehen öffentlich erreichbare Dienste wie Webserver, Mailserver und DNS-Server."),
+    mq("f24", "9. Firewalls und Netzwerksicherheit", "Warum erhöht eine DMZ die Sicherheit?",
+      ["Öffentliche Dienste sind vom internen Netz getrennt", "Bei Kompromittierung eines DMZ-Servers ist das interne Netz geschützt", "Es gibt keine Firewalls", "Der gesamte Verkehr wird verschlüsselt"],
+      [0, 1], "Eine DMZ trennt öffentliche Dienste vom internen Netz. Selbst wenn ein Angreifer einen DMZ-Server kompromittiert, hat er keinen Zugriff auf das interne Netz."),
+    tq("f25", "9. Firewalls und Netzwerksicherheit", "Beschreiben Sie den Aufbau einer DMZ und erklären Sie, warum sie das interne Netz schützt.",
+      ["Aufbau beschrieben (2 P)", "Schutzwirkung erklärt (2 P)"],
+      "Eine DMZ ist ein separates Netzsegment zwischen internem und externem Netz. Zwei Firewalls schützen die DMZ: eine zum Internet, eine zum internen Netz. Öffentliche Dienste stehen in der DMZ. Bei Kompromittierung eines DMZ-Servers ist das interne Netz weiterhin geschützt.", 4),
+
+    /* Bastion Host */
+    mq("f26", "9. Firewalls und Netzwerksicherheit", "Welche Eigenschaften hat ein Bastion Host?",
+      ["Besonders gehärtet", "Öffentlich erreichbar", "Stellt Dienste bereit", "Hat minimale Software-Ausstattung"],
+      [0, 1, 2, 3], "Ein Bastion Host ist besonders gehärtet, öffentlich erreichbar, stellt Dienste bereit und hat minimale Software."),
+    tq("f27", "9. Firewalls und Netzwerksicherheit", "Was ist ein Bastion Host und welche Eigenschaften muss er erfüllen?",
+      ["Definition (2 P)", "Eigenschaften genannt (2 P)"],
+      "Ein Bastion Host ist ein besonders gehärteter Rechner, der öffentlich erreichbare Dienste bereitstellt. Er hat minimale Software, umfangreiche Protokollierung und ist besonders gesichert.", 4),
+
+    /* Reverse Proxy */
+    mq("f28", "9. Firewalls und Netzwerksicherheit", "Welche Aussagen über einen Reverse Proxy sind richtig?",
+      ["Leitet externe Anfragen an interne Server weiter", "Schützt interne Server", "Kann SSL/TLS terminieren", "Versteckt die interne Serverstruktur"],
+      [0, 1, 2, 3], "Ein Reverse Proxy leitet externe Anfragen an interne Server weiter, schützt sie, kann SSL terminieren und versteckt die interne Struktur."),
+    tq("f29", "9. Firewalls und Netzwerksicherheit", "Erklären Sie die Funktion eines Reverse Proxys und nennen Sie drei Vorteile.",
+      ["Funktion erklärt (2 P)", "Drei Vorteile genannt (3 P)"],
+      "Ein Reverse Proxy steht vor internen Servern und leitet externe Anfragen weiter. Vorteile: Schutz der internen Server, Lastverteilung, SSL-Terminierung, Verstecken der internen Struktur.", 5),
+
+    /* Vergleich der Architekturen */
+    mq("f30", "9. Firewalls und Netzwerksicherheit", "Welche Firewall-Architekturen gibt es?",
+      ["Dual-Homed Firewall", "Screened Host", "Screened Subnet / DMZ", "Virenscanner"],
+      [0, 1, 2], "Die wichtigsten Firewall-Architekturen sind Dual-Homed, Screened Host und Screened Subnet/DMZ."),
+    tq("f31", "9. Firewalls und Netzwerksicherheit", "Vergleichen Sie Dual-Homed Firewall, Screened Host und Screened Subnet (DMZ) hinsichtlich Aufbau und Sicherheitsniveau.",
+      ["Dual-Homed erklärt (2 P)", "Screened Host erklärt (2 P)", "DMZ erklärt (2 P)", "Sicherheitsniveau verglichen (1 P)"],
+      "Dual-Homed: Ein Rechner mit zwei Netzwerkkarten trennt die Netze. Screened Host: Paketfilter + Bastion Host. DMZ: Separates Netzsegment mit zwei Firewalls. Die DMZ bietet das höchste Sicherheitsniveau.", 7),
+
+    /* Stateful Inspection */
+    mq("f32", "9. Firewalls und Netzwerksicherheit", "Welche Aussagen über Stateful Inspection sind richtig?",
+      ["Überwacht den Verbindungszustand", "Ist zustandsbehaftet", "Filtert Pakete basierend auf dem Verbindungszustand", "Ist zustandslos"],
+      [0, 1, 2], "Stateful Inspection überwacht den Zustand von Verbindungen und filtert Pakete basierend darauf."),
+
+    /* NAT */
+    mq("f33", "9. Firewalls und Netzwerksicherheit", "Welche Aussagen über NAT (Network Address Translation) sind richtig?",
+      ["Übersetzt IP-Adressen", "Verbirgt interne Netzstrukturen", "Erhöht die Sicherheit", "Ist eine Firewall"],
+      [0, 1, 2], "NAT übersetzt IP-Adressen, verbirgt interne Strukturen und erhöht die Sicherheit."),
+    tq("f34", "9. Firewalls und Netzwerksicherheit", "Was ist NAT und wie trägt es zur Sicherheit bei?",
+      ["NAT erklärt (2 P)", "Sicherheitsbeitrag erklärt (2 P)"],
+      "NAT übersetzt private IP-Adressen in öffentliche. Es verbirgt die interne Netzstruktur und erschwert Angreifern das Mapping des internen Netzes.", 4),
+
+    /* Grenzen von Firewalls */
+    mq("f35", "9. Firewalls und Netzwerksicherheit", "Welche Grenzen haben Firewalls?",
+      ["Schützen nicht vor Innentätern", "Erkennen kein Tunneling", "Analysieren keine verschlüsselten Inhalte", "Ersetzen keine Schulungen"],
+      [0, 1, 2, 3], "Firewalls haben viele Grenzen und sind nur eine Schutzschicht."),
+    tq("f36", "9. Firewalls und Netzwerksicherheit", "Nennen Sie fünf Grenzen von Firewalls und erklären Sie diese.",
+      ["Fünf Grenzen genannt (5 P)"],
+      "1. Kein Schutz vor Innentätern. 2. Kein Schutz vor Tunneling. 3. Keine Analyse verschlüsselter Inhalte. 4. Kein Ersatz für Schulungen. 5. Kein Schutz vor Malware auf Endgeräten.", 5).
+
 
     /* POOL 10: PRIVATHEIT UND DATENSCHUTZ */
     mq("p01", "10. Privatheit und Datenschutz", "Welche Aussagen über personenbezogene Daten sind richtig?",
